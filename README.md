@@ -25,14 +25,57 @@ C:\Users\SSR\Desktop\hykim\study\this-cat>npx sass --watch css/style.scss css/st
 
 ### 리액트 라우터 설치
 
+- Main, Photo, Text, Result를 라우터로
+
 ### Firebase 연동
 
 1. npm i firebase
 2. env에 key 저장, initialize firebase
 3. storage import
 
+### 파일 업로드 코드 구현
+
+- 파일 업로드시 랜덤 파일명으로
+
+```js
+const fileRef = ref(
+  storage,
+  `photos/${
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(36).substring(2, 15)
+  }`,
+);
+```
+
+### 리덕스 설치
+
+```js
+npm install react-redux
+npm install @reduxjs/toolkit
+```
+
 ## Trouble Shooting
 
 ### Error: "prettier/react" has been merged into "prettier" in eslint-config-prettier 8.0.0
 
 - 해결 : .eslintrc.json 에서 extends의 "prettier/@typescript-eslint" 삭제
+
+### Error: API key not valid. Please pass a valid API key.
+
+- 해결 : .env 파일-> = 할때 양 옆에 공백 두고 / 쉼표 없앰
+
+### Error: User does not have permission to access 'photos/[object File]'
+
+- 해결 :
+
+```js
+rules_version = '2';
+service firebase.storage {
+match /b/{bucket}/o {
+match /{allPaths=**} {
+allow read, write;
+    }
+  }
+}
+
+```
