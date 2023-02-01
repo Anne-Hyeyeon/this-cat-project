@@ -1,25 +1,34 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import store, { setText } from '../store/store';
+import { useDispatch } from 'react-redux/es/hooks/useDispatch';
+import store, { setPetName, setPetType } from '../store/store';
 
 const Text = () => {
   const [value, setValue] = useState('고양이');
-  const [inputValue, setInputValue] = useState('');
+  const [petTypeinputValue, setPetTypeInputValue] = useState('');
+  const [petNameinputValue, setPetNameInputValue] = useState('');
   const [showInput, setShowInput] = useState(false);
+  const dispatch = useDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setValue(e.target.value);
     setShowInput(e.target.value === '직접 입력');
-    if (value !== '직접 입력') store.dispatch(setText(e.target.value));
+    if (e.target.value !== '직접 입력') {
+      store.dispatch(setPetType(e.target.value));
+    }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-    store.dispatch(setText(e.target.value));
+  const handlePetTypeInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPetTypeInputValue(e.target.value);
+    dispatch(setPetType(e.target.value));
+  };
+
+  const handlePetNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPetNameInputValue(e.target.value);
+    dispatch(setPetName(e.target.value));
   };
 
   return (
-    <div>
+    <>
       <select value={value} onChange={handleChange}>
         <option value="고양이">고양이</option>
         <option value="강아지">강아지</option>
@@ -27,9 +36,20 @@ const Text = () => {
         <option value="직접 입력">직접 입력</option>
       </select>
       {showInput && (
-        <input type="text" value={inputValue} onChange={handleInputChange} />
+        <input
+          type="text"
+          value={petTypeinputValue}
+          onChange={handlePetTypeInputChange}
+        />
       )}
-    </div>
+      <div>
+        <input
+          type="text"
+          value={petNameinputValue}
+          onChange={handlePetNameInputChange}
+        />
+      </div>
+    </>
   );
 };
 

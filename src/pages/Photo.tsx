@@ -3,11 +3,14 @@ import { storage } from '../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { Link } from 'react-router-dom';
 import store, { setPhotoUrl } from '../store/store';
+import Poster from '../components/Poster';
+import { useDispatch } from 'react-redux/es/exports';
 
 const Photo = () => {
   const [file, setFile] = useState(null);
   const [url, setUrl] = useState('');
   const [progress, setProgress] = useState(0);
+  const dispatch = useDispatch();
 
   const handleFileChange = (e: any) => {
     setFile(e.target.files[0]);
@@ -30,7 +33,7 @@ const Photo = () => {
       () => {
         getDownloadURL(ref(storage, `photos/${randomFileName}`)).then((url) => {
           setUrl(url);
-          store.dispatch(setPhotoUrl(url));
+          dispatch(setPhotoUrl(url));
         });
       },
     );
@@ -46,6 +49,7 @@ const Photo = () => {
       <Link to="/text">
         <button>다음으로</button>
       </Link>
+      <Poster />
     </>
   );
 };

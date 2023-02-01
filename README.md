@@ -47,11 +47,24 @@ const fileRef = ref(
 );
 ```
 
-### 리덕스 설치
+### 리덕스 세팅
 
 ```js
 npm install react-redux
 npm install @reduxjs/toolkit
+```
+
+- 스토어 세팅
+
+### Text
+
+- selectBox와 input 생성 후 store의 state값과 연결.
+
+### Styled-components 설치
+
+```js
+yarn add styled-components
+npm i -D @types/styled-components
 ```
 
 ## Trouble Shooting
