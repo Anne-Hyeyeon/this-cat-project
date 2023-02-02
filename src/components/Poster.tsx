@@ -63,7 +63,15 @@ width: ${({ width }) => {
   border: 1px solid blue;
 `;
 
-const SecondLine = styled.div``;
+const SecondLine = styled.div<Styles>`
+width: ${({ width }) => {
+  return `${width ?? initialWidth}px`;
+}};
+    height: ${({ height }) => {
+      return `${height ? height / 3 : 100}px`;
+    }}};
+    border: 1px solid orange;
+`;
 
 const Poster: React.FC<Props> = (props) => {
   const photoUrl = useSelector((state: State) => state.photoUrl);
@@ -74,6 +82,10 @@ const Poster: React.FC<Props> = (props) => {
         <Header>잠깐! 이 고양이를 보신 적 있습니까</Header>
         <Photo photoUrl={photoUrl} />
         <FirstLine>왜냐면 얘가 졸귀거든요.</FirstLine>
+        <SecondLine>
+          잃어버린 고양이 아니고요, 그냥 여러분들한테 얘를 보여드리고 싶어서
+          전단을 붙입니다.{' '}
+        </SecondLine>
       </Wrapper>
     </>
   );
