@@ -3,6 +3,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { State } from '../../store/store';
+import {
+  objectCaseSelector,
+  subjectCaseSelector,
+} from '../function/endingSelector';
 
 interface Styles {
   width?: number;
@@ -82,16 +86,16 @@ const Poster: React.FC<Props> = (props) => {
       <Wrapper {...props.styles}>
         <Header>
           잠깐! 이 {petType}
-          {postposition ? '를' : '을'} 보신 적 있습니까
+          {objectCaseSelector(petType)} 보신 적 있습니까
         </Header>
         <Photo photoUrl={photoUrl} />
         <FirstLine>
           왜냐면 {petName}
-          {postposition ? '가' : '이'} 졸귀거든요.
+          {subjectCaseSelector(petName)} 졸귀거든요.
         </FirstLine>
         <SecondLine>
           잃어버린 {petType} 아니고요, 그냥 여러분들한테 {petName}
-          {postposition ? '를' : '을'} 보여드리고 싶어서 전단을 붙입니다.
+          {objectCaseSelector(petName)} 보여드리고 싶어서 전단을 붙입니다.
         </SecondLine>
       </Wrapper>
     </>

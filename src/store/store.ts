@@ -4,12 +4,14 @@ export interface State {
   photoUrl: string;
   petType: string;
   petName: string;
+  postposition: boolean;
 }
 
 const initialState: State = {
   photoUrl: '',
-  petType: '',
-  petName: '',
+  petType: '고양이',
+  petName: '얘',
+  postposition: true,
 };
 
 const postSlice = createSlice({
@@ -17,18 +19,21 @@ const postSlice = createSlice({
   initialState,
   reducers: {
     setPhotoUrl: (state, action) => {
-      state.photoUrl = action.payload;
+        state.photoUrl = action.payload;
     },
     setPetType: (state, action) => {
-      state.petType = action.payload;
+        state.petType = action.payload;
     },
     setPetName: (state, action) => {
         state.petName = action.payload;
-      },
+    },
+    setPostposition: (state, action) => {
+        state.postposition = action.payload;
+    },
   },
 });
 
-export const { setPhotoUrl, setPetType, setPetName } = postSlice.actions;
+export const { setPhotoUrl, setPetType, setPetName, setPostposition } = postSlice.actions;
 
 const store = configureStore({
   reducer: postSlice.reducer,

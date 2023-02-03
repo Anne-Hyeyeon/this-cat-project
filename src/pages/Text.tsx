@@ -1,35 +1,49 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
-import store, { setPetName, setPetType } from '../store/store';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import Poster from '../common/components/Poster';
+import { setPetName, setPetType, setPostposition, State } from '../store/store';
 
 const Text = () => {
-  const [value, setValue] = useState('고양이');
-  const [petTypeinputValue, setPetTypeInputValue] = useState('');
-  const [petNameinputValue, setPetNameInputValue] = useState('');
-  const [showInput, setShowInput] = useState(false);
   const dispatch = useDispatch();
+  const [showInput, setShowInput] = useState(false);
+  const state = useSelector((state: State) => state);
+  const { petName, petType, postposition } = state;
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setValue(e.target.value);
+  const handlePetTypeSelectChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
     setShowInput(e.target.value === '직접 입력');
-    if (e.target.value !== '직접 입력') {
-      store.dispatch(setPetType(e.target.value));
+    dispatch(setPetType(e.target.value));
+    if (e.target.value === '직접 입력') {
+      dispatch(setPetType(petType));
     }
   };
 
   const handlePetTypeInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPetTypeInputValue(e.target.value);
     dispatch(setPetType(e.target.value));
   };
 
   const handlePetNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPetNameInputValue(e.target.value);
     dispatch(setPetName(e.target.value));
+  };
+
+  const handlePostpositionSelectChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    if (e.target.value === '를') {
+      dispatch(setPostposition(true));
+    } else if (e.target.value === '을') {
+      dispatch(setPostposition(false));
+    }
   };
 
   return (
     <>
-      <select value={value} onChange={handleChange}>
+      <select
+        value={showInput ? '직접 입력' : petType}
+        onChange={handlePetTypeSelectChange}
+      >
         <option value="고양이">고양이</option>
         <option value="강아지">강아지</option>
         <option value="이구아나">이구아나</option>
@@ -38,17 +52,25 @@ const Text = () => {
       {showInput && (
         <input
           type="text"
-          value={petTypeinputValue}
+          value={petType}
           onChange={handlePetTypeInputChange}
         />
       )}
       <div>
         <input
           type="text"
-          value={petNameinputValue}
+          value={petName}
           onChange={handlePetNameInputChange}
         />
       </div>
+      <select
+        value={postposition ? '를' : '을'}
+        onChange={handlePostpositionSelectChange}
+      >
+        <option value="을">을</option>
+        <option value="를">를</option>
+      </select>
+      <Poster />
     </>
   );
 };
