@@ -112,3 +112,14 @@ allow read, write;
 ```
 
 ### Html to Image 컴포넌트로 이미지 다운로드시 image가 다운받아지지 않음.
+
+`Access to fetch at 'https://firebasestorage.googleapis.com/...' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.`
+
+- CORS 에러였다.
+- CORS 에러란? Cross-Origin Resource Sharing.
+- 여기서 Origin이란 Origin은 요청이 시작된 서버의 위치를 나타낸다.
+- SOP, Same Origin POlicy에 따라 동일한 출처의 Origin만 리소스를 공유할 수 있다.
+- Origin이 같다는 것? 같은 프로토콜, 호스트, 포트를 사용한다는 것.
+- 해결? `Access-Control-Allow-Origin`
+- 서버에서 Access-Control-Allow-Origin 헤더에 허용할 출처를 기재해서 클라이언트에 응답
+- https://stove99.github.io/etc/2021/06/09/firebase-storage-cors-setting 파이어베이스 자체에서 CORS 해결할 수 있는 방법을 찾아 해결함.
