@@ -79,8 +79,7 @@ width: ${({ width }) => {
 
 const Poster: React.FC<Props> = (props) => {
   const state = useSelector((state: State) => state);
-  const { photoUrl, petType, petName, postposition } = state;
-
+  const { photoUrl, petType, petName } = state;
   return (
     <>
       <Wrapper {...props.styles}>

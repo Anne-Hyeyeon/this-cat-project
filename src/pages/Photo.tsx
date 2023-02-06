@@ -47,10 +47,10 @@ const Photo = () => {
         {url && <img src={url} alt="uploaded" />}
       </div>
       <Link to="/">
-        <button>다음으로</button>
+        <button>이전</button>
       </Link>
       <Link to="/text">
-        <button>다음으로</button>
+        <button>다음</button>
       </Link>
       <Poster />
     </>

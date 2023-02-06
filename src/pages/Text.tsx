@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import Poster from '../common/components/Poster';
-import { setPetName, setPetType, setPostposition, State } from '../store/store';
+import { setPetName, setPetType, State } from '../store/store';
 
 const Text = () => {
   const dispatch = useDispatch();
   const [showInput, setShowInput] = useState(false);
+  const [showCustomEnding, setShowCustomEnding] = useState(false);
   const state = useSelector((state: State) => state);
-  const { petName, petType, postposition } = state;
+  const { petName, petType } = state;
 
   const handlePetTypeSelectChange = (
     e: React.ChangeEvent<HTMLSelectElement>,
@@ -26,16 +27,6 @@ const Text = () => {
 
   const handlePetNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setPetName(e.target.value));
-  };
-
-  const handlePostpositionSelectChange = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    if (e.target.value === '를') {
-      dispatch(setPostposition(true));
-    } else if (e.target.value === '을') {
-      dispatch(setPostposition(false));
-    }
   };
 
   return (
@@ -63,13 +54,6 @@ const Text = () => {
           onChange={handlePetNameInputChange}
         />
       </div>
-      <select
-        value={postposition ? '를' : '을'}
-        onChange={handlePostpositionSelectChange}
-      >
-        <option value="을">을</option>
-        <option value="를">를</option>
-      </select>
       <Poster />
     </>
   );
