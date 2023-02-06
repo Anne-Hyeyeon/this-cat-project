@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { HtmlToImage } from '../common/components/HtmlToImage';
 
 const Result = () => {
-  return <div>Result</div>;
+  return (
+    <>
+      <HtmlToImage />
+    </>
+  );
 };
 
 export default Result;

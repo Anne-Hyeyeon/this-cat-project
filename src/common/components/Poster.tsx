@@ -31,6 +31,7 @@ const Wrapper = styled.div<Styles>`
     return `${height ?? 600}px`;
   }};
   border: 1px solid black;
+  background-color: white;
 `;
 
 const Header = styled.div<Styles>`

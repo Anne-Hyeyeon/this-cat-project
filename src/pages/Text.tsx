@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { Link } from 'react-router-dom';
 import Poster from '../common/components/Poster';
 import { setPetName, setPetType, State } from '../store/store';
 
@@ -55,6 +56,12 @@ const Text = () => {
         />
       </div>
       <Poster />
+      <Link to="/photo">
+        <button>이전</button>
+      </Link>
+      <Link to="/result">
+        <button>다음</button>
+      </Link>
     </>
   );
 };
