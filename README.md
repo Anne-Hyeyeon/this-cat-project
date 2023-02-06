@@ -33,7 +33,7 @@ C:\Users\SSR\Desktop\hykim\study\this-cat>npx sass --watch css/style.scss css/st
 2. env에 key 저장, initialize firebase
 3. storage import
 
-### 파일 업로드 코드 구현
+### Photo
 
 - 파일 업로드시 랜덤 파일명으로
 
@@ -47,25 +47,43 @@ const fileRef = ref(
 );
 ```
 
-### 리덕스 세팅
+### Text
+
+- selectBox와 input 생성 후 store의 state값과 연결.
+- 자동 조사 생성기 (주어/목적어의 받침에 따라 이/가, 을/를 자동으로 선택)
+
+### Result
+
+- Html to Image 컴포넌트 이용해 Poster 컴포넌트를 이미지로 다운로드.
+
+## Liberaies
+
+### Redux, Redux-toolkit
 
 ```js
 npm install react-redux
 npm install @reduxjs/toolkit
 ```
 
-- 스토어 세팅
+- 이미지 주소, 입력값을 전역으로 관리하기 위해
 
-### Text
-
-- selectBox와 input 생성 후 store의 state값과 연결.
-
-### Styled-components 설치
+### Styled-components
 
 ```js
 yarn add styled-components
 npm i -D @types/styled-components
 ```
+
+- Poster 컴포넌트 구성하는 데 사용
+
+### Html-to-Image
+
+```js
+npm install --save html-to-image
+
+```
+
+- Poster 컴포넌트를 이미지로 다운받는 데 사용
 
 ## Trouble Shooting
 
@@ -92,3 +110,5 @@ allow read, write;
 }
 
 ```
+
+### Html to Image 컴포넌트로 이미지 다운로드시 image가 다운받아지지 않음.
