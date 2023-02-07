@@ -1,12 +1,14 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 export interface State {
+  step: number;
   photoUrl: string;
   petType: string;
   petName: string;
 }
 
 const initialState: State = {
+  step: 0,
   photoUrl: '',
   petType: '고양이',
   petName: '얘',
@@ -16,6 +18,9 @@ const postSlice = createSlice({
   name: 'post',
   initialState,
   reducers: {
+    setStep: (state, action) => {
+      state.step = action.payload;
+  },
     setPhotoUrl: (state, action) => {
         state.photoUrl = action.payload;
     },
@@ -29,7 +34,7 @@ const postSlice = createSlice({
   },
 );
 
-export const { setPhotoUrl, setPetType, setPetName,  } = postSlice.actions;
+export const { setStep, setPhotoUrl, setPetType, setPetName } = postSlice.actions;
 
 const store = configureStore({
   reducer: postSlice.reducer,

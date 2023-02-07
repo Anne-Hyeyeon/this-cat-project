@@ -3,12 +3,11 @@ import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { Link } from 'react-router-dom';
 import Poster from '../common/components/Poster';
-import { setPetName, setPetType, State } from '../store/store';
+import { setPetName, setPetType, setStep, State } from '../store/store';
 
 const Text = () => {
   const dispatch = useDispatch();
   const [showInput, setShowInput] = useState(false);
-  const [showCustomEnding, setShowCustomEnding] = useState(false);
   const state = useSelector((state: State) => state);
   const { petName, petType } = state;
 
@@ -56,12 +55,20 @@ const Text = () => {
         />
       </div>
       <Poster />
-      <Link to="/photo">
-        <button>이전</button>
-      </Link>
-      <Link to="/result">
-        <button>다음</button>
-      </Link>
+      <button
+        onClick={() => {
+          dispatch(setStep(2));
+        }}
+      >
+        이전
+      </button>
+      <button
+        onClick={() => {
+          dispatch(setStep(3));
+        }}
+      >
+        다음
+      </button>
     </>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { storage } from '../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { Link } from 'react-router-dom';
-import store, { setPhotoUrl } from '../store/store';
+import store, { setPhotoUrl, setStep } from '../store/store';
 import Poster from '../common/components/Poster';
 import { useDispatch } from 'react-redux/es/exports';
 
@@ -46,12 +46,20 @@ const Photo = () => {
         {progress > 0 && <progress value={progress} max="100" />}
         {url && <img src={url} alt="uploaded" />}
       </div>
-      <Link to="/">
-        <button>이전</button>
-      </Link>
-      <Link to="/text">
-        <button>다음</button>
-      </Link>
+      <button
+        onClick={() => {
+          dispatch(setStep(0));
+        }}
+      >
+        이전
+      </button>
+      <button
+        onClick={() => {
+          dispatch(setStep(2));
+        }}
+      >
+        다음
+      </button>
       <Poster />
     </>
   );
