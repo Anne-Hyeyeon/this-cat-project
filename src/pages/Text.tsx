@@ -57,7 +57,7 @@ const Text = () => {
       <Poster />
       <button
         onClick={() => {
-          dispatch(setStep(2));
+          dispatch(setStep(1));
         }}
       >
         이전

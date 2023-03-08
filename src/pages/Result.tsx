@@ -1,11 +1,12 @@
 import { toPng } from 'html-to-image';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Poster from '../common/components/Poster';
-import { setStep } from '../store/store';
+import { State, init } from '../store/store';
 
 const Result = () => {
   const dispatch = useDispatch();
+  const state = useSelector((state: State) => state);
   const ref = useRef<HTMLDivElement>(null);
   const onButtonClick = useCallback(() => {
     if (ref.current === null) {
@@ -29,11 +30,11 @@ const Result = () => {
 
   const onShowFullPageClick = useCallback(() => {
     window.open('https://link.coupang.com/a/OqysD', '_blank');
-    localStorage.setItem('showFullPage', 'true');
+    sessionStorage.setItem('showFullPage', 'true');
     setShowFullPage(true);
   }, []);
 
-  const storedValue = localStorage.getItem('showFullPage');
+  const storedValue = sessionStorage.getItem('showFullPage');
   const initialShowFullPage = storedValue === 'true';
   const [showFullPage, setShowFullPage] = useState(initialShowFullPage);
 
@@ -89,7 +90,7 @@ const Result = () => {
       <button onClick={onButtonClick}>Click me</button>
       <button
         onClick={() => {
-          dispatch(setStep(0));
+          dispatch(init());
         }}
       >
         다시 하기

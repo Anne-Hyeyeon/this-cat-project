@@ -123,3 +123,10 @@ allow read, write;
 - 해결? `Access-Control-Allow-Origin`
 - 서버에서 Access-Control-Allow-Origin 헤더에 허용할 출처를 기재해서 클라이언트에 응답
 - https://stove99.github.io/etc/2021/06/09/firebase-storage-cors-setting 파이어베이스 자체에서 CORS 해결할 수 있는 방법을 찾아 해결함.
+
+### localStorage, sessionStorage
+
+- '쿠팡 보고 결과 확인하기'를 localStorage로 구현했으나, localStorage에 남아 있는 데이터를 초기화시키는 기준에 대해 고민하게 됨.
+- 사용자들이 몇 번이고 '다시 하기'를 누를 걸 생각해서, 일단 한 번 쿠팡창이 열리면 브라우저를 닫을 때까지는 쿠팡을 클릭할 필요가 없도록 구현하고 싶었음.
+- 내 의도에 맞게 데이터를 저장하기 위해서는 localStorage보다 sessionStorage가 데이터 저장소로 더 적합했음. (브라우저 껐다 키면 데이터 사라짐)
+- localStorage를 sessionStorage로 변경.
