@@ -131,36 +131,14 @@ allow read, write;
 - 내 의도에 맞게 데이터를 저장하기 위해서는 localStorage보다 sessionStorage가 데이터 저장소로 더 적합했음. (브라우저 껐다 키면 데이터 사라짐)
 - localStorage를 sessionStorage로 변경.
 
-### The 'file' is possibly null.
+### 이미지 사이즈 제한
 
-- useState로 선언한 file 값이 null일 경우, 파일 사이즈를 정하지 못함.
-- 타입 방어 필요
+- 파이어베이스 스토리지 관리를 위해서는, 이미지 파일 사이즈 제한이 필요할듯 했다.
+- 하지만 파이어베이스 콘솔에서 사용할 수 있는 자체프로그램은 유료 요금제를 구독해야 이용할 수 있었다.
 
-- 원본 코드
+#### 방법 : 페이지를 벗어날 때 storage의 이미지 정보 지움
 
-```js
-  const handleUpload = () => {
-  if (file.size > 5 _ 1024 _ 1024) {
-  alert('이미지 크기는 5MB 이하로 등록해주세요.');
-  return;
-  ...
-  }
-```
+- 파이어베이스의 deleteObject 메소드를 활용하면 storage 내의 파일을 삭제할 수 있음.
 
-- 수정 코드
-
-```js
-const handleUpload = () => {
-  if (!file) {
-    alert('파일을 등록해 주세요.');
-    return;
-  }
-
-  const fileSize = file.size;
-  const maxSize = 5 * 1024 * 1024;
-
-  if (fileSize > maxSize) {
-    alert('이미지 크기는 5MB 이하로 등록해주세요.');
-    return;
-  }
-```
+1. Result.tsx 에 useEffect hook 사용, useEffect 내에 deleteObject 이용한 함수 선언
+2. window이벤트 중 beforeunload 이용하면 페이지를 떠날 때 이미지가 삭제되도록 할 수 있음.
