@@ -10,17 +10,7 @@ const Result = () => {
   const dispatch = useDispatch();
   const state = useSelector((state: State) => state);
   const ref = useRef<HTMLDivElement>(null);
-  const { photoUrl, fileRef } = state;
-
-  useEffect(() => {
-    return () => {
-      if (fileRef) {
-        deleteObject(fileRef).catch((error) => {
-          console.error(error);
-        });
-      }
-    };
-  }, [fileRef]);
+  const { fileRef } = state;
 
   const onButtonClick = useCallback(() => {
     if (ref.current === null) {
@@ -63,6 +53,22 @@ const Result = () => {
       window.removeEventListener('unload', handleUnload);
     };
   }, []);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      if (fileRef) {
+        deleteObject(fileRef).catch((error) => {
+          console.error(error);
+        });
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [fileRef]);
 
   if (!showFullPage) {
     return (
