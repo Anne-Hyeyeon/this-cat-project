@@ -1,6 +1,8 @@
 import { toPng } from 'html-to-image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { storage } from '../firebase';
+import { deleteObject } from 'firebase/storage';
 import Poster from '../common/components/Poster';
 import { State, init } from '../store/store';
 
@@ -8,6 +10,18 @@ const Result = () => {
   const dispatch = useDispatch();
   const state = useSelector((state: State) => state);
   const ref = useRef<HTMLDivElement>(null);
+  const { photoUrl, fileRef } = state;
+
+  useEffect(() => {
+    return () => {
+      if (fileRef) {
+        deleteObject(fileRef).catch((error) => {
+          console.error(error);
+        });
+      }
+    };
+  }, [fileRef]);
+
   const onButtonClick = useCallback(() => {
     if (ref.current === null) {
       return;

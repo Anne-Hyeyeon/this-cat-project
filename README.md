@@ -130,3 +130,37 @@ allow read, write;
 - 사용자들이 몇 번이고 '다시 하기'를 누를 걸 생각해서, 일단 한 번 쿠팡창이 열리면 브라우저를 닫을 때까지는 쿠팡을 클릭할 필요가 없도록 구현하고 싶었음.
 - 내 의도에 맞게 데이터를 저장하기 위해서는 localStorage보다 sessionStorage가 데이터 저장소로 더 적합했음. (브라우저 껐다 키면 데이터 사라짐)
 - localStorage를 sessionStorage로 변경.
+
+### The 'file' is possibly null.
+
+- useState로 선언한 file 값이 null일 경우, 파일 사이즈를 정하지 못함.
+- 타입 방어 필요
+
+- 원본 코드
+
+```js
+  const handleUpload = () => {
+  if (file.size > 5 _ 1024 _ 1024) {
+  alert('이미지 크기는 5MB 이하로 등록해주세요.');
+  return;
+  ...
+  }
+```
+
+- 수정 코드
+
+```js
+const handleUpload = () => {
+  if (!file) {
+    alert('파일을 등록해 주세요.');
+    return;
+  }
+
+  const fileSize = file.size;
+  const maxSize = 5 * 1024 * 1024;
+
+  if (fileSize > maxSize) {
+    alert('이미지 크기는 5MB 이하로 등록해주세요.');
+    return;
+  }
+```

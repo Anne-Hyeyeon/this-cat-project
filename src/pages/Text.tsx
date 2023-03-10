@@ -4,11 +4,12 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { Link } from 'react-router-dom';
 import Poster from '../common/components/Poster';
 import { setPetName, setPetType, setStep, State } from '../store/store';
+import { initialState } from '../store/store';
 
 const Text = () => {
   const dispatch = useDispatch();
-  const [showInput, setShowInput] = useState(false);
   const state = useSelector((state: State) => state);
+  const [showInput, setShowInput] = useState(false);
   const { petName, petType } = state;
 
   const handlePetTypeSelectChange = (
@@ -21,12 +22,24 @@ const Text = () => {
     }
   };
 
+  const handleConfirm = () => {
+    if (confirm('변경된 내용이 없습니다. 다음으로 넘어가시겠습니까?')) {
+      dispatch(setStep(3));
+    } else null;
+  };
+
   const handlePetTypeInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setPetType(e.target.value));
   };
 
   const handlePetNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setPetName(e.target.value));
+  };
+
+  const handleNextBtnOnclick = () => {
+    petName === initialState.petName && petType === initialState.petType
+      ? handleConfirm()
+      : dispatch(setStep(3));
   };
 
   return (
@@ -62,13 +75,7 @@ const Text = () => {
       >
         이전
       </button>
-      <button
-        onClick={() => {
-          dispatch(setStep(3));
-        }}
-      >
-        다음
-      </button>
+      <button onClick={handleNextBtnOnclick}>다음</button>
     </>
   );
 };
