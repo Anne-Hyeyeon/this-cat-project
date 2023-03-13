@@ -142,3 +142,9 @@ allow read, write;
 
 1. Result.tsx 에 useEffect hook 사용, useEffect 내에 deleteObject 이용한 함수 선언
 2. window이벤트 중 beforeunload 이용하면 페이지를 떠날 때 이미지가 삭제되도록 할 수 있음.
+
+### 'embed-webfonts.ts:158 Error loading remote stylesheet DOMException: Failed to read the 'cssRules' property from 'CSSStyleSheet': Cannot access rules'
+
+- CORS문제로 웹폰트가 걸린 HTML을 png로 다운로드 할 수 없음.
+
+- crossorigin="anonymous" 를 link 태그에다가 추가해줌.

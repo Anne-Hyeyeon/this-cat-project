@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { storage } from '../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { Link } from 'react-router-dom';
-import store, { setFileRef, setPhotoUrl, setStep } from '../store/store';
-import Poster from '../common/components/Poster';
+import { setFileRef, setPhotoUrl, setStep } from '../store/store';
 import { useDispatch } from 'react-redux/es/exports';
+import Poster from '../common/components/Poster';
 
 const Photo = () => {
   const [file, setFile] = useState(null);

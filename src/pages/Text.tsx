@@ -58,6 +58,7 @@ const Text = () => {
           type="text"
           value={petType}
           onChange={handlePetTypeInputChange}
+          maxLength={4}
         />
       )}
       <div>

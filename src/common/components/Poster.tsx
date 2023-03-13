@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { State } from '../../store/store';
+import { Container, Box } from '@mui/material';
 import {
   objectCaseSelector,
   subjectCaseSelector,
@@ -32,16 +33,25 @@ const Wrapper = styled.div<Styles>`
   }};
   border: 1px solid black;
   background-color: white;
+  font-family: 'Black Han Sans', sans-serif;
   padding: 20px;
 `;
 
 const Header = styled.div<Styles>`
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
   width: 100%;
   }};
   height: ${({ height }) => {
     return `${height ? height / 6 : 49.5}mm`;
   }};
-  border: 1px solid red;
+  font-size: 90px;
+  background-color: #C63F3B;
+  color: #E5D45E;
+  -webkit-text-stroke: 5px #1A1A1A;
+  line-height:80px;
 `;
 
 const Photo = styled.div<Styles & { photoUrl?: string }>`
@@ -55,26 +65,44 @@ const Photo = styled.div<Styles & { photoUrl?: string }>`
   background-repeat: no-repeat;
   background-position: center;
   background-size:cover;
-  border: 1px solid green;
   margin-top: ${marginTop}px;
 `;
 
-const FirstLine = styled.div<Styles>`
+const FirstLine = styled.div<Styles & { petName?: string }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: ${({ height }) => {
     return `${height ? height / 9 : 33}mm`;
   }};
-  border: 1px solid blue;
   margin-top: ${marginTop}px;
+  font-size: ${({ petName }) => {
+    if (petName?.length === 1) return '80px';
+    if (petName?.length === 2) return '73px';
+    if (petName?.length === 3) return '60px';
+    return '60px';
+  }};
+  background-color: #cf423d;
+  color: #1a1a1a;
+  -webkit-text-stroke: 2px #fff;
 `;
 
 const SecondLine = styled.div<Styles>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: ${({ height }) => {
     return `${height ? height / 6.2 : 48}mm`;
   }};
-  border: 1px solid orange;
   margin-top: ${marginTop}px;
+  font-size: 60px;
+  color: #1a1a1a;
+  line-height: 70px;
+  letter-spacing: 8px;
 `;
 
 const Poster: React.FC<Props> = (props) => {
@@ -84,17 +112,22 @@ const Poster: React.FC<Props> = (props) => {
     <>
       <Wrapper {...props.styles}>
         <Header {...props.styles}>
-          잠깐! 이 {petType}
-          {objectCaseSelector(petType)} 보신 적 있습니까
+          <div className="first-line">
+            잠깐! 이 {petType}
+            {objectCaseSelector(petType)}
+          </div>
+          <div className="second-line" style={{ letterSpacing: 10 }}>
+            보신 적 있습니까?
+          </div>
         </Header>
         <Photo {...props.styles} photoUrl={photoUrl} />
-        <FirstLine {...props.styles}>
+        <FirstLine {...props.styles} petName={petName}>
           왜냐면 {petName}
           {subjectCaseSelector(petName)} 졸귀거든요.
         </FirstLine>
         <SecondLine {...props.styles}>
-          잃어버린 {petType} 아니고요, 그냥 여러분들한테 {petName}
-          {objectCaseSelector(petName)} 보여드리고 싶어서 전단을 붙입니다.
+          <div>잃어버린 {petType} 아니고요,</div>
+          <div>그냥 보여드리고 싶어서요.</div>
         </SecondLine>
       </Wrapper>
     </>

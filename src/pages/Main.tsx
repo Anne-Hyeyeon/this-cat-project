@@ -12,18 +12,10 @@ const Main = () => {
 
   return (
     <Container maxWidth="sm">
-      <Box
-        sx={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '50vh',
-        }}
-      >
-        {step === 0 && <Start />}
-        {step === 1 && <Photo />}
-        {step === 2 && <Text />}
-        {step === 3 && <Result />}
-      </Box>
+      {step === 0 && <Start />}
+      {step === 1 && <Photo />}
+      {step === 2 && <Text />}
+      {step === 3 && <Result />}
     </Container>
   );
 };

@@ -18,8 +18,8 @@ const Result = () => {
     }
 
     toPng(ref.current, {
-      width: 300,
-      height: 600,
+      width: 793.7,
+      height: 1122.5,
     })
       .then((dataUrl) => {
         const link = document.createElement('a');
@@ -81,9 +81,7 @@ const Result = () => {
             position: 'relative',
           }}
         >
-          <div ref={ref}>
-            <Poster />
-          </div>
+          <Poster />
           <div
             style={{
               position: 'absolute',
