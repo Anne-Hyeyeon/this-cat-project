@@ -148,3 +148,9 @@ allow read, write;
 - CORS문제로 웹폰트가 걸린 HTML을 png로 다운로드 할 수 없음.
 
 - crossorigin="anonymous" 를 link 태그에다가 추가해줌.
+
+### useTheme() 사용할 수 없음
+
+- 자동 임포트로 styled-component 에 있는 useTheme을 가져왔었다. 하지만 내가 사용하는 useTheme은 Mui 컴포넌트로 경로를 Mui로 해주어야 정상 작동하는 것이었다.
+
+- import 경로를 mui로 변경하니 정상 작동함.
