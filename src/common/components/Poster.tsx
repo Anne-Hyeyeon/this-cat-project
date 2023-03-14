@@ -35,6 +35,7 @@ const Wrapper = styled.div<Styles>`
   background-color: white;
   font-family: 'Black Han Sans', sans-serif;
   padding: 20px;
+  box-sizing: border-box;
 `;
 
 const Header = styled.div<Styles>`
