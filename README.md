@@ -154,3 +154,9 @@ allow read, write;
 - 자동 임포트로 styled-component 에 있는 useTheme을 가져왔었다. 하지만 내가 사용하는 useTheme은 Mui 컴포넌트로 경로를 Mui로 해주어야 정상 작동하는 것이었다.
 
 - import 경로를 mui로 변경하니 정상 작동함.
+
+### import mingming from '../assets/img/mingming.png' 임포트 안 됨
+
+- 파일이름.d.ts -> 타입스크립트 선언 파일을 src 폴더 내에 만들어준다.
+- .d.ts 파일이란? 타입스크립트 선언 파일로, 타입스크립트 코드 타입 추론을 돕는 파일.
+- 전역 변수로 선언한 변수를 특정 파일에서 사용하는 경우, 해당 변수를 인식하지 못한다. 이 때 변수를 인식하게 해 준다.

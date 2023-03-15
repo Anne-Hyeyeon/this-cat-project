@@ -83,7 +83,7 @@ const FirstLine = styled.div<Styles & { petName?: string }>`
     if (petName?.length === 1) return '80px';
     if (petName?.length === 2) return '73px';
     if (petName?.length === 3) return '60px';
-    return '60px';
+    return '55px';
   }};
   background-color: #cf423d;
   color: #1a1a1a;

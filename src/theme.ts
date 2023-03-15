@@ -9,10 +9,11 @@ const theme = createTheme({
     },
     secondary: {
       main: '#fff',
+      dark: '#414141',
     },
   },
   typography: {
-    fontFamily: 'Jua',
+    fontFamily: 'Yeon Sung',
   },
   breakpoints: {
     values: {

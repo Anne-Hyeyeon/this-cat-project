@@ -1,4 +1,4 @@
-import { toPng } from 'html-to-image';
+import { toJpeg } from 'html-to-image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { storage } from '../firebase';
@@ -17,9 +17,9 @@ const Result = () => {
       return;
     }
 
-    toPng(ref.current, {
-      width: 793.7,
-      height: 1122.5,
+    toJpeg(ref.current, {
+      width: 797,
+      height: 1123,
     })
       .then((dataUrl) => {
         const link = document.createElement('a');

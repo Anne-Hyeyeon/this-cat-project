@@ -5,8 +5,9 @@ import Photo from './Photo';
 import Start from './Start';
 import Text from './Text';
 import Result from './Result';
-import './Main.scss';
 import { useTheme } from '@mui/material/styles';
+import './Main.scss';
+import backgroundImg from '../assets/img/background.png';
 
 const Main = () => {
   const state = useSelector((state: State) => state);
@@ -14,14 +15,17 @@ const Main = () => {
   const { step } = state;
   const { primary, secondary } = theme.palette;
   return (
-    <Box
-      height="100vh"
-      sx={{ backgroundColor: primary.light }}
-      id="this-cat-container"
-    >
+    <Box>
       <Container
         maxWidth="sm"
-        sx={{ backgroundColor: secondary.main, height: '100vh' }}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          background: `no-repeat url(${backgroundImg})`,
+          backgroundSize: 'cover',
+          height: 'calc(var(--vh, 1vh) * 100)',
+        }}
       >
         {step === 0 && <Start />}
         {step === 1 && <Photo />}

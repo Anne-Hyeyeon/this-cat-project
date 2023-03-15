@@ -66,6 +66,7 @@ const Text = () => {
           type="text"
           value={petName}
           onChange={handlePetNameInputChange}
+          maxLength={6}
         />
       </div>
       <Poster />
