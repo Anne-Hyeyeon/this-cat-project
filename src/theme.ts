@@ -3,9 +3,10 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#F1A661',
-      dark: '#E38B29',
-      light: '#FDEEDC',
+      main: '#414141',
+      dark: '#B96C1F',
+      light: '#F6E9DB',
+      contrastText: '#844201',
     },
     secondary: {
       main: '#fff',
@@ -13,7 +14,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Yeon Sung',
+    fontFamily: 'Jua',
   },
   breakpoints: {
     values: {

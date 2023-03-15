@@ -69,7 +69,6 @@ const Text = () => {
           maxLength={6}
         />
       </div>
-      <Poster />
       <button
         onClick={() => {
           dispatch(setStep(1));

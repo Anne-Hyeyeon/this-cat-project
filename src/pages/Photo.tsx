@@ -4,6 +4,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { setFileRef, setPhotoUrl, setStep } from '../store/store';
 import { useDispatch } from 'react-redux/es/exports';
 import Poster from '../common/components/Poster';
+import { Box, Button, Grid } from '@mui/material';
 
 const Photo = () => {
   const [file, setFile] = useState(null);
@@ -55,29 +56,37 @@ const Photo = () => {
   };
 
   return (
-    <>
-      <div>
-        {url ? (
-          <button onClick={handleResetBtnOnclick}>이미지 다시 선택하기</button>
-        ) : (
-          <>
-            <input type="file" onChange={handleFileChange} />
-            <button onClick={handleUploadBtnOnclick}>Upload</button>
-            {progress > 0 && <progress value={progress} max="100" />}
-          </>
-        )}
-        {url && <img src={url} alt="uploaded" />}
-      </div>
-      <button
-        onClick={() => {
-          dispatch(setStep(0));
-        }}
-      >
-        이전
-      </button>
-      <button onClick={handleNextBtnOnclick}>다음</button>
-      <Poster />
-    </>
+    <Box>
+      <Grid container>
+        <Grid xs={12}>
+          <Box>
+            {url ? (
+              <button onClick={handleResetBtnOnclick}>
+                이미지 다시 선택하기
+              </button>
+            ) : (
+              <>
+                <input type="file" onChange={handleFileChange} />
+                <button onClick={handleUploadBtnOnclick}>Upload</button>
+                {progress > 0 && <progress value={progress} max="100" />}
+              </>
+            )}
+            {url && <img src={url} height={200} alt="uploaded" />}
+          </Box>
+        </Grid>
+        <Grid xs={12}>
+          <Button
+            onClick={() => {
+              dispatch(setStep(0));
+            }}
+          >
+            이전
+          </Button>
+          <Button onClick={handleNextBtnOnclick}>다음</Button>
+        </Grid>
+        <Grid xs={12}></Grid>
+      </Grid>
+    </Box>
   );
 };
 

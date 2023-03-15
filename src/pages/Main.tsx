@@ -5,15 +5,12 @@ import Photo from './Photo';
 import Start from './Start';
 import Text from './Text';
 import Result from './Result';
-import { useTheme } from '@mui/material/styles';
 import './Main.scss';
 import backgroundImg from '../assets/img/background.png';
 
 const Main = () => {
   const state = useSelector((state: State) => state);
-  const theme = useTheme();
   const { step } = state;
-  const { primary, secondary } = theme.palette;
   return (
     <Box>
       <Container
@@ -24,7 +21,7 @@ const Main = () => {
           alignItems: 'center',
           background: `no-repeat url(${backgroundImg})`,
           backgroundSize: 'cover',
-          height: 'calc(var(--vh, 1vh) * 100)',
+          height: '100vh',
         }}
       >
         {step === 0 && <Start />}

@@ -1,4 +1,4 @@
-import { toJpeg } from 'html-to-image';
+import { toJpeg, toPng } from 'html-to-image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { storage } from '../firebase';
@@ -17,7 +17,7 @@ const Result = () => {
       return;
     }
 
-    toJpeg(ref.current, {
+    toPng(ref.current, {
       width: 797,
       height: 1123,
     })
@@ -81,7 +81,9 @@ const Result = () => {
             position: 'relative',
           }}
         >
-          <Poster />
+          <div style={{ marginTop: 50 }}>
+            <Poster />
+          </div>
           <div
             style={{
               position: 'absolute',
