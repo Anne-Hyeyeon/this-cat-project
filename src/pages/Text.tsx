@@ -1,3 +1,4 @@
+import { Container } from '@mui/system';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
@@ -76,6 +77,10 @@ const Text = () => {
       >
         이전
       </button>
+      <Container maxWidth="sm">
+        <Poster />
+      </Container>
+
       <button onClick={handleNextBtnOnclick}>다음</button>
     </>
   );

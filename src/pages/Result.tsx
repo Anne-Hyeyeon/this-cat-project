@@ -18,7 +18,7 @@ const Result = () => {
     }
 
     toPng(ref.current, {
-      width: 797,
+      width: 798,
       height: 1123,
     })
       .then((dataUrl) => {

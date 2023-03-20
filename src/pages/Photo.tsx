@@ -3,8 +3,12 @@ import { storage } from '../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { setFileRef, setPhotoUrl, setStep } from '../store/store';
 import { useDispatch } from 'react-redux/es/exports';
-import Poster from '../common/components/Poster';
-import { Box, Button, Grid } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
+import MainWrapper from '../common/components/MainWrapper';
+import ImagePreview from '../common/components/ImagePreview';
+import PetsIcon from '@mui/icons-material/Pets';
+import MainButton from '../common/components/MainButton';
+import './Photo.scss';
 
 const Photo = () => {
   const [file, setFile] = useState(null);
@@ -56,36 +60,50 @@ const Photo = () => {
   };
 
   return (
-    <Box>
-      <Grid container>
-        <Grid xs={12}>
-          <Box>
+    <Box height="100vh">
+      <MainWrapper>
+        <Grid container rowGap={2}>
+          <Grid xs={12}>
+            <Box
+              component="span"
+              display="flex"
+              justifyContent="flex-start"
+              alignItems="center"
+            >
+              <PetsIcon />
+              <Typography ml={1} variant="body2">
+                2MB 이하의 사진 업로드를 권장합니다.
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid xs={12} textAlign="center">
+            <ImagePreview imageUrl={url} />
+          </Grid>
+          <Grid xs={12} textAlign="center">
             {url ? (
-              <button onClick={handleResetBtnOnclick}>
-                이미지 다시 선택하기
-              </button>
-            ) : (
               <>
-                <input type="file" onChange={handleFileChange} />
-                <button onClick={handleUploadBtnOnclick}>Upload</button>
-                {progress > 0 && <progress value={progress} max="100" />}
+                <Button
+                  variant="contained"
+                  fullWidth
+                  onClick={handleResetBtnOnclick}
+                  sx={{ bgcolor: '#ddd', color: 'rgba(0,0,0,0.8)' }}
+                >
+                  이미지 다시 선택하기
+                </Button>
               </>
+            ) : (
+              <Box display="flex" justifyContent="space-between">
+                <input type="file" onChange={handleFileChange} />
+                <Button className="upload-btn" onClick={handleUploadBtnOnclick}>
+                  Upload
+                </Button>
+                {progress > 0 && <progress value={progress} max="100" />}
+              </Box>
             )}
-            {url && <img src={url} height={200} alt="uploaded" />}
-          </Box>
+          </Grid>
+          <Grid xs={12}>{!!url && <MainButton text="다음으로" />}</Grid>
         </Grid>
-        <Grid xs={12}>
-          <Button
-            onClick={() => {
-              dispatch(setStep(0));
-            }}
-          >
-            이전
-          </Button>
-          <Button onClick={handleNextBtnOnclick}>다음</Button>
-        </Grid>
-        <Grid xs={12}></Grid>
-      </Grid>
+      </MainWrapper>
     </Box>
   );
 };

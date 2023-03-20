@@ -1,0 +1,18 @@
+input[type='file']::file-selector-button,
+.upload-btn {
+  color: rgb(77 77 77);
+  width: 100px;
+  height: 30px;
+  background: #fff;
+  border: 1px solid rgb(77, 77, 77);
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+    background: rgb(77, 77, 77);
+    color: #fff;
+  }
+}
+
+::-webkit-progress-value {
+  background-color: orange;
+}
