@@ -7,6 +7,8 @@ import PetsIcon from '@mui/icons-material/Pets';
 import mingming from '../assets/img/mingming.png';
 import cat from '../assets/img/cat.png';
 import banner from '../assets/img/banner.png';
+import MainWrapper from '../common/components/MainWrapper';
+import { Container } from '@mui/system';
 
 const Start = () => {
   const dispatch = useDispatch();
@@ -14,49 +16,60 @@ const Start = () => {
   const { primary, secondary } = theme.palette;
 
   return (
-    <Box>
-      <Grid container rowGap={5} textAlign="center">
-        <Grid xs={12}>
-          <Box>
-            <img src={banner} alt="banner" />
-          </Box>
+    <Container maxWidth="sm" sx={{ padding: '20px' }}>
+      <MainWrapper>
+        <Grid container textAlign="center" rowGap={3}>
+          <Grid xs={12}>
+            <Typography
+              variant="h4"
+              color={secondary.dark}
+              fontWeight={700}
+              sx={{ textShadow: `1px 1px 2px ${primary.light}` }}
+            >
+              이 고양이를 보신 적 있습니까?
+            </Typography>
+          </Grid>
+          <Grid xs={12}>
+            <Typography
+              variant="h6"
+              color={secondary.dark}
+              sx={{ textShadow: `1px 1px 2px ${primary.light}` }}
+            >
+              혼자만 보기 아까운 우리집 세젤예 강아지, 고양이를
+            </Typography>
+            <Typography
+              variant="h6"
+              color={secondary.dark}
+              sx={{ textShadow: `1px 1px 2px ${primary.light}` }}
+            >
+              나만의 포스터를 통해 사람들한테 자랑해 보세요.
+            </Typography>
+          </Grid>
+          <Grid xs={12}>
+            <img src={cat} alt="example cat" width="90%" />
+          </Grid>
         </Grid>
-        <Grid xs={6} textAlign="right" p={1}>
-          <img src={mingming} alt="example ming" width={200} />
-        </Grid>
-        <Grid xs={6} textAlign="left" p={1}>
-          <img src={cat} alt="example cat" width={200} />
-        </Grid>
-        <Grid xs={12}>
-          <Typography
-            variant="h5"
-            color={primary.main}
-            sx={{ textShadow: `1px 1px 2px ${primary.light}` }}
-          >
-            귀여운 포스터를 통해
-          </Typography>
-          <Typography
-            variant="h5"
-            color={primary.main}
-            sx={{ textShadow: `1px 1px 2px ${primary.light}` }}
-          >
-            사랑스러운 내 애완동물, 최애를 자랑해 보세요!
-          </Typography>
-        </Grid>
+      </MainWrapper>
+      <Grid container textAlign="center" marginTop={2}>
         <Grid xs={12}>
           <Button
+            fullWidth
             variant="contained"
-            sx={{ bgcolor: primary.dark, color: secondary.main }}
+            sx={{
+              bgcolor: secondary.dark,
+              color: secondary.main,
+              height: '50px',
+            }}
             onClick={() => {
               dispatch(setStep(1));
             }}
           >
-            <PetsIcon fontSize="small" />{' '}
+            <PetsIcon fontSize="small" />
             <Typography ml={1}> 시작하기</Typography>
           </Button>
         </Grid>
       </Grid>
-    </Box>
+    </Container>
   );
 };
 

@@ -7,28 +7,19 @@ import Text from './Text';
 import Result from './Result';
 import './Main.scss';
 import backgroundImg from '../assets/img/background.png';
+import MainAppBar from '../common/components/MainAppBar';
+import MainWrapper from '../common/components/MainWrapper';
 
 const Main = () => {
   const state = useSelector((state: State) => state);
   const { step } = state;
   return (
-    <Box>
-      <Container
-        maxWidth="sm"
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          background: `no-repeat url(${backgroundImg})`,
-          backgroundSize: 'cover',
-          height: '100vh',
-        }}
-      >
-        {step === 0 && <Start />}
-        {step === 1 && <Photo />}
-        {step === 2 && <Text />}
-        {step === 3 && <Result />}
-      </Container>
+    <Box height="100%" bgcolor="#fbf6f0">
+      <MainAppBar />
+      {step === 0 && <Start />}
+      {step === 1 && <Photo />}
+      {step === 2 && <Text />}
+      {step === 3 && <Result />}
     </Box>
   );
 };

@@ -3,18 +3,19 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#414141',
-      dark: '#B96C1F',
+      main: '#C63F3B',
+      dark: '#C63F3B',
       light: '#F6E9DB',
-      contrastText: '#844201',
+      contrastText: '#C63F3B',
     },
     secondary: {
       main: '#fff',
-      dark: '#414141',
+      dark: 'rgba(0,0,0,0.8)',
+      light: '#ddd',
     },
   },
   typography: {
-    fontFamily: 'Jua',
+    fontFamily: 'IBM Plex Sans KR',
   },
   breakpoints: {
     values: {
