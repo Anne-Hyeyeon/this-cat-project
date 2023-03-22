@@ -63,7 +63,7 @@ const Photo = () => {
     <Box height="100vh">
       <MainWrapper>
         <Grid container rowGap={2}>
-          <Grid xs={12}>
+          <Grid item xs={12}>
             <Box
               component="span"
               display="flex"
@@ -92,13 +92,26 @@ const Photo = () => {
                 </Button>
               </>
             ) : (
-              <Box display="flex" justifyContent="space-between">
-                <input type="file" onChange={handleFileChange} />
-                <Button className="upload-btn" onClick={handleUploadBtnOnclick}>
-                  Upload
-                </Button>
-                {progress > 0 && <progress value={progress} max="100" />}
-              </Box>
+              <>
+                <Box display="flex" justifyContent="space-between">
+                  <input type="file" onChange={handleFileChange} />
+                  <button
+                    className="upload-btn"
+                    onClick={handleUploadBtnOnclick}
+                  >
+                    Upload
+                  </button>
+                </Box>
+                <Box mt={1}>
+                  {progress > 0 && (
+                    <progress
+                      className="progressbar"
+                      value={progress}
+                      max="100"
+                    />
+                  )}
+                </Box>
+              </>
             )}
           </Grid>
           <Grid xs={12}>{!!url && <MainButton text="다음으로" />}</Grid>

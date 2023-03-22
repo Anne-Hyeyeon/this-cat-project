@@ -13,6 +13,27 @@ input[type='file']::file-selector-button,
   }
 }
 
-::-webkit-progress-value {
-  background-color: orange;
+.progressbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.progressbar::-webkit-progress-value {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+}
+
+.progressbar::-webkit-progress-bar {
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+.progressbar::-moz-progress-bar {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
 }

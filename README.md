@@ -160,3 +160,45 @@ allow read, write;
 - 파일이름.d.ts -> 타입스크립트 선언 파일을 src 폴더 내에 만들어준다.
 - .d.ts 파일이란? 타입스크립트 선언 파일로, 타입스크립트 코드 타입 추론을 돕는 파일.
 - 전역 변수로 선언한 변수를 특정 파일에서 사용하는 경우, 해당 변수를 인식하지 못한다. 이 때 변수를 인식하게 해 준다.
+
+### progressbar color 등 속성 변경하는 법
+
+- 디버거로 사라지려는 프로그래스바를 딱 잡아서 얘가 어디서 영향을 받는지 확인!
+
+```js
+<progress
+  className="progressbar"
+  style={{ backgroundColor: red }}
+  value={progress}
+  max="100"
+/>
+```
+
+- 위와 같이 프로그래스바에 클래스네임 넣어줌
+
+```css
+.progressbar {
+  width: 100%;
+  height: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.progressbar::-webkit-progress-value {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+}
+
+.progressbar::-webkit-progress-bar {
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+.progressbar::-moz-progress-bar {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+}
+```
+
+- 그 후, CSS로 속성을 수정해주면 된다. 다른 브라우저와의 호환을 위해 (-moz-, -ms-, -o-) 등 사용해준다.
+- style attribute는 안 먹힌다.
