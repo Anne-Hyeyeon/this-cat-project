@@ -76,10 +76,10 @@ const Photo = () => {
               </Typography>
             </Box>
           </Grid>
-          <Grid xs={12} textAlign="center">
+          <Grid item xs={12} textAlign="center">
             <ImagePreview imageUrl={url} />
           </Grid>
-          <Grid xs={12} textAlign="center">
+          <Grid item xs={12} textAlign="center">
             {url ? (
               <>
                 <Button
@@ -114,7 +114,9 @@ const Photo = () => {
               </>
             )}
           </Grid>
-          <Grid xs={12}>{!!url && <MainButton text="다음으로" />}</Grid>
+          <Grid item xs={12}>
+            {!!url && <MainButton text="다음으로" />}
+          </Grid>
         </Grid>
       </MainWrapper>
     </Box>

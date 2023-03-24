@@ -202,3 +202,40 @@ allow read, write;
 
 - 그 후, CSS로 속성을 수정해주면 된다. 다른 브라우저와의 호환을 위해 (-moz-, -ms-, -o-) 등 사용해준다.
 - style attribute는 안 먹힌다.
+
+### A non-serializable value was detected in an action, in the path: `payload`
+
+```js
+const fileRef = ref(storage, `photos/${randomFileName}`);
+```
+
+- Redux에 store한 value가 ref 형식임.
+- 여기서 fileRef를 콘솔에 찍어보면
+
+```
+Reference {_service: FirebaseStorageImpl, _location: Location}
+```
+
+- '레퍼런스'가 뜨는데 이건 **_non-serializable_**한 값임.
+
+#### non-serializable하다는 건 어떤 의미일까?
+
+- gpt 의 답변
+
+```
+Yes, the Reference object you posted is likely a non-serializable format in Redux. The Reference object is a Firebase Storage reference that represents a file in the storage bucket. It contains internal state and methods that are not serializable.
+
+When you store data in the Redux store, it is important to ensure that the data is serializable, meaning it can be converted to a plain JavaScript object and back without losing any data or functionality. This is because Redux stores the state as a plain JavaScript object, and non-serializable data will cause errors when it is serialized or deserialized.
+```
+
+- 해결 방법
+
+1. To make the Reference object serializable, you can extract the necessary information from the object and store it in a plain JavaScript object instead. For example, you can store the bucket name, file path, and other necessary metadata as separate fields in the state, and use that information to construct a new Reference object when needed.
+
+- Reference에서 필요한 정보를 추출해서 object로 만들어 사용한다.
+
+2. Alternatively, you can exclude the Reference object from the state altogether and store it outside of the Redux store, for example in a local variable or a separate object.
+
+- Reference 값을 리덕스에서 사용하지 안흔ㄴ다.
+
+- 참고로 `serializable`은 한국어로 `직렬화`로 번역할 수 있는데, 이는 데이터나 객체를 저장, 전송 또는 공유 가능한 형식으로 변환할 수 있는 속성을 의미한다.

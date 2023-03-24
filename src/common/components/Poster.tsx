@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { State } from '../../store/store';
-import { Container, Box } from '@mui/material';
 import {
   objectCaseSelector,
   subjectCaseSelector,
@@ -28,8 +27,9 @@ const Wrapper = styled.div<Styles>`
   width: ${({ width }) => {
     return `${width ?? initialWidth}mm`;
   }};
-  height: ${({ height }) => {
-    return `${height ?? initialWidth * 1.414}mm`;
+  height: ${({ width }) => {
+    if (width === undefined) return `${initialWidth * 1.414}mm`;
+    if (width !== undefined) return `${width * 1.414}mm`;
   }};
   border: 1px solid black;
   background-color: white;
@@ -45,10 +45,12 @@ const Header = styled.div<Styles>`
   align-items:center;
   width: 100%;
   }};
-  height: ${({ height }) => {
-    return `${height ? height / 6 : 49.5}mm`;
+  height: ${({ width }) => {
+    return `${width ? (width * 1.414) / 6 : 49.5}mm`;
   }};
-  font-size: 90px;
+  font-size: ${({ width }) => {
+    return `${width ? width / 3 : 90}px`;
+  }};
   background-color: #C63F3B;
   color: #E5D45E;
   -webkit-text-stroke: 5px #1A1A1A;
@@ -60,8 +62,8 @@ const Photo = styled.div<Styles & { photoUrl?: string }>`
     return `url(${photoUrl})`;
   }}};
   width: 100%;
-  height: ${({ height }) => {
-    return `${height ? height / 2 : 148}mm`;
+  height: ${({ width }) => {
+    return `${width ? (width * 1.414) / 2 : 148}mm`;
   }};
   background-repeat: no-repeat;
   background-position: center;
@@ -75,8 +77,8 @@ const FirstLine = styled.div<Styles & { petName?: string }>`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: ${({ height }) => {
-    return `${height ? height / 9 : 33}mm`;
+  height: ${({ width }) => {
+    return `${width ? (width * 1.414) / 9 : 33}mm`;
   }};
   margin-top: ${marginTop}px;
   font-size: ${({ petName }) => {
@@ -96,8 +98,8 @@ const SecondLine = styled.div<Styles>`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: ${({ height }) => {
-    return `${height ? height / 6.2 : 48}mm`;
+  height: ${({ width }) => {
+    return `${width ? (width * 1.414) / 6.2 : 48}mm`;
   }};
   margin-top: ${marginTop}px;
   font-size: 60px;

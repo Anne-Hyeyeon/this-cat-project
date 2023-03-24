@@ -13,7 +13,7 @@ export const initialState: State = {
   photoUrl: '',
   petType: '고양이',
   petName: '얘',
-  fileRef: null,
+  fileRef: '',
 };
 
 const postSlice = createSlice({

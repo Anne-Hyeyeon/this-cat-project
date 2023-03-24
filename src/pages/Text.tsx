@@ -78,7 +78,7 @@ const Text = () => {
         이전
       </button>
       <Container maxWidth="sm">
-        <Poster />
+        <Poster styles={{ width: 100 }} />
       </Container>
 
       <button onClick={handleNextBtnOnclick}>다음</button>
