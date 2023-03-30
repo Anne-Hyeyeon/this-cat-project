@@ -239,3 +239,7 @@ When you store data in the Redux store, it is important to ensure that the data 
 - Reference 값을 리덕스에서 사용하지 안흔ㄴ다.
 
 - 참고로 `serializable`은 한국어로 `직렬화`로 번역할 수 있는데, 이는 데이터나 객체를 저장, 전송 또는 공유 가능한 형식으로 변환할 수 있는 속성을 의미한다.
+
+### analytics/config-fetch-failed 오류
+
+- .env 파일에 입력해뒀던 id 값에 문제가 있었다. 언제 바뀌었지..?
