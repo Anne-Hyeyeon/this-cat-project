@@ -243,3 +243,9 @@ When you store data in the Redux store, it is important to ensure that the data 
 ### analytics/config-fetch-failed 오류
 
 - .env 파일에 입력해뒀던 id 값에 문제가 있었다. 언제 바뀌었지..?
+
+### Poster component 상대 크기
+
+### Poster component의 사이즈를 width값을 이용해 자유자재로 조절하고자 한다. 예를 들면, 고정된 height 대신 width 에 따른 상대 값을 사용하는 것이다. height 값을 width의 1:414배로 해 두면 width값이 달라져도, 컴포넌트는 A4 사이즈 비율을 유지한다.
+
+### 하지만, 폰트 사이즈는 어떻게 맞출 것인가?

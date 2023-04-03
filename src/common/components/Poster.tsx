@@ -53,8 +53,7 @@ const Header = styled.div<Styles>`
   }};
   background-color: #C63F3B;
   color: #E5D45E;
-  -webkit-text-stroke: 5px #1A1A1A;
-  line-height:80px;
+  // -webkit-text-stroke: 5px #1A1A1A;
 `;
 
 const Photo = styled.div<Styles & { photoUrl?: string }>`
