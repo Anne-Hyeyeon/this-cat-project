@@ -51,6 +51,12 @@ const Header = styled.div<Styles>`
   font-size: ${({ width }) => {
     return `${width ? width / 3 : 90}px`;
   }};
+  line-height: ${({ width }) => {
+    return `${width ? width / 3 : 80}px`;
+  }};
+  letter-spacing: ${({ width }) => {
+    return `${width ? width / 10 : 20}px`;
+  }};
   background-color: #C63F3B;
   color: #E5D45E;
   // -webkit-text-stroke: 5px #1A1A1A;

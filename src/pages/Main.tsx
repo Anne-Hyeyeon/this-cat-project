@@ -14,7 +14,7 @@ const Main = () => {
   const state = useSelector((state: State) => state);
   const { step } = state;
   return (
-    <Box height="100%" bgcolor="#fbf6f0">
+    <Box bgcolor="#fbf6f0">
       <MainAppBar />
       <Container maxWidth="sm">
         {step !== 0 && <MainStepper />}

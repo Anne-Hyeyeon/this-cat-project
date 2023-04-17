@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Grid, Container } from '@mui/material';
+import { Typography, Grid, Container, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import cat from '../assets/img/cat.png';
 import MainWrapper from '../common/components/MainWrapper';
@@ -9,7 +9,7 @@ const Start = () => {
   const theme = useTheme();
   const { primary, secondary } = theme.palette;
   return (
-    <Container maxWidth="sm" sx={{ padding: '30px', height: '100vh' }}>
+    <Container maxWidth="sm" sx={{ padding: '30px' }}>
       <MainWrapper>
         <Grid container textAlign="center" rowGap={3}>
           <Grid item xs={12}>
