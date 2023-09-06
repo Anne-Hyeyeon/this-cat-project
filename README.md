@@ -246,9 +246,10 @@ When you store data in the Redux store, it is important to ensure that the data 
 
 ### Poster component 상대 크기
 
-### Poster component의 사이즈를 width값을 이용해 자유자재로 조절하고자 한다. 예를 들면, 고정된 height 대신 width 에 따른 상대 값을 사용하는 것이다. height 값을 width의 1:414배로 해 두면 width값이 달라져도, 컴포넌트는 A4 사이즈 비율을 유지한다.
-
-### 하지만, 폰트 사이즈는 어떻게 맞출 것인가?
+### Poster component의 사이즈를 width값을 이용해 자유자재로 조절하고자 한다. 
+- 예를 들면, 고정된 height 대신 width 에 따른 상대 값을 사용하는 것이다. height 값을 width의 1:414배로 해 두면 width값이 달라져도, 컴포넌트는 A4 사이즈 비율을 유지한다.
+- 하지만, 폰트 사이즈는 어떻게 맞출 것인가?
+- 방법 : 아래의 '전체 스케일 조절'
 
 ### 개발진스처럼 사용자가 자유롭게 요소와 폰트를 변경하는...뭐 그런 거 없을까...
 
@@ -256,8 +257,23 @@ When you store data in the Redux store, it is important to ensure that the data 
 
 ### 자식 요소가 부모 요소보다 클 때
 
-### Resize Event Listenr
+### Resize Event Listener
 
 - before : 컴포넌트가 처음 마운트 될 때만 `setScreenSize` 호출함.
 - after : 사용자가 브라우저 크기를 조절하거나, 모바일 기기에서 화면을 회전할 경우에도 `--vh` 값 업데이트
 - how : resize 이벤트 리스너
+
+### 전체 스케일 조절
+
+- Poster.tsx에 전체 스케일을 width값만으로 동적으로 조정할 수 있게 만듦.
+
+```ts
+const ScaleWrapper = styled.div<Styles>`
+  transform: ${({ width }) =>
+    width ? `scale(${width / initialWidth})` : 'none'};
+  transform-origin: top left;
+  width: ${({ width }) => (width ? `${width}mm` : `${initialWidth}mm`)};
+  height: ${({ width }) =>
+    width ? `${width * 1.414}mm` : `${initialWidth * 1.414}mm`};
+`;
+```
