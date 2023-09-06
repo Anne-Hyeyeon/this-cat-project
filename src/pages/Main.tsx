@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useSelector } from 'react-redux';
 import { State } from '../store/store';
 import { Container, Box } from '@mui/material';
 import Photo from './Photo';
@@ -11,8 +11,8 @@ import MainWrapper from '../common/components/MainWrapper';
 import MainStepper from '../common/components/MainStepper';
 
 const Main = () => {
-  const state = useSelector((state: State) => state);
-  const { step } = state;
+  const step = useSelector((state: State) => state.step);
+
   return (
     <Box bgcolor="#fbf6f0">
       <MainAppBar />

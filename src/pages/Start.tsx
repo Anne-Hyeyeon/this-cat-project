@@ -28,13 +28,7 @@ const Start = () => {
               color={secondary.dark}
               sx={{ textShadow: `1px 1px 2px ${primary.light}` }}
             >
-              혼자만 보기 아까운 <br /> 우리집 세젤예 강아지, 고양이를
-            </Typography>
-            <Typography
-              variant="body2"
-              color={secondary.dark}
-              sx={{ textShadow: `1px 1px 2px ${primary.light}` }}
-            >
+              혼자만 보기 아까운 <br /> 우리집 세젤예 강아지, 고양이를 <br />
               나만의 포스터를 통해 <br />
               사람들한테 자랑해 보세요.
             </Typography>

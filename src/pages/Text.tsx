@@ -6,6 +6,15 @@ import { Link } from 'react-router-dom';
 import Poster from '../common/components/Poster';
 import { setPetName, setPetType, setStep, State } from '../store/store';
 import { initialState } from '../store/store';
+import {
+  Box,
+  Button,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 const Text = () => {
   const dispatch = useDispatch();
@@ -13,12 +22,12 @@ const Text = () => {
   const [showInput, setShowInput] = useState(false);
   const { petName, petType } = state;
 
-  const handlePetTypeSelectChange = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    setShowInput(e.target.value === '직접 입력');
-    dispatch(setPetType(e.target.value));
-    if (e.target.value === '직접 입력') {
+  const handlePetTypeSelectChange = (e: SelectChangeEvent<string>) => {
+    const selectedValue = e.target.value as string;
+
+    setShowInput(selectedValue === '직접 입력');
+    dispatch(setPetType(selectedValue));
+    if (selectedValue === '직접 입력') {
       dispatch(setPetType(petType));
     }
   };
@@ -44,45 +53,59 @@ const Text = () => {
   };
 
   return (
-    <>
-      <select
+    <Container maxWidth="sm">
+      <Select
         value={showInput ? '직접 입력' : petType}
         onChange={handlePetTypeSelectChange}
+        size="small"
       >
-        <option value="고양이">고양이</option>
-        <option value="강아지">강아지</option>
-        <option value="이구아나">이구아나</option>
-        <option value="직접 입력">직접 입력</option>
-      </select>
+        <MenuItem value="고양이">고양이</MenuItem>
+        <MenuItem value="강아지">강아지</MenuItem>
+        <MenuItem value="이구아나">이구아나</MenuItem>
+        <MenuItem value="직접 입력">직접 입력</MenuItem>
+      </Select>
       {showInput && (
-        <input
-          type="text"
-          value={petType}
-          onChange={handlePetTypeInputChange}
-          maxLength={4}
-        />
+        <Box display="flex" flexDirection="row" alignItems="center">
+          <TextField
+            sx={{ width: 150 }}
+            size="small"
+            inputProps={{ maxLength: 4 }}
+            variant="filled"
+            value={petType}
+            onChange={handlePetTypeInputChange}
+          />
+          <Typography
+            variant="body2"
+            align="center"
+            style={{ marginLeft: '8px' }}
+          >
+            최대 4글자까지 입력 가능합니다.
+          </Typography>
+        </Box>
       )}
-      <div>
-        <input
-          type="text"
+      <Box>
+        <TextField
+          sx={{ width: 150 }}
+          size="small"
+          inputProps={{ maxLength: 6 }}
+          variant="filled"
           value={petName}
           onChange={handlePetNameInputChange}
-          maxLength={6}
         />
-      </div>
-      <button
+      </Box>
+      <Box sx={{ alignItems: 'center' }}>
+        <Poster styles={{ width: 100 }} />
+      </Box>
+      <Button
         onClick={() => {
           dispatch(setStep(1));
         }}
       >
         이전
-      </button>
-      <Container maxWidth="sm">
-        <Poster styles={{ width: 100 }} />
-      </Container>
+      </Button>
 
-      <button onClick={handleNextBtnOnclick}>다음</button>
-    </>
+      <Button onClick={handleNextBtnOnclick}>다음</Button>
+    </Container>
   );
 };
 
