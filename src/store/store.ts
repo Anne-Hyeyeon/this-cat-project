@@ -21,26 +21,26 @@ const postSlice = createSlice({
   initialState,
   reducers: {
     setStep: (state, action) => {
-      state['step'] = action.payload;
+      state.step = action.payload;
     },
     setPhotoUrl: (state, action) => {
-      state['photoUrl'] = action.payload;
+      state.photoUrl = action.payload;
     },
     setPetType: (state, action) => {
-      state['petType'] = action.payload;
+      state.petType = action.payload;
     },
     setPetName: (state, action) => {
-      state['petName'] = action.payload;
+      state.petName = action.payload;
     },
     setFileRef: (state, action) => {
-      state['fileRef'] = action.payload;
+      state.fileRef = action.payload;
     },
     init: (state) => {
-      state['step'] = initialState['step'];
-      state['photoUrl'] = initialState['photoUrl'];
-      state['petType'] = initialState['petType'];
-      state['petName'] = initialState['petName'];
-      state['fileRef'] = initialState['fileRef'];
+      state.step = initialState.step;
+      state.photoUrl = initialState.photoUrl;
+      state.petType = initialState.petType;
+      state.petName = initialState.petName;
+      state.fileRef = initialState.fileRef;
     },
   },
 });
