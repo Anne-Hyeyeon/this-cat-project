@@ -253,3 +253,11 @@ When you store data in the Redux store, it is important to ensure that the data 
 ### 개발진스처럼 사용자가 자유롭게 요소와 폰트를 변경하는...뭐 그런 거 없을까...
 
 - https://devjeans.dev-hee.com/
+
+### 자식 요소가 부모 요소보다 클 때
+
+### Resize Event Listenr
+
+- before : 컴포넌트가 처음 마운트 될 때만 `setScreenSize` 호출함.
+- after : 사용자가 브라우저 크기를 조절하거나, 모바일 기기에서 화면을 회전할 경우에도 `--vh` 값 업데이트
+- how : resize 이벤트 리스너
