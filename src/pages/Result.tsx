@@ -1,9 +1,9 @@
-import { toJpeg, toPng } from 'html-to-image';
+import { getFontEmbedCSS, toJpeg, toPng } from 'html-to-image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { storage } from '../firebase';
 import { deleteObject } from 'firebase/storage';
-import Poster from '../common/components/Poster';
+import Poster from '../common/components/poster/DefaultPoster';
 import { State, init } from '../store/store';
 
 const Result = () => {
@@ -16,8 +16,7 @@ const Result = () => {
     if (ref.current === null) {
       return;
     }
-
-    toPng(ref.current, {
+    toJpeg(ref.current, {
       width: 798,
       height: 1123,
     })

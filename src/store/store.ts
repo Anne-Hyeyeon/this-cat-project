@@ -12,7 +12,7 @@ export const initialState: State = {
   step: 0,
   photoUrl: '',
   petType: '고양이',
-  petName: '얘',
+  petName: '저희집 별이',
   fileRef: '',
 };
 

@@ -8,7 +8,7 @@ interface Props {
 const ImagePreview: React.FC<Props> = ({ imageUrl }) => {
   return (
     <Box
-      height={300}
+      height={450}
       display="flex"
       alignItems="center"
       justifyContent="center"

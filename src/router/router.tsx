@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Poster from '../common/components/Poster';
+import Poster from '../common/components/poster/DefaultPoster';
 import Main from '../pages/Main';
 
 const Router = () => {

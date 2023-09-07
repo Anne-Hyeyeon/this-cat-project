@@ -3,20 +3,28 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { Link } from 'react-router-dom';
-import Poster from '../common/components/Poster';
+import Poster from '../common/components/poster/DefaultPoster';
 import { setPetName, setPetType, setStep, State } from '../store/store';
 import { initialState } from '../store/store';
 import {
   Box,
   Button,
+  FormControl,
+  FormHelperText,
   MenuItem,
   Select,
   SelectChangeEvent,
   TextField,
   Typography,
+  Grid,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import MainButton from '../common/components/MainButton';
 
 const Text = () => {
+  const theme = useTheme();
+  const { primary, secondary } = theme.palette;
+
   const dispatch = useDispatch();
   const state = useSelector((state: State) => state);
   const [showInput, setShowInput] = useState(false);
@@ -53,59 +61,84 @@ const Text = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Select
-        value={showInput ? '직접 입력' : petType}
-        onChange={handlePetTypeSelectChange}
-        size="small"
-      >
-        <MenuItem value="고양이">고양이</MenuItem>
-        <MenuItem value="강아지">강아지</MenuItem>
-        <MenuItem value="이구아나">이구아나</MenuItem>
-        <MenuItem value="직접 입력">직접 입력</MenuItem>
-      </Select>
-      {showInput && (
-        <Box display="flex" flexDirection="row" alignItems="center">
-          <TextField
-            sx={{ width: 150 }}
-            size="small"
-            inputProps={{ maxLength: 4 }}
-            variant="filled"
-            value={petType}
-            onChange={handlePetTypeInputChange}
-          />
-          <Typography
-            variant="body2"
-            align="center"
-            style={{ marginLeft: '8px' }}
-          >
-            최대 4글자까지 입력 가능합니다.
-          </Typography>
-        </Box>
-      )}
-      <Box>
-        <TextField
-          sx={{ width: 150 }}
-          size="small"
-          inputProps={{ maxLength: 6 }}
-          variant="filled"
-          value={petName}
-          onChange={handlePetNameInputChange}
-        />
-      </Box>
-      <Box sx={{ alignItems: 'center' }}>
-        <Poster styles={{ width: 100 }} />
-      </Box>
-      <Button
-        onClick={() => {
-          dispatch(setStep(1));
-        }}
-      >
-        이전
-      </Button>
-
-      <Button onClick={handleNextBtnOnclick}>다음</Button>
-    </Container>
+    <Box height="100vh">
+      <Container maxWidth="sm">
+        <Grid container sx={{ bgcolor: 'secondary.light', p: 2 }}>
+          <Grid item xs={6}>
+            <Grid container direction="column" spacing={2}>
+              <Grid item>
+                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  <Select
+                    sx={{ width: 200, mb: 1 }}
+                    value={showInput ? '직접 입력' : petType}
+                    onChange={handlePetTypeSelectChange}
+                    size="small"
+                  >
+                    <MenuItem value="고양이">고양이</MenuItem>
+                    <MenuItem value="강아지">강아지</MenuItem>
+                    <MenuItem value="이구아나">이구아나</MenuItem>
+                    <MenuItem value="직접 입력">직접 입력</MenuItem>
+                  </Select>
+                  <FormHelperText>
+                    찾을 대상 ex) 고양이, 남자, 아내
+                  </FormHelperText>
+                </FormControl>
+              </Grid>
+              {showInput && (
+                <Grid item>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <TextField
+                      sx={{ mb: 1 }}
+                      size="small"
+                      inputProps={{ maxLength: 4 }}
+                      value={petType}
+                      onChange={handlePetTypeInputChange}
+                    />
+                    <FormHelperText>
+                      최대 4글자까지 입력 가능합니다 <br />
+                    </FormHelperText>
+                  </FormControl>
+                </Grid>
+              )}
+              <Grid item>
+                <FormControl sx={{ m: 1, mb: 5, minWidth: 120 }}>
+                  <TextField
+                    sx={{ width: 150, mb: 1 }}
+                    size="small"
+                    inputProps={{ maxLength: 6 }}
+                    value={petName}
+                    onChange={handlePetNameInputChange}
+                  />
+                  <FormHelperText>
+                    동물, 또는 최애의 이름을 입력해주세요. <br />
+                  </FormHelperText>
+                </FormControl>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="h6" marginBottom={1}>
+              *미리보기*
+            </Typography>
+            <Poster styles={{ width: 60 }} />
+          </Grid>
+        </Grid>
+        <Grid container justifyContent="space-between" mt={4}>
+          <Grid item xs={12}>
+            <MainButton useIcon text="다음으로" />
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              onClick={() => {
+                dispatch(setStep(1));
+              }}
+            >
+              * 사진 다시 선택하기
+            </Button>
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
   );
 };
 
