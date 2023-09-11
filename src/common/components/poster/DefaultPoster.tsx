@@ -6,6 +6,8 @@ import {
   objectCaseSelector,
   subjectCaseSelector,
 } from '../../function/endingSelector';
+import ScaleWrapper from './common/ScaleWrapper';
+import { initialWidth, marginTop } from './common/initialStyles';
 
 interface Styles {
   width?: number;
@@ -15,13 +17,6 @@ interface Styles {
 interface Props {
   styles?: Styles;
 }
-
-const initialStyles: { initialWidth: number; marginTop: number } = {
-  initialWidth: 210,
-  marginTop: 10,
-};
-
-const { initialWidth, marginTop } = initialStyles;
 
 const Wrapper = styled.div`
   width: ${initialWidth}mm;
@@ -33,6 +28,7 @@ const Wrapper = styled.div`
   box-sizing: border-box;
 `;
 
+// DefaultPoster Design
 const Header = styled.div<{ petType: string }>`
   display: flex;
   flex-direction: column;
@@ -107,21 +103,12 @@ const SecondLine = styled.div<{ petType: string }>`
   line-height: 70px;
 `;
 
-const ScaleWrapper = styled.div<Styles>`
-  transform: ${({ width }) =>
-    width ? `scale(${width / initialWidth})` : 'none'};
-  transform-origin: top left;
-  width: ${({ width }) => (width ? `${width}mm` : `${initialWidth}mm`)};
-  height: ${({ width }) =>
-    width ? `${width * 1.414}mm` : `${initialWidth * 1.414}mm`};
-`;
-
 const DefaultPoster: React.FC<Props> = (props) => {
   const state = useSelector((state: State) => state);
   const { photoUrl, petType, petName } = state;
 
   return (
-    <ScaleWrapper {...props.styles}>
+    <ScaleWrapper styles={props.styles}>
       <Wrapper>
         <Header {...props.styles} petType={petType}>
           <div className="first-line">
@@ -144,4 +131,4 @@ const DefaultPoster: React.FC<Props> = (props) => {
   );
 };
 
-export default DefaultPoster;
+export { DefaultPoster };

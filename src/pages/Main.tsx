@@ -20,8 +20,8 @@ const Main = () => {
         {step === 0 && <Start />}
         {step === 1 && <Photo />}
         {step === 2 && <Text />}
-        {/* {step === 3 && <Design />} */}
-        {step === 3 && <Result />}
+        {step === 3 && <Design />}
+        {step === 4 && <Result />}
       </Container>
     </Box>
   );

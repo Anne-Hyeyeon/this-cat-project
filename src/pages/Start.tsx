@@ -4,8 +4,11 @@ import { useTheme } from '@mui/material/styles';
 import cat from '../assets/img/cat.png';
 import MainWrapper from '../common/components/MainWrapper';
 import MainButton from '../common/components/MainButton';
+import { useDispatch } from 'react-redux';
+import { setStep } from '../store/store';
 
 const Start = () => {
+  const dispatch = useDispatch();
   const theme = useTheme();
   const { primary, secondary } = theme.palette;
   return (
@@ -41,6 +44,13 @@ const Start = () => {
       <Grid container textAlign="center" marginTop={2}>
         <Grid item xs={12}>
           <MainButton text="시작하기" useIcon />
+          <button
+            onClick={() => {
+              dispatch(setStep(2));
+            }}
+          >
+            하하
+          </button>
         </Grid>
       </Grid>
     </Container>

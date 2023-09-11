@@ -1,8 +1,7 @@
 import { Box, Container, Grid } from '@mui/material';
 import React from 'react';
-import Poster from '../common/components/poster/DefaultPoster';
-import DefaultPoster from '../common/components/poster/DefaultPoster';
-import SimplePoster from '../common/components/poster/SimplePoster';
+import { DefaultPoster } from '../common/components/poster/DefaultPoster';
+import { SimplePoster } from '../common/components/poster/SimplePoster';
 
 function Design() {
   return (

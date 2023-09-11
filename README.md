@@ -277,4 +277,53 @@ const ScaleWrapper = styled.div<Styles>`
 `;
 ```
 
-## Html-to-Image가 웹폰트를 인식하지 못함
+## 한 파일에서 여러 개의 컴포넌트 export하기
+
+1. 컴포넌트 정의
+
+```tsx
+const SimplePoster: React.FC<Props> = (props) => {
+  // component logic here
+  return (
+    // JSX for SimplePoster
+  );
+}
+
+const PrettyPoster: React.FC<Props> = (props) => {
+  // component logic here
+  return (
+    // JSX for PrettyPoster
+  );
+}
+```
+
+2. export 하기
+
+```tsx
+export { Poster, SimplePoster, PrettyPoster };
+```
+
+3. import 하기
+
+```tsx
+import { Poster, SimplePoster, PrettyPoster } from './path';
+```
+
+## 'Poster'컴포넌트에서 사용되는 initialWidth를 별도의 모듈 파일로 분리하여 사용하는 것은 좋은 접근일까?
+
+- Poster.tsx, ScaleWrapper.tsx에서 공통으로 사용되는 initialWidth
+- 해당 값을 관리하는 파일을 별도로 만들어야 하는지.
+
+### pros
+
+1. `재사용성``: 해당 상수가 여러 컴포넌트나 함수에서 사용되어야 하는 경우, 한 곳에서 정의하고 여러 곳에서 임포트하여 사용하면 중복 코드를 줄일 수 있다.
+
+2. `관리 용이성``: 상수가 한 곳에 모여있으면, 나중에 값이 변경되어야 할 때 한 파일 내에서만 수정하면 되므로 유지 보수가 용이하다.
+
+3. `가독성`: 각 컴포넌트나 함수 파일이 주요 로직에만 집중할 수 있게 되고, 상수와 같은 설정 값들이 별도의 파일에 있으므로 코드의 가독성이 향상됨.
+
+### cons
+
+- 오버엔지니어링: 만약 initialWidth와 같은 상수가 특정 컴포넌트에서만 사용되고, 재사용될 가능성이 없다면 별도의 파일로 분리하는 것은 오버엔지니어링이 될 수 있음.
+
+- 디렉토리 구조: 상수를 별도 파일로 관리할 때, 프로젝트의 디렉토리 구조를 잘 관리하지 않으면 여러 상수 파일들이 프로젝트 전체에 흩어져 코드 베이스가 혼란스러울 수 있다.

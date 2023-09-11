@@ -6,6 +6,8 @@ import {
   objectCaseSelector,
   subjectCaseSelector,
 } from '../../function/endingSelector';
+import ScaleWrapper from './common/ScaleWrapper';
+import { initialWidth, marginTop } from './common/initialStyles';
 
 interface Styles {
   width?: number;
@@ -16,20 +18,13 @@ interface Props {
   styles?: Styles;
 }
 
-const initialStyles: { initialWidth: number; marginTop: number } = {
-  initialWidth: 210,
-  marginTop: 10,
-};
-
-const { initialWidth, marginTop } = initialStyles;
-
 const Wrapper = styled.div`
   width: ${initialWidth}mm;
   height: ${initialWidth * 1.414}mm;
   border: 1px solid black;
   background-color: white;
-  font-family: 'Black Han Sans', sans-serif;
-  padding: 20px;
+  padding: 50px 0px;
+  font-family: 'Nanum Pen Script', cursive;
   box-sizing: border-box;
 `;
 
@@ -39,7 +34,7 @@ const Header = styled.div<{ petType: string }>`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 49.5mm;
+  padding-bottom: 30px;
   font-size: ${({ petType }) => {
     if (petType.length <= 3) {
       return '100px';
@@ -49,9 +44,7 @@ const Header = styled.div<{ petType: string }>`
     return '90px';
   }};
   line-height: 80px;
-  background-color: #c63f3b;
-  color: #e5d45e;
-  -webkit-text-stroke: 2px #1a1a1a;
+  color: #000000;
   padding-top: 10px;
 `;
 
@@ -59,7 +52,6 @@ const Photo = styled.div<{ photoUrl?: string }>`
   background-image: url(${(props) => props.photoUrl});
   width: 100%;
   height: 148mm;
-  border: 1px solid black;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -72,7 +64,6 @@ const FirstLine = styled.div<{ petName: string }>`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 33mm;
   margin-top: ${marginTop}px;
   font-size: ${({ petName }) => {
     if (petName.length <= 4) {
@@ -82,9 +73,7 @@ const FirstLine = styled.div<{ petName: string }>`
     }
     return '65px';
   }};
-  background-color: #cf423d;
-  color: #1a1a1a;
-  -webkit-text-stroke: 1px #fff;
+  color: #8b0000;
 `;
 
 const SecondLine = styled.div<{ petType: string }>`
@@ -93,7 +82,6 @@ const SecondLine = styled.div<{ petType: string }>`
   justify-content: center;
   align-items: center;
   width: 100;
-  height: 48mm;
   margin-top: ${marginTop}px;
   color: #1a1a1a;
   font-size: ${({ petType }) => {
@@ -107,21 +95,12 @@ const SecondLine = styled.div<{ petType: string }>`
   line-height: 70px;
 `;
 
-const ScaleWrapper = styled.div<Styles>`
-  transform: ${({ width }) =>
-    width ? `scale(${width / initialWidth})` : 'none'};
-  transform-origin: top left;
-  width: ${({ width }) => (width ? `${width}mm` : `${initialWidth}mm`)};
-  height: ${({ width }) =>
-    width ? `${width * 1.414}mm` : `${initialWidth * 1.414}mm`};
-`;
-
 const SimplePoster: React.FC<Props> = (props) => {
   const state = useSelector((state: State) => state);
   const { photoUrl, petType, petName } = state;
 
   return (
-    <ScaleWrapper {...props.styles}>
+    <ScaleWrapper styles={props.styles}>
       <Wrapper>
         <Header {...props.styles} petType={petType}>
           <div className="first-line">
@@ -144,4 +123,4 @@ const SimplePoster: React.FC<Props> = (props) => {
   );
 };
 
-export default SimplePoster;
+export { SimplePoster };
