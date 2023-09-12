@@ -4,7 +4,14 @@ import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { Link } from 'react-router-dom';
 import { DefaultPoster } from '../common/components/poster/DefaultPoster';
-import { setPetName, setPetType, setStep, State } from '../store/store';
+import {
+  setPetName,
+  setPetType,
+  setStep,
+  State,
+  setHeaderColor,
+  setAccentColor,
+} from '../store/store';
 import { initialState } from '../store/store';
 import { useFormControl } from '@mui/material/FormControl';
 
@@ -25,6 +32,17 @@ import { useTheme } from '@mui/material/styles';
 import MainWrapper from '../common/components/MainWrapper';
 import { SimplePoster } from '../common/components/poster/SimplePoster';
 import MainButton from '../common/components/MainButton';
+import {
+  ChromePicker,
+  CirclePicker,
+  SketchPicker,
+  SwatchesPicker,
+  TwitterPicker,
+} from 'react-color';
+
+// interface color {
+
+// }
 
 const Detail = () => {
   const theme = useTheme();
@@ -32,25 +50,21 @@ const Detail = () => {
 
   const dispatch = useDispatch();
   const state = useSelector((state: State) => state);
+  const { petName, petType, posterType, colors } = state;
+  const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [showInput, setShowInput] = useState(false);
-  const { petName, petType, posterType } = state;
 
-  const handlePetTypeSelectChange = (e: SelectChangeEvent<string>) => {
-    const selectedValue = e.target.value as string;
-
-    setShowInput(selectedValue === '직접 입력');
-    dispatch(setPetType(selectedValue));
-    if (selectedValue === '직접 입력') {
-      dispatch(setPetType(petType));
-    }
+  const handleClick = () => {
+    setDisplayColorPicker(!displayColorPicker);
   };
 
-  const handlePetTypeInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setPetType(e.target.value));
+  const handleClose = () => {
+    setDisplayColorPicker(false);
   };
 
-  const handlePetNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setPetName(e.target.value));
+  const handleChange = (color: any) => {
+    console.log(color.hex);
+    dispatch(setAccentColor(color.hex));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -73,13 +87,26 @@ const Detail = () => {
                   *미리보기*
                 </Typography>
                 {posterType === 'emphasized' ? (
-                  <DefaultPoster styles={{ width: 55 }} />
+                  <DefaultPoster styles={{ width: 100 }} />
                 ) : (
-                  <SimplePoster styles={{ width: 55 }} />
+                  <SimplePoster styles={{ width: 100 }} />
                 )}
               </Grid>
               <Grid item xs={6}>
-                '색상'
+                <div>
+                  <div onClick={handleClick}>
+                    <div>ㅋㅋㅋ</div>
+                  </div>
+                  {displayColorPicker ? (
+                    <div>
+                      <div onClick={handleClose}>안녕</div>
+                      <SketchPicker
+                        color={colors.emphasizedPosterColors.accentColor}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  ) : null}
+                </div>
               </Grid>
             </Grid>
           </MainWrapper>

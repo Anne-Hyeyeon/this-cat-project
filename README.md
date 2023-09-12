@@ -331,3 +331,215 @@ import { Poster, SimplePoster, PrettyPoster } from './path';
 ## 페이지 설명을 나타내는 TitleTypography와 본문 내용을 설명하는 BodyTypoGraphy 공통 컴포넌트로 분리
 
 - 재사용성 업!
+
+## Hook은 무조건 컴포넌트 안에!
+
+### 오류 내용
+
+```
+react.development.js:209 Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+```
+
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+
+### 원인
+
+Poster 컴포넌트에서 컴포넌트 내부가 아닌 바깥에 useSelector를 사용했음. hook은 컴포넌트 내부에서! !
+
+## 삽질 기록: react-color 가 hex값도 제공했네~!!
+
+### 생각의 흐름
+
+1. color-picker를 이용해서 Poster의 배경색, 강조색을 사용자가 직접 정할 수 있게 만들어보자!
+2. react-color 라이브러리 설치
+3. react-color 에서는 color값을 rgba로 제공하겠지?
+4. store에 강조포스터, 심플포스터의 컬러값을 rgba로 만들어놓음...
+
+```ts
+import { PayloadAction, configureStore, createSlice } from '@reduxjs/toolkit';
+
+type PosterType = 'simplePosterColors' | 'emphasizedPosterColors';
+
+interface PosterColors {
+  headerColor: RgbaColor;
+  firstLineColor: RgbaColor;
+  secondLineColor: RgbaColor;
+}
+
+export interface emphasizedPosterColors extends PosterColors {
+  accentColor: RgbaColor;
+}
+
+export interface RgbaColor {
+  r: number;
+  g: number;
+  b: number;
+  a: number;
+}
+
+export interface State {
+  step: number;
+  photoUrl: string;
+  petType: string;
+  petName: string;
+  posterType: string;
+  fileRef: any;
+  colors: {
+    emphasizedPosterColors: emphasizedPosterColors;
+    simplePosterColors: PosterColors;
+  };
+}
+export const initialState: State = {
+  step: 0,
+  photoUrl: '',
+  petType: '고양이',
+  petName: '저희집 별이',
+  posterType: '',
+  fileRef: '',
+  colors: {
+    emphasizedPosterColors: {
+      headerColor: {
+        r: 229,
+        g: 212,
+        b: 94,
+        a: 1,
+      },
+      firstLineColor: {
+        r: 26,
+        g: 26,
+        b: 26,
+        a: 1,
+      },
+      secondLineColor: {
+        r: 26,
+        g: 26,
+        b: 26,
+        a: 1,
+      },
+      accentColor: {
+        r: 198,
+        g: 63,
+        b: 59,
+        a: 1,
+      },
+    },
+    simplePosterColors: {
+      headerColor: {
+        r: 1,
+        g: 1,
+        b: 1,
+        a: 1,
+      },
+      firstLineColor: {
+        r: 1,
+        g: 1,
+        b: 1,
+        a: 1,
+      },
+      secondLineColor: {
+        r: 1,
+        g: 1,
+        b: 1,
+        a: 1,
+      },
+    },
+  },
+};
+
+const postSlice = createSlice({
+  name: 'post',
+  initialState,
+  reducers: {
+    setStep: (state, action) => {
+      state.step = action.payload;
+    },
+    setPhotoUrl: (state, action) => {
+      state.photoUrl = action.payload;
+    },
+    setPetType: (state, action) => {
+      state.petType = action.payload;
+    },
+    setPetName: (state, action) => {
+      state.petName = action.payload;
+    },
+    setFileRef: (state, action) => {
+      state.fileRef = action.payload;
+    },
+    setPosterType: (state, action) => {
+      state.posterType = action.payload;
+    },
+    setAccentColor: (state, action) => {
+      state.colors.emphasizedPosterColors.accentColor = action.payload;
+    },
+    setHeaderColor: (
+      state,
+      action: PayloadAction<{ type: PosterType; color: RgbaColor }>,
+    ) => {
+      state.colors[action.payload.type].headerColor = action.payload.color;
+    },
+    setFirstLineColor: (
+      state,
+      action: PayloadAction<{ type: PosterType; color: RgbaColor }>,
+    ) => {
+      state.colors[action.payload.type].firstLineColor = action.payload.color;
+    },
+    setSecondLineColor: (
+      state,
+      action: PayloadAction<{ type: PosterType; color: RgbaColor }>,
+    ) => {
+      state.colors[action.payload.type].secondLineColor = action.payload.color;
+    },
+
+    init: (state) => {
+      state.step = initialState.step;
+      state.photoUrl = initialState.photoUrl;
+      state.petType = initialState.petType;
+      state.petName = initialState.petName;
+      state.fileRef = initialState.fileRef;
+      state.posterType = initialState.posterType;
+    },
+  },
+});
+
+export const {
+  setStep,
+  setPhotoUrl,
+  setPetType,
+  setPetName,
+  setFileRef,
+  setPosterType,
+  init,
+  setAccentColor,
+  setFirstLineColor,
+  setSecondLineColor,
+  setHeaderColor,
+} = postSlice.actions;
+
+const store = configureStore({
+  reducer: postSlice.reducer,
+});
+
+export default store;
+```
+
+5. 하지만..!!!!!!!!
+6. 알고 보니 컬러 피커는 rgba값은 물론 hex값을 제공하고 있었다.... 객체로. 콘솔로그로 피커의 컬러값을 찍어본 결과
+
+```
+{hsl: {…}, hex: '#5e201e', rgb: {…}, hsv: {…}, oldHue: 1.7266187050359711, …}
+hex: "#5e201e"
+hsl:
+{h: 1.726618705035969, s: 0.5122873345935727, l: 0.244398, a: 1}
+hsv:
+{h: 1.726618705035969, s: 0.6774999999999999, v: 0.3696, a: 1}
+oldHue:1.7266187050359711
+rgb:
+{r: 94, g: 32, b: 30, a: 1}
+source: "hsv"
+```
+
+나는 진실을 알게 되고 말았지... 7. 모든 걸 hex로 되돌리는 작업 실시!
+
+### 교훈 : 삽질하기 전에 꼼꼼히 사전조사하기...

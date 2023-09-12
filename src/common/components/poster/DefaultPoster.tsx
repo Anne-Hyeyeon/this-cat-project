@@ -28,8 +28,7 @@ const Wrapper = styled.div`
   box-sizing: border-box;
 `;
 
-// DefaultPoster Design
-const Header = styled.div<{ petType: string }>`
+const Header = styled.div<{ petType: string; accentColor: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,7 +44,9 @@ const Header = styled.div<{ petType: string }>`
     return '90px';
   }};
   line-height: 80px;
-  background-color: #c63f3b;
+  background-color: ${({ accentColor }) => {
+    return accentColor;
+  }};
   color: #e5d45e;
   -webkit-text-stroke: 2px #1a1a1a;
   padding-top: 10px;
@@ -62,7 +63,7 @@ const Photo = styled.div<{ photoUrl?: string }>`
   margin-top: ${marginTop}px;
 `;
 
-const FirstLine = styled.div<{ petName: string }>`
+const FirstLine = styled.div<{ petName: string; accentColor: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,7 +79,9 @@ const FirstLine = styled.div<{ petName: string }>`
     }
     return '65px';
   }};
-  background-color: #cf423d;
+  background-color: ${({ accentColor }) => {
+    return accentColor;
+  }};
   color: #1a1a1a;
   -webkit-text-stroke: 1px #fff;
 `;
@@ -105,12 +108,14 @@ const SecondLine = styled.div<{ petType: string }>`
 
 const DefaultPoster: React.FC<Props> = (props) => {
   const state = useSelector((state: State) => state);
-  const { photoUrl, petType, petName } = state;
-
+  const { photoUrl, petType, petName, colors } = state;
+  const { emphasizedPosterColors } = colors;
+  const { accentColor, headerColor, firstLineColor, secondLineColor } =
+    emphasizedPosterColors;
   return (
     <ScaleWrapper styles={props.styles}>
       <Wrapper>
-        <Header {...props.styles} petType={petType}>
+        <Header {...props.styles} petType={petType} accentColor={accentColor}>
           <div className="first-line">
             잠깐! 이 {petType}
             {objectCaseSelector(petType)}
@@ -118,7 +123,11 @@ const DefaultPoster: React.FC<Props> = (props) => {
           <div className="second-line">보신 적 있습니까?</div>
         </Header>
         <Photo {...props.styles} photoUrl={photoUrl} />
-        <FirstLine {...props.styles} petName={petName}>
+        <FirstLine
+          {...props.styles}
+          petName={petName}
+          accentColor={accentColor}
+        >
           왜냐면 {petName}
           {subjectCaseSelector(petName)} 졸귀거든요.
         </FirstLine>

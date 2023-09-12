@@ -1,4 +1,16 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, configureStore, createSlice } from '@reduxjs/toolkit';
+
+type PosterType = 'simplePosterColors' | 'emphasizedPosterColors';
+
+interface PosterColors {
+  headerColor: string;
+  firstLineColor: string;
+  secondLineColor: string;
+}
+
+export interface emphasizedPosterColors extends PosterColors {
+  accentColor: string;
+}
 
 export interface State {
   step: number;
@@ -7,8 +19,11 @@ export interface State {
   petName: string;
   posterType: string;
   fileRef: any;
+  colors: {
+    emphasizedPosterColors: emphasizedPosterColors;
+    simplePosterColors: PosterColors;
+  };
 }
-
 export const initialState: State = {
   step: 0,
   photoUrl: '',
@@ -16,6 +31,19 @@ export const initialState: State = {
   petName: '저희집 별이',
   posterType: '',
   fileRef: '',
+  colors: {
+    emphasizedPosterColors: {
+      headerColor: '#e5d45e',
+      firstLineColor: '#1a1a1a',
+      secondLineColor: '#1a1a1a',
+      accentColor: '#c63f3b',
+    },
+    simplePosterColors: {
+      headerColor: '#1a1a1a',
+      firstLineColor: '#e5d45e',
+      secondLineColor: '#1a1a1a',
+    },
+  },
 };
 
 const postSlice = createSlice({
@@ -40,6 +68,29 @@ const postSlice = createSlice({
     setPosterType: (state, action) => {
       state.posterType = action.payload;
     },
+    setAccentColor: (state, action) => {
+      state.colors.emphasizedPosterColors.accentColor = action.payload;
+    },
+    setHeaderColor: (
+      state,
+      action: PayloadAction<{ type: PosterType; color: string }>,
+    ) => {
+      console.log(action.payload.type);
+      state.colors[action.payload.type].headerColor = action.payload.color;
+    },
+    setFirstLineColor: (
+      state,
+      action: PayloadAction<{ type: PosterType; color: string }>,
+    ) => {
+      state.colors[action.payload.type].firstLineColor = action.payload.color;
+    },
+    setSecondLineColor: (
+      state,
+      action: PayloadAction<{ type: PosterType; color: string }>,
+    ) => {
+      state.colors[action.payload.type].secondLineColor = action.payload.color;
+    },
+
     init: (state) => {
       state.step = initialState.step;
       state.photoUrl = initialState.photoUrl;
@@ -59,6 +110,10 @@ export const {
   setFileRef,
   setPosterType,
   init,
+  setAccentColor,
+  setFirstLineColor,
+  setSecondLineColor,
+  setHeaderColor,
 } = postSlice.actions;
 
 const store = configureStore({
