@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { CssBaseline } from '@mui/material';
 import Router from './router/router';
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      <CssBaseline />
       <Router />
     </BrowserRouter>
   );

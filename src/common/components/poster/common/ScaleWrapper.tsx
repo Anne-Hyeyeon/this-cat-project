@@ -23,7 +23,6 @@ const Wrapper = styled.div<Styles>`
 `;
 
 const ScaleWrapper: (props: Props) => JSX.Element = ({ styles, children }) => {
-  console.log(styles);
   return (
     <Wrapper {...styles} initialWidth={initialWidth}>
       {children}

@@ -26,7 +26,7 @@ import MainWrapper from '../common/components/MainWrapper';
 import { SimplePoster } from '../common/components/poster/SimplePoster';
 import MainButton from '../common/components/MainButton';
 
-const Text = () => {
+const Detail = () => {
   const theme = useTheme();
   const { primary, secondary } = theme.palette;
 
@@ -68,65 +68,7 @@ const Text = () => {
         <form onSubmit={handleSubmit}>
           <MainWrapper>
             <Grid container sx={{ bgcolor: 'secondary.light', p: 2 }}>
-              <Grid item xs={6}>
-                <Grid
-                  container
-                  justifyContent="center"
-                  direction="column"
-                  spacing={2}
-                >
-                  <Grid item>
-                    <FormControl sx={{ m: 1, minWidth: 120 }}>
-                      <Select
-                        sx={{ width: 150, mb: 1 }}
-                        value={showInput ? '직접 입력' : petType}
-                        onChange={handlePetTypeSelectChange}
-                        size="small"
-                      >
-                        <MenuItem value="고양이">고양이</MenuItem>
-                        <MenuItem value="강아지">강아지</MenuItem>
-                        <MenuItem value="이구아나">이구아나</MenuItem>
-                        <MenuItem value="직접 입력">직접 입력</MenuItem>
-                      </Select>
-                      <FormHelperText sx={{ m: 0 }}>
-                        찾을 대상 ex) 고양이, 남자, 아내
-                      </FormHelperText>
-                    </FormControl>
-                  </Grid>
-                  {showInput && (
-                    <Grid item>
-                      <FormControl required sx={{ m: 1, minWidth: 120 }}>
-                        <TextField
-                          sx={{ width: 150, mb: 1 }}
-                          size="small"
-                          inputProps={{ maxLength: 4 }}
-                          value={petType}
-                          onChange={handlePetTypeInputChange}
-                          required
-                        />
-                        <FormHelperText sx={{ m: 0 }}>
-                          최대 4글자까지 입력 가능합니다 <br />
-                        </FormHelperText>
-                      </FormControl>
-                    </Grid>
-                  )}
-                  <Grid item>
-                    <FormControl sx={{ m: 1, mb: 5, minWidth: 120 }}>
-                      <TextField
-                        sx={{ width: 150, mb: 1 }}
-                        size="small"
-                        inputProps={{ maxLength: 6 }}
-                        value={petName}
-                        onChange={handlePetNameInputChange}
-                      />
-                      <FormHelperText sx={{ m: 0 }}>
-                        동물, 또는 최애의 이름을 입력해주세요. <br />
-                      </FormHelperText>
-                    </FormControl>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12}>
                 <Typography variant="h6" marginBottom={1}>
                   *미리보기*
                 </Typography>
@@ -135,6 +77,9 @@ const Text = () => {
                 ) : (
                   <SimplePoster styles={{ width: 55 }} />
                 )}
+              </Grid>
+              <Grid item xs={6}>
+                '색상'
               </Grid>
             </Grid>
           </MainWrapper>
@@ -176,4 +121,4 @@ const Text = () => {
   );
 };
 
-export default Text;
+export default Detail;

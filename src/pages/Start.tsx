@@ -4,8 +4,12 @@ import { useTheme } from '@mui/material/styles';
 import cat from '../assets/img/cat.png';
 import MainWrapper from '../common/components/MainWrapper';
 import MainButton from '../common/components/MainButton';
+('../common/components/MainButton');
+
 import { useDispatch } from 'react-redux';
 import { setStep } from '../store/store';
+import TitleTypography from '../common/components/TitleTypography';
+import BodyTypography from '../common/components/BodyTypoGraphy';
 
 const Start = () => {
   const dispatch = useDispatch();
@@ -16,25 +20,13 @@ const Start = () => {
       <MainWrapper>
         <Grid container textAlign="center" rowGap={3}>
           <Grid item xs={12}>
-            <Typography
-              variant="h6"
-              color={secondary.dark}
-              fontWeight={700}
-              sx={{ textShadow: `1px 1px 2px ${primary.light}` }}
-            >
-              이 고양이를 보신 적 있습니까?
-            </Typography>
+            <TitleTypography>이 고양이를 보신 적 있습니까?</TitleTypography>
           </Grid>
           <Grid item xs={12}>
-            <Typography
-              variant="body2"
-              color={secondary.dark}
-              sx={{ textShadow: `1px 1px 2px ${primary.light}` }}
-            >
-              혼자만 보기 아까운 <br /> 우리집 세젤예 강아지, 고양이를 <br />
-              나만의 포스터를 통해 <br />
-              사람들한테 자랑해 보세요.
-            </Typography>
+            <BodyTypography>혼자만 보기 아까운</BodyTypography>
+            <BodyTypography>우리집 세젤예 강아지, 고양이를</BodyTypography>
+            <BodyTypography>나만의 포스터를 통해</BodyTypography>
+            <BodyTypography>사람들한테 자랑해 보세요.</BodyTypography>
           </Grid>
           <Grid item xs={12}>
             <img src={cat} alt="example cat" width="90%" />

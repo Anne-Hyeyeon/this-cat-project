@@ -5,6 +5,7 @@ export interface State {
   photoUrl: string;
   petType: string;
   petName: string;
+  posterType: string;
   fileRef: any;
 }
 
@@ -13,6 +14,7 @@ export const initialState: State = {
   photoUrl: '',
   petType: '고양이',
   petName: '저희집 별이',
+  posterType: '',
   fileRef: '',
 };
 
@@ -35,12 +37,16 @@ const postSlice = createSlice({
     setFileRef: (state, action) => {
       state.fileRef = action.payload;
     },
+    setPosterType: (state, action) => {
+      state.posterType = action.payload;
+    },
     init: (state) => {
       state.step = initialState.step;
       state.photoUrl = initialState.photoUrl;
       state.petType = initialState.petType;
       state.petName = initialState.petName;
       state.fileRef = initialState.fileRef;
+      state.posterType = initialState.posterType;
     },
   },
 });
@@ -51,6 +57,7 @@ export const {
   setPetType,
   setPetName,
   setFileRef,
+  setPosterType,
   init,
 } = postSlice.actions;
 

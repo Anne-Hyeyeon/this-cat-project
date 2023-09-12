@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   border: 1px solid black;
   background-color: white;
   padding: 50px 0px;
-  font-family: 'Nanum Pen Script', cursive;
+  font-family: 'Jua', sans-serif;
   box-sizing: border-box;
 `;
 
@@ -37,11 +37,11 @@ const Header = styled.div<{ petType: string }>`
   padding-bottom: 30px;
   font-size: ${({ petType }) => {
     if (petType.length <= 3) {
-      return '100px';
-    } else if (petType.length === 4) {
       return '90px';
+    } else if (petType.length === 4) {
+      return '80px';
     }
-    return '90px';
+    return '80px';
   }};
   line-height: 80px;
   color: #000000;
@@ -95,7 +95,7 @@ const SecondLine = styled.div<{ petType: string }>`
   line-height: 70px;
 `;
 
-const SimplePoster: React.FC<Props> = (props) => {
+const SimplePoster = (props: Props) => {
   const state = useSelector((state: State) => state);
   const { photoUrl, petType, petName } = state;
 

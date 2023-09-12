@@ -8,13 +8,19 @@ import MainWrapper from '../common/components/MainWrapper';
 import ImagePreview from '../common/components/ImagePreview';
 import PetsIcon from '@mui/icons-material/Pets';
 import MainButton from '../common/components/MainButton';
+('../common/components/MainButton');
+
 import './Photo.scss';
+import { useTheme } from '@mui/material/styles';
+import TitleTypography from '../common/components/TitleTypography';
 
 const Photo = () => {
   const [file, setFile] = useState(null);
   const [url, setUrl] = useState('');
   const [progress, setProgress] = useState(0);
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const { primary, secondary } = theme.palette;
 
   const handleFileChange = (e: any) => {
     setFile(e.target.files[0]);
@@ -62,7 +68,10 @@ const Photo = () => {
   return (
     <Box height="100vh">
       <MainWrapper>
-        <Grid container rowGap={2}>
+        <Grid container rowGap={1} textAlign="center">
+          <Grid item xs={12}>
+            <TitleTypography>사진 선택하기</TitleTypography>
+          </Grid>
           <Grid item xs={12}>
             <Box
               component="span"
@@ -71,7 +80,7 @@ const Photo = () => {
               alignItems="center"
             >
               <PetsIcon />
-              <Typography ml={1} variant="body2">
+              <Typography mt={1} ml={1} variant="body2">
                 2MB 이하의 사진 업로드를 권장합니다.
               </Typography>
             </Box>
