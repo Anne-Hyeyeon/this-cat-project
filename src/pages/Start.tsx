@@ -13,8 +13,6 @@ import BodyTypography from '../common/components/BodyTypoGraphy';
 
 const Start = () => {
   const dispatch = useDispatch();
-  const theme = useTheme();
-  const { primary, secondary } = theme.palette;
   return (
     <Container maxWidth="sm" sx={{ padding: '30px' }}>
       <MainWrapper>

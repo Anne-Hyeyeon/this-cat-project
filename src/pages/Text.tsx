@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { Link } from 'react-router-dom';
-import { DefaultPoster } from '../common/components/poster/DefaultPoster';
+import EmphasizedPoster from '../common/components/poster/EmphasizedPoster';
 import { setPetName, setPetType, setStep, State } from '../store/store';
 import { initialState } from '../store/store';
 import { useFormControl } from '@mui/material/FormControl';
@@ -23,7 +23,7 @@ import {
 import { useTheme } from '@mui/material/styles';
 
 import MainWrapper from '../common/components/MainWrapper';
-import { SimplePoster } from '../common/components/poster/SimplePoster';
+import SimplePoster from '../common/components/poster/SimplePoster';
 import MainButton from '../common/components/MainButton';
 
 const Text = () => {
@@ -131,7 +131,7 @@ const Text = () => {
                   *미리보기*
                 </Typography>
                 {posterType === 'emphasized' ? (
-                  <DefaultPoster styles={{ width: 55 }} />
+                  <EmphasizedPoster styles={{ width: 55 }} />
                 ) : (
                   <SimplePoster styles={{ width: 55 }} />
                 )}

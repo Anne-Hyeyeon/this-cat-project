@@ -543,3 +543,15 @@ source: "hsv"
 나는 진실을 알게 되고 말았지... 7. 모든 걸 hex로 되돌리는 작업 실시!
 
 ### 교훈 : 삽질하기 전에 꼼꼼히 사전조사하기...
+
+## Detail 컴포넌트 -> 분리냐, 통합이냐
+
+1. Detail 컴포넌트에서는 SimplePoster, EmphasizedPoster의 Detail 설정을 담당하고 있다.
+2. poster별로 컨트롤해야 할 색상의 수는 각 4개(accent color, header color, first line color, second line color), 3개(accent color 제외한 나머지 색상). 해당 컴포넌트에다가 7개의 색상을 컨트롤하는 로직을 짜야 함.
+3. SimplePoster의 색상만을 컨트롤하는 SimpleDetail과, EmphasizedPoster의 색상을 컨토를하는 EmphasizedDetail로 나눠서 컴포넌트 분리하기로 결정함.
+4. 컴포넌트 분리 시 생각해야 할 것.
+
+- 재사용성 :
+- 복잡도 : 너무 많은 기능을 하고 있는 건 아닌지? -> 7개의 색상 컨트롤이라는 기능은 복잡도를 키움. 분리하는 게 맞음.
+- 유지보수
+- 코드 가독성 : 조건문과 리듀서 때문에 코드가 꼬일 가능성이 큼

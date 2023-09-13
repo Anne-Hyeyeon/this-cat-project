@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { storage } from '../firebase';
 import { deleteObject } from 'firebase/storage';
-import { DefaultPoster } from '../common/components/poster/DefaultPoster';
+import EmphasizedPoster from '../common/components/poster/EmphasizedPoster';
 import { State, init } from '../store/store';
 
 const Result = () => {
@@ -81,7 +81,7 @@ const Result = () => {
           }}
         >
           <div style={{ marginTop: 50 }}>
-            <DefaultPoster />
+            <EmphasizedPoster />
           </div>
           <div
             style={{
@@ -104,7 +104,7 @@ const Result = () => {
   return (
     <>
       <div ref={ref}>
-        <DefaultPoster />
+        <EmphasizedPoster />
       </div>
       <button onClick={onButtonClick}>Click me</button>
       <button

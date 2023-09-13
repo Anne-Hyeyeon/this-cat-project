@@ -18,33 +18,58 @@ interface Props {
   styles?: Styles;
 }
 
-const Wrapper = styled.div`
+interface Header {
+  petType: string;
+  accentColor: string;
+  headerColor: string;
+}
+
+interface FirstLine {
+  petName: string;
+  accentColor: string;
+  firstLineColor: string;
+}
+
+interface SecondLine {
+  petType: string;
+  secondLineColor: string;
+}
+
+const Wrapper = styled.div<{ bgColor: string }>`
   width: ${initialWidth}mm;
   height: ${initialWidth * 1.414}mm;
   border: 1px solid black;
-  background-color: white;
-  padding: 50px 0px;
-  font-family: 'Jua', sans-serif;
+  background-color: ${({ bgColor }) => {
+    return bgColor;
+  }};
+  font-family: 'Black Han Sans', sans-serif;
+  padding: 20px;
   box-sizing: border-box;
 `;
 
-const Header = styled.div<{ petType: string }>`
+const Header = styled.div<Header>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding-bottom: 30px;
+  height: 49.5mm;
   font-size: ${({ petType }) => {
     if (petType.length <= 3) {
-      return '90px';
+      return '100px';
     } else if (petType.length === 4) {
-      return '80px';
+      return '90px';
     }
-    return '80px';
+    return '90px';
   }};
   line-height: 80px;
-  color: #000000;
+  background-color: ${({ accentColor }) => {
+    return accentColor;
+  }};
+  color: ${({ headerColor }) => {
+    return headerColor;
+  }};
+  -webkit-text-stroke: 2px #1a1a1a;
   padding-top: 10px;
 `;
 
@@ -52,18 +77,20 @@ const Photo = styled.div<{ photoUrl?: string }>`
   background-image: url(${(props) => props.photoUrl});
   width: 100%;
   height: 148mm;
+  border: 1px solid black;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   margin-top: ${marginTop}px;
 `;
 
-const FirstLine = styled.div<{ petName: string }>`
+const FirstLine = styled.div<FirstLine>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 33mm;
   margin-top: ${marginTop}px;
   font-size: ${({ petName }) => {
     if (petName.length <= 4) {
@@ -73,17 +100,26 @@ const FirstLine = styled.div<{ petName: string }>`
     }
     return '65px';
   }};
-  color: #8b0000;
+  background-color: ${({ accentColor }) => {
+    return accentColor;
+  }};
+  color: ${({ firstLineColor }) => {
+    return firstLineColor;
+  }};
+  -webkit-text-stroke: 1px #fff;
 `;
 
-const SecondLine = styled.div<{ petType: string }>`
+const SecondLine = styled.div<SecondLine>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100;
+  height: 48mm;
   margin-top: ${marginTop}px;
-  color: #1a1a1a;
+  color: ${({ secondLineColor }) => {
+    return secondLineColor;
+  }};
   font-size: ${({ petType }) => {
     if (petType.length <= 3) {
       return '70px';
@@ -95,14 +131,21 @@ const SecondLine = styled.div<{ petType: string }>`
   line-height: 70px;
 `;
 
-const SimplePoster = (props: Props) => {
+const EmphasizedPoster: React.FC<Props> = (props) => {
   const state = useSelector((state: State) => state);
-  const { photoUrl, petType, petName } = state;
-
+  const { photoUrl, petType, petName, colors } = state;
+  const { emphasizedPosterColors } = colors;
+  const { bgColor, accentColor, headerColor, firstLineColor, secondLineColor } =
+    emphasizedPosterColors;
   return (
     <ScaleWrapper styles={props.styles}>
-      <Wrapper>
-        <Header {...props.styles} petType={petType}>
+      <Wrapper bgColor={bgColor}>
+        <Header
+          {...props.styles}
+          petType={petType}
+          accentColor={accentColor}
+          headerColor={headerColor}
+        >
           <div className="first-line">
             잠깐! 이 {petType}
             {objectCaseSelector(petType)}
@@ -110,11 +153,20 @@ const SimplePoster = (props: Props) => {
           <div className="second-line">보신 적 있습니까?</div>
         </Header>
         <Photo {...props.styles} photoUrl={photoUrl} />
-        <FirstLine {...props.styles} petName={petName}>
+        <FirstLine
+          {...props.styles}
+          petName={petName}
+          accentColor={accentColor}
+          firstLineColor={firstLineColor}
+        >
           왜냐면 {petName}
           {subjectCaseSelector(petName)} 졸귀거든요.
         </FirstLine>
-        <SecondLine {...props.styles} petType={petType}>
+        <SecondLine
+          {...props.styles}
+          petType={petType}
+          secondLineColor={secondLineColor}
+        >
           <div>잃어버린 {petType} 아니고요,</div>
           <div>그냥 보여드리고 싶어서요.</div>
         </SecondLine>
@@ -123,4 +175,4 @@ const SimplePoster = (props: Props) => {
   );
 };
 
-export default SimplePoster;
+export default EmphasizedPoster;
