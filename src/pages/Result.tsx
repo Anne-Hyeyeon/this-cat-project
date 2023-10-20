@@ -5,12 +5,13 @@ import { storage } from '../firebase';
 import { deleteObject } from 'firebase/storage';
 import EmphasizedPoster from '../common/components/poster/EmphasizedPoster';
 import { State, init } from '../store/store';
+import SimplePoster from '../common/components/poster/SimplePoster';
 
 const Result = () => {
   const dispatch = useDispatch();
   const state = useSelector((state: State) => state);
   const ref = useRef<HTMLDivElement>(null);
-  const { fileRef } = state;
+  const { fileRef, posterType } = state;
 
   const onButtonClick = useCallback(() => {
     if (ref.current === null) {
@@ -40,6 +41,11 @@ const Result = () => {
   const storedValue = sessionStorage.getItem('showFullPage');
   const initialShowFullPage = storedValue === 'true';
   const [showFullPage, setShowFullPage] = useState(initialShowFullPage);
+
+  const displayPoster = () => {
+    if (posterType === 'emphasized') return <EmphasizedPoster />;
+    if (posterType === 'simple') return <SimplePoster />;
+  };
 
   useEffect(() => {
     const handleUnload = () => {
@@ -80,9 +86,7 @@ const Result = () => {
             position: 'relative',
           }}
         >
-          <div style={{ marginTop: 50 }}>
-            <EmphasizedPoster />
-          </div>
+          <div style={{ marginTop: 50 }}>{displayPoster()}</div>
           <div
             style={{
               position: 'absolute',
@@ -103,9 +107,7 @@ const Result = () => {
 
   return (
     <>
-      <div ref={ref}>
-        <EmphasizedPoster />
-      </div>
+      <div ref={ref}>{displayPoster()}</div>
       <button onClick={onButtonClick}>Click me</button>
       <button
         onClick={() => {

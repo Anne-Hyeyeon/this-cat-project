@@ -47,9 +47,9 @@ import {
   TwitterPicker,
 } from 'react-color';
 
-// interface color {
-
-// }
+interface Color {
+  hex: string;
+}
 
 const EmphasizedDetail = () => {
   const theme = useTheme();
@@ -110,26 +110,26 @@ const EmphasizedDetail = () => {
     setSecondLinePickerAnchorEl(null);
   };
 
-  const handleAccentColorChange = (color: any) => {
+  const handleAccentColorChange = (color: Color) => {
     dispatch(setAccentColor(color.hex));
   };
-  const handleBgColorChange = (color: any) => {
+  const handleBgColorChange = (color: Color) => {
     dispatch(setBgColor({ type: 'emphasizedPosterColors', color: color.hex }));
   };
 
-  const handleHeaderColorChange = (color: any) => {
+  const handleHeaderColorChange = (color: Color) => {
     dispatch(
       setHeaderColor({ type: 'emphasizedPosterColors', color: color.hex }),
     );
   };
 
-  const handleFirstLineColorChange = (color: any) => {
+  const handleFirstLineColorChange = (color: Color) => {
     dispatch(
       setFirstLineColor({ type: 'emphasizedPosterColors', color: color.hex }),
     );
   };
 
-  const handleSecondLineColorChange = (color: any) => {
+  const handleSecondLineColorChange = (color: Color) => {
     dispatch(
       setSecondLineColor({ type: 'emphasizedPosterColors', color: color.hex }),
     );
@@ -268,7 +268,7 @@ const EmphasizedDetail = () => {
                   }}
                 >
                   <SketchPicker
-                    color={colors.emphasizedPosterColors.firstLineColor} // 상태 관리 구조에 따라 적절하게 수정해야 합니다.
+                    color={colors.emphasizedPosterColors.firstLineColor}
                     onChange={handleFirstLineColorChange}
                   />
                 </Popover>

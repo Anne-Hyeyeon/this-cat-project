@@ -39,9 +39,7 @@ const Wrapper = styled.div<{ bgColor: string }>`
   width: ${initialWidth}mm;
   height: ${initialWidth * 1.414}mm;
   border: 1px solid black;
-  background-color: ${({ bgColor }) => {
-    return bgColor;
-  }};
+  background-color: ${(props) => props.bgColor};
   font-family: 'Black Han Sans', sans-serif;
   padding: 20px;
   box-sizing: border-box;
@@ -63,12 +61,8 @@ const Header = styled.div<Header>`
     return '90px';
   }};
   line-height: 80px;
-  background-color: ${({ accentColor }) => {
-    return accentColor;
-  }};
-  color: ${({ headerColor }) => {
-    return headerColor;
-  }};
+  background-color: ${(props) => props.accentColor};
+  color: ${(props) => props.headerColor};
   -webkit-text-stroke: 2px #1a1a1a;
   padding-top: 10px;
 `;
@@ -100,12 +94,8 @@ const FirstLine = styled.div<FirstLine>`
     }
     return '65px';
   }};
-  background-color: ${({ accentColor }) => {
-    return accentColor;
-  }};
-  color: ${({ firstLineColor }) => {
-    return firstLineColor;
-  }};
+  background-color: ${(props) => props.accentColor};
+  color: ${(props) => props.firstLineColor};
   -webkit-text-stroke: 1px #fff;
 `;
 
@@ -117,9 +107,7 @@ const SecondLine = styled.div<SecondLine>`
   width: 100;
   height: 48mm;
   margin-top: ${marginTop}px;
-  color: ${({ secondLineColor }) => {
-    return secondLineColor;
-  }};
+  color: ${(props) => props.secondLineColor};
   font-size: ${({ petType }) => {
     if (petType.length <= 3) {
       return '70px';
