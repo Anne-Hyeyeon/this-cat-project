@@ -16,7 +16,7 @@ const MainAppBar = () => {
   return (
     <Box>
       <AppBar
-        position="static"
+        position="fixed"
         sx={{
           display: 'flex',
           justifyContent: 'center',

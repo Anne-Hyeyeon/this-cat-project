@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Container, Box } from '@mui/material';
+import { Container, Box, Grid } from '@mui/material';
 import { State } from '../store/store';
 import MainAppBar from '../common/components/MainAppBar';
 import MainStepper from '../common/components/MainStepper';
@@ -50,11 +50,11 @@ const Main = () => {
         backgroundRepeat: 'repeat',
       }}
     >
-      <MainAppBar />
-      <Container maxWidth="sm" sx={{ padding: '10px' }}>
-        {step !== 0 && <MainStepper />}
-        {renderComponentBasedOnStep(step, posterType)}
-      </Container>
+          <MainAppBar />
+          <Container maxWidth="sm" sx={{ paddingTop:'70px' }}>
+            {step !== 0 && <MainStepper />}
+            {renderComponentBasedOnStep(step, posterType)}
+          </Container>
     </Box>
   );
 };

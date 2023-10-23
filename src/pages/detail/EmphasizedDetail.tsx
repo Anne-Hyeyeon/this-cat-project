@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { Link } from 'react-router-dom';
-import EmphasizedPoster from '../../common/components/poster/EmphasizedPoster';
+import EmphasizedPoster from '../../common/components/Poster/EmphasizedPoster';
 import {
   setPetName,
   setPetType,
@@ -37,7 +37,7 @@ import {
 import { useTheme } from '@mui/material/styles';
 
 import MainWrapper from '../../common/components/MainWrapper';
-import SimplePoster from '../../common/components/poster/SimplePoster';
+import SimplePoster from '../../common/components/Poster/SimplePoster';
 import MainButton from '../../common/components/MainButton';
 import {
   ChromePicker,

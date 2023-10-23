@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Container, Grid, Typography } from '@mui/material';
-import EmphasizedPoster from '../common/components/poster/EmphasizedPoster';
-import SimplePoster from '../common/components/poster/SimplePoster';
+import EmphasizedPoster from '../common/components/Poster/EmphasizedPoster';
+import SimplePoster from '../common/components/Poster/SimplePoster';
 import MainButton from '../common/components/MainButton';
 ('../common/components/MainButton');
 import MainWrapper from '../common/components/MainWrapper';

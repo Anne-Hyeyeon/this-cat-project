@@ -3,9 +3,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { storage } from '../firebase';
 import { deleteObject } from 'firebase/storage';
-import EmphasizedPoster from '../common/components/poster/EmphasizedPoster';
+import EmphasizedPoster from '../common/components/Poster/EmphasizedPoster';
 import { State, init } from '../store/store';
-import SimplePoster from '../common/components/poster/SimplePoster';
+import SimplePoster from '../common/components/Poster/SimplePoster';
 
 const Result = () => {
   const dispatch = useDispatch();
