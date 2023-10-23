@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MainWrapperRoot = styled.div`
-  border: 1px solid rgb(0, 0, 0, 0.6);
+  border: 2px solid #ddd;
   border-radius: 15px;
   background-color: #fff;
   padding: 15px; 15px; 

@@ -8,13 +8,14 @@ interface Props {
 
 const TitleTypography = ({ children }: Props): JSX.Element => {
   const theme = useTheme();
-  const { primary, secondary } = theme.palette;
+  const { primary } = theme.palette;
   return (
     <Typography
       variant="h6"
-      color={secondary.dark}
+      color="secondary-dark"
       fontWeight={700}
       sx={{ textShadow: `1px 1px 2px ${primary.light}` }}
+      fontFamily="Nanum Gothic"
     >
       {children}
     </Typography>

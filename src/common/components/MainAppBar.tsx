@@ -1,4 +1,3 @@
-import { useTheme } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -9,8 +8,6 @@ import { IconButton } from '@mui/material';
 import { setStep } from '../../store/store';
 
 const MainAppBar = () => {
-  const theme = useTheme();
-  const { secondary } = theme.palette;
   const dispatch = useDispatch();
   const handleHomeBtnOnclick = () => {
     dispatch(setStep(0));
@@ -24,9 +21,8 @@ const MainAppBar = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          bgcolor: secondary.light,
+          bgcolor: 'primary.main',
           boxShadow: 'none',
-          borderBottom: `1px solid ${secondary.main}`,
         }}
       >
         <Container maxWidth="sm">
@@ -37,28 +33,31 @@ const MainAppBar = () => {
             justifyContent="space-between"
             alignItems="center"
           >
-            <IconButton color="primary" onClick={handleHomeBtnOnclick}>
+            <IconButton color="secondary" onClick={handleHomeBtnOnclick}>
               <HomeIcon fontSize="medium" />
             </IconButton>
             <Box textAlign="center" m={3}>
               <Typography
+                bgcolor="primary.main"
                 fontFamily="IBM Plex Sans KR"
                 fontWeight={500}
                 variant="body2"
-                color="#c63f3b"
+                color="secondary.main"
               >
                 Have you ever seen this cat?
               </Typography>
               <Typography
+                bgcolor="secondary.main"
                 fontFamily="IBM Plex Sans KR"
                 fontWeight={700}
-                variant="h6"
-                color="#c63f3b"
+                variant="body1"
+                color="primary.main"
+                padding="2px"
               >
-                이 고양이를 보신 적 있습니까?
+                😺 이 고양이를 보신 적 있습니까? 🤷‍♀️
               </Typography>
             </Box>
-            <HomeIcon sx={{ color: '#fff' }} />
+            <HomeIcon sx={{ color: 'primary.main' }} />
           </Box>
         </Container>
       </AppBar>
