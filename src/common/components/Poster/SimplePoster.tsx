@@ -6,11 +6,8 @@ import {
   objectCaseSelector,
   subjectCaseSelector,
 } from '../../function/endingSelector';
-import {
-  initialWidth,
-  marginTop,
-} from '../Poster/SharedComponents/initialStyles';
-import ScaleWrapper from '../Poster/SharedComponents/ScaleWrapper';
+import ScaleWrapper from './common/ScaleWrapper';
+import { initialWidth, marginTop } from './common/initialStyles';
 
 interface Styles {
   width?: number;

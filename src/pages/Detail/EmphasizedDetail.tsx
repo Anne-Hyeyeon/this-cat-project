@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { Link } from 'react-router-dom';
+import EmphasizedPoster from '../../common/components/poster/EmphasizedPoster';
 import {
   setPetName,
   setPetType,
@@ -45,7 +46,6 @@ import {
   SwatchesPicker,
   TwitterPicker,
 } from 'react-color';
-import EmphasizedPoster from '../../common/components/poster/EmphasizedPoster';
 
 interface Color {
   hex: string;
