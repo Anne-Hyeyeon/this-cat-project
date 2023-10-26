@@ -5,9 +5,9 @@ import BodyTypography from '../common/components/BodyTypoGraphy';
 import MainButton from '../common/components/MainButton';
 import MainWrapper from '../common/components/MainWrapper';
 import TitleTypography from '../common/components/TitleTypography';
-import React, { Component } from "react";
-import Slider from "react-slick";
-
+import React, { Component } from 'react';
+import Slider from 'react-slick';
+import PosterSlider from '../common/components/PosterSlider';
 
 const Start = () => {
   return (
@@ -33,8 +33,8 @@ const Start = () => {
         </Grid>
         <Grid item xs={12}>
           <MainWrapper>
-            <Box width='100px' height='200px' border='1px solid black'>
-              Slider
+            <Box border="1px solid black">
+              <PosterSlider />
             </Box>
             <img src={cat} alt="example cat" width="90%" />
           </MainWrapper>

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { State } from '../../../store/store';
 import {
+  endingWithConsonantSelector,
   objectCaseSelector,
   subjectCaseSelector,
 } from '../../function/endingSelector';
@@ -112,7 +113,7 @@ const SecondLine = styled.div<SecondLine>`
 
 const SimplePoster = (props: Props) => {
   const state = useSelector((state: State) => state);
-  const { photoUrl, petType, petName, colors } = state;
+  const { photoUrl, petType, petName, petDesc, colors } = state;
   const { simplePosterColors } = colors;
   const { bgColor, headerColor, firstLineColor, secondLineColor } =
     simplePosterColors;
@@ -133,7 +134,8 @@ const SimplePoster = (props: Props) => {
           firstLineColor={firstLineColor}
         >
           왜냐면 {petName}
-          {subjectCaseSelector(petName)} 졸귀거든요.
+          {subjectCaseSelector(petName)} {petDesc}
+          {endingWithConsonantSelector(petDesc)}거든요.
         </FirstLine>
         <SecondLine
           {...props.styles}

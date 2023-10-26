@@ -18,6 +18,7 @@ export interface State {
   photoUrl: string;
   petType: string;
   petName: string;
+  petDesc: string;
   posterType: 'emphasized' | 'simple';
   fileRef: any;
   colors: {
@@ -30,6 +31,7 @@ export const initialState: State = {
   photoUrl: '',
   petType: '고양이',
   petName: '저희집 별이',
+  petDesc: '졸귀',
   posterType: 'emphasized',
   fileRef: '',
   colors: {
@@ -64,6 +66,9 @@ const postSlice = createSlice({
     },
     setPetName: (state, action) => {
       state.petName = action.payload;
+    },
+    setPetDesc: (state, action) => {
+      state.petDesc = action.payload;
     },
     setFileRef: (state, action) => {
       state.fileRef = action.payload;
@@ -118,6 +123,7 @@ export const {
   setPhotoUrl,
   setPetType,
   setPetName,
+  setPetDesc,
   setFileRef,
   setPosterType,
   setAccentColor,

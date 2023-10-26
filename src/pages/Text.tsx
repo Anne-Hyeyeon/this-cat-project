@@ -4,7 +4,13 @@ import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { Link } from 'react-router-dom';
 import EmphasizedPoster from '../common/components/Poster/EmphasizedPoster';
-import { setPetName, setPetType, setStep, State } from '../store/store';
+import {
+  setPetDesc,
+  setPetName,
+  setPetType,
+  setStep,
+  State,
+} from '../store/store';
 import { initialState } from '../store/store';
 import { useFormControl } from '@mui/material/FormControl';
 
@@ -33,7 +39,7 @@ const Text = () => {
   const dispatch = useDispatch();
   const state = useSelector((state: State) => state);
   const [showInput, setShowInput] = useState(false);
-  const { petName, petType, posterType } = state;
+  const { petName, petType, posterType, petDesc } = state;
 
   const handlePetTypeSelectChange = (e: SelectChangeEvent<string>) => {
     const selectedValue = e.target.value as string;
@@ -51,6 +57,10 @@ const Text = () => {
 
   const handlePetNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setPetName(e.target.value));
+  };
+
+  const handlePetDescInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setPetDesc(e.target.value));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -115,12 +125,30 @@ const Text = () => {
                       <TextField
                         sx={{ width: 150, mb: 1 }}
                         size="small"
-                        inputProps={{ maxLength: 6 }}
+                        inputProps={{ maxLength: 5 }}
                         value={petName}
                         onChange={handlePetNameInputChange}
                       />
                       <FormHelperText sx={{ m: 0 }}>
                         동물, 또는 최애의 이름을 입력해주세요. <br />
+                        ex) 저희집 별이, 제 아내 <br /> 최대 5글자까지 입력
+                        가능합니다.
+                      </FormHelperText>
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControl sx={{ m: 1, mb: 5, minWidth: 120 }}>
+                      <TextField
+                        sx={{ width: 150, mb: 1 }}
+                        size="small"
+                        inputProps={{ maxLength: 3 }}
+                        value={petDesc}
+                        onChange={handlePetDescInputChange}
+                      />
+                      <FormHelperText sx={{ m: 0 }}>
+                        대상을 설명하는 말을 넣어 주세요. <br />
+                        ex) 존귀, 졸귀, 존예. <br />
+                        최대 3글자까지 입력 가능합니다.
                       </FormHelperText>
                     </FormControl>
                   </Grid>
