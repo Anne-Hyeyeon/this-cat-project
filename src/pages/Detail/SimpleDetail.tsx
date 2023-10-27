@@ -106,6 +106,7 @@ const SimpleDetail = () => {
   };
 
   const handleBgColorChange = (color: Color) => {
+    console.log(color);
     dispatch(setBgColor({ type: 'simplePosterColors', color: color.hex }));
   };
 
