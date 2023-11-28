@@ -293,6 +293,13 @@ const SimpleDetail = () => {
             >
               * 디자인 다시 선택하기
             </Button>
+            <Button
+              onClick={() => {
+                dispatch(setStep(3));
+              }}
+            >
+              * 문구 수정하기
+            </Button>
           </Grid>
         </Grid>
       </Container>
