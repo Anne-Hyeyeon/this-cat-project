@@ -109,6 +109,7 @@ const postSlice = createSlice({
       state.petType = initialState.petType;
       state.petName = initialState.petName;
       state.fileRef = initialState.fileRef;
+      state.petDesc = initialState.petDesc;
       state.posterType = initialState.posterType;
       state.colors = initialState.colors;
     },

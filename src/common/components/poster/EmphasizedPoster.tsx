@@ -88,7 +88,7 @@ const FirstLine = styled.div<FirstLine>`
   margin-top: ${marginTop}px;
   font-size: ${({ petName }) => {
     if (petName.length <= 4) {
-      return '65px';
+      return '60px';
     } else if (petName.length >= 5) {
       return '55px';
     }
@@ -121,7 +121,7 @@ const SecondLine = styled.div<SecondLine>`
 
 const EmphasizedPoster: React.FC<Props> = (props) => {
   const state = useSelector((state: State) => state);
-  const { photoUrl, petType, petName, colors } = state;
+  const { photoUrl, petType, petName, petDesc, colors } = state;
   const { emphasizedPosterColors } = colors;
   const { bgColor, accentColor, headerColor, firstLineColor, secondLineColor } =
     emphasizedPosterColors;
@@ -148,7 +148,7 @@ const EmphasizedPoster: React.FC<Props> = (props) => {
           firstLineColor={firstLineColor}
         >
           왜냐면 {petName}
-          {subjectCaseSelector(petName)} 졸귀거든요.
+          {subjectCaseSelector(petName)} {petDesc}거든요.
         </FirstLine>
         <SecondLine
           {...props.styles}
