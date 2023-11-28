@@ -73,92 +73,89 @@ const Text = () => {
       <Container maxWidth="sm">
         <form onSubmit={handleSubmit}>
           <MainWrapper>
-            <Grid container sx={{ bgcolor: 'secondary.light', p: 2 }}>
-              <Grid item xs={6}>
-                <Grid
-                  container
-                  justifyContent="center"
-                  direction="column"
-                  spacing={2}
-                >
-                  <Grid item>
-                    <FormControl sx={{ m: 1, minWidth: 120 }}>
-                      <Select
-                        sx={{ width: 150, mb: 1 }}
-                        value={showInput ? '직접 입력' : petType}
-                        onChange={handlePetTypeSelectChange}
-                        size="small"
-                      >
-                        <MenuItem value="고양이">고양이</MenuItem>
-                        <MenuItem value="강아지">강아지</MenuItem>
-                        <MenuItem value="이구아나">이구아나</MenuItem>
-                        <MenuItem value="직접 입력">직접 입력</MenuItem>
-                      </Select>
-                      <FormHelperText sx={{ m: 0 }}>
-                        찾을 대상 ex) 고양이, 남자, 아내
-                      </FormHelperText>
-                    </FormControl>
-                  </Grid>
-                  {showInput && (
-                    <Grid item>
-                      <FormControl required sx={{ m: 1, minWidth: 120 }}>
-                        <TextField
-                          sx={{ width: 150, mb: 1 }}
-                          size="small"
-                          inputProps={{ maxLength: 4 }}
-                          value={petType}
-                          onChange={handlePetTypeInputChange}
-                          required
-                        />
-                        <FormHelperText sx={{ m: 0 }}>
-                          최대 4글자까지 입력 가능합니다 <br />
-                        </FormHelperText>
-                      </FormControl>
-                    </Grid>
-                  )}
-                  <Grid item>
-                    <FormControl sx={{ m: 1, mb: 5, minWidth: 120 }}>
-                      <TextField
-                        sx={{ width: 150, mb: 1 }}
-                        size="small"
-                        inputProps={{ maxLength: 6 }}
-                        value={petName}
-                        onChange={handlePetNameInputChange}
-                      />
-                      <FormHelperText sx={{ m: 0 }}>
-                        동물, 또는 최애의 이름을 입력해주세요. <br />
-                        ex) 저희집 별이, 제 아내 <br /> 최대 5글자까지 입력
-                        가능합니다.
-                      </FormHelperText>
-                    </FormControl>
-                  </Grid>
-                  <Grid item>
-                    <FormControl sx={{ m: 1, mb: 5, minWidth: 120 }}>
-                      <TextField
-                        sx={{ width: 150, mb: 1 }}
-                        size="small"
-                        inputProps={{ maxLength: 4 }}
-                        value={petDesc}
-                        onChange={handlePetDescInputChange}
-                      />
-                      <FormHelperText sx={{ m: 0 }}>
-                        대상을 설명하는 말을 넣어 주세요. <br />
-                        ex) 존귀, 졸귀, 존예. <br />
-                        최대 4글자까지 입력 가능합니다.
-                      </FormHelperText>
-                    </FormControl>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography variant="h6" marginBottom={1}>
-                  *미리보기*
+            <Grid
+              container
+              rowGap={2}
+              sx={{ bgcolor: 'secondary.light', p: 2 }}
+            >
+              <Grid item xs={12}>
+                <Typography variant="body2" fontWeight={700} marginBottom={1}>
+                  😻 미리보기
                 </Typography>
                 {posterType === 'emphasized' ? (
                   <EmphasizedPoster styles={{ width: 55 }} />
                 ) : (
                   <SimplePoster styles={{ width: 55 }} />
                 )}
+              </Grid>
+              <Grid item xs={12}>
+                <Grid item>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <Select
+                      sx={{ width: 150, mb: 1 }}
+                      value={showInput ? '직접 입력' : petType}
+                      onChange={handlePetTypeSelectChange}
+                      size="small"
+                    >
+                      <MenuItem value="고양이">고양이</MenuItem>
+                      <MenuItem value="강아지">강아지</MenuItem>
+                      <MenuItem value="이구아나">이구아나</MenuItem>
+                      <MenuItem value="직접 입력">직접 입력</MenuItem>
+                    </Select>
+                    <FormHelperText sx={{ m: 0 }}>
+                      찾을 대상 ex) 고양이, 남자, 아내
+                    </FormHelperText>
+                  </FormControl>
+                </Grid>
+                {showInput && (
+                  <Grid item>
+                    <FormControl required sx={{ m: 1, minWidth: 120 }}>
+                      <TextField
+                        sx={{ width: 150, mb: 1 }}
+                        size="small"
+                        inputProps={{ maxLength: 4 }}
+                        value={petType}
+                        onChange={handlePetTypeInputChange}
+                        required
+                      />
+                      <FormHelperText sx={{ m: 0 }}>
+                        최대 4글자까지 입력 가능합니다 <br />
+                      </FormHelperText>
+                    </FormControl>
+                  </Grid>
+                )}
+                <Grid item>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <TextField
+                      sx={{ width: 150, mb: 1 }}
+                      size="small"
+                      inputProps={{ maxLength: 6 }}
+                      value={petName}
+                      onChange={handlePetNameInputChange}
+                    />
+                    <FormHelperText sx={{ m: 0 }}>
+                      동물, 또는 최애의 이름을 입력해주세요. <br />
+                      ex) 저희집 별이, 제 아내 <br /> 최대 5글자까지 입력
+                      가능합니다.
+                    </FormHelperText>
+                  </FormControl>
+                </Grid>
+                <Grid item>
+                  <FormControl sx={{ m: 1, mb: 5, minWidth: 120 }}>
+                    <TextField
+                      sx={{ width: 150, mb: 1 }}
+                      size="small"
+                      inputProps={{ maxLength: 4 }}
+                      value={petDesc}
+                      onChange={handlePetDescInputChange}
+                    />
+                    <FormHelperText sx={{ m: 0 }}>
+                      대상을 설명하는 말을 넣어 주세요. <br />
+                      ex) 존귀, 졸귀, 존예. <br />
+                      최대 4글자까지 입력 가능합니다.
+                    </FormHelperText>
+                  </FormControl>
+                </Grid>
               </Grid>
             </Grid>
           </MainWrapper>

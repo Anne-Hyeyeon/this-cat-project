@@ -45,7 +45,7 @@ export const initialState: State = {
     simplePosterColors: {
       bgColor: 'white',
       headerColor: '#1a1a1a',
-      firstLineColor: '#e5d45e',
+      firstLineColor: '#c63f3b',
       secondLineColor: '#1a1a1a',
     },
   },

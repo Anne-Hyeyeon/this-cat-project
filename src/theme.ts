@@ -6,12 +6,12 @@ const theme = createTheme({
       main: '#CC3D44',
       dark: '#C63F3B',
       light: '#F6E9DB',
-      contrastText: '#D9626A',
+      contrastText: '#fff',
     },
     secondary: {
       main: '#fff',
       dark: 'rgba(0,0,0,0.7)',
-      light: 'rgba(0,0,0,0.2)',
+      light: '#f9f9f9',
     },
   },
   typography: {
