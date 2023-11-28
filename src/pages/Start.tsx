@@ -1,12 +1,8 @@
-import { Grid, Container } from '@mui/material';
-import { Box } from '@mui/system';
-import cat from '../assets/img/cat.png';
+import { Grid, Container, Typography } from '@mui/material';
 import BodyTypography from '../common/components/BodyTypoGraphy';
 import MainButton from '../common/components/MainButton';
 import MainWrapper from '../common/components/MainWrapper';
 import TitleTypography from '../common/components/TitleTypography';
-import React, { Component } from 'react';
-import Slider from 'react-slick';
 import PosterSlider from '../common/components/PosterSlider';
 
 const Start = () => {
@@ -18,6 +14,7 @@ const Start = () => {
             <Grid container rowGap={2}>
               <Grid item xs={12}>
                 <TitleTypography>이 고양이를 보신 적 있습니까?</TitleTypography>
+                <Typography variant="h1">😽</Typography>
               </Grid>
               <Grid item xs={12}>
                 <BodyTypography>혼자만 보기 아까운</BodyTypography>
@@ -33,10 +30,14 @@ const Start = () => {
         </Grid>
         <Grid item xs={12}>
           <MainWrapper>
-            <Box border="1px solid black">
-              <PosterSlider />
-            </Box>
-            <img src={cat} alt="example cat" width="90%" />
+            <Grid container rowGap={3}>
+              <Grid item xs={12} textAlign="center">
+                <TitleTypography>😻이렇게 만들어 보세요!</TitleTypography>
+              </Grid>
+              <Grid item xs={12}>
+                <PosterSlider />
+              </Grid>
+            </Grid>
           </MainWrapper>
         </Grid>
       </Grid>
