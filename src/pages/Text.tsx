@@ -2,7 +2,6 @@ import { Container } from '@mui/system';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
-import { Link } from 'react-router-dom';
 import EmphasizedPoster from '../common/components/Poster/EmphasizedPoster';
 import {
   setPetDesc,
@@ -11,8 +10,6 @@ import {
   setStep,
   State,
 } from '../store/store';
-import { initialState } from '../store/store';
-import { useFormControl } from '@mui/material/FormControl';
 
 import {
   Box,
@@ -30,7 +27,6 @@ import { useTheme } from '@mui/material/styles';
 
 import MainWrapper from '../common/components/MainWrapper';
 import SimplePoster from '../common/components/Poster/SimplePoster';
-import MainButton from '../common/components/MainButton';
 
 const Text = () => {
   const theme = useTheme();
@@ -125,7 +121,7 @@ const Text = () => {
                       <TextField
                         sx={{ width: 150, mb: 1 }}
                         size="small"
-                        inputProps={{ maxLength: 5 }}
+                        inputProps={{ maxLength: 6 }}
                         value={petName}
                         onChange={handlePetNameInputChange}
                       />
@@ -141,14 +137,14 @@ const Text = () => {
                       <TextField
                         sx={{ width: 150, mb: 1 }}
                         size="small"
-                        inputProps={{ maxLength: 3 }}
+                        inputProps={{ maxLength: 4 }}
                         value={petDesc}
                         onChange={handlePetDescInputChange}
                       />
                       <FormHelperText sx={{ m: 0 }}>
                         대상을 설명하는 말을 넣어 주세요. <br />
                         ex) 존귀, 졸귀, 존예. <br />
-                        최대 3글자까지 입력 가능합니다.
+                        최대 4글자까지 입력 가능합니다.
                       </FormHelperText>
                     </FormControl>
                   </Grid>
