@@ -17,9 +17,12 @@ const Result = () => {
     if (ref.current === null) {
       return;
     }
+    const actualWidth = ref.current.offsetWidth; // 실제 컨텐츠의 너비
+    const actualHeight = ref.current.offsetHeight; // 실제 컨텐츠의 높이
+
     toJpeg(ref.current, {
-      width: 798,
-      height: 1123,
+      width: 795,
+      height: actualHeight,
     })
       .then((dataUrl) => {
         const link = document.createElement('a');
