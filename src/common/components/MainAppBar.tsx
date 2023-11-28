@@ -1,7 +1,5 @@
 import { useDispatch } from 'react-redux';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { AppBar, Box, Typography, Grid } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import { Container } from '@mui/system';
 import { IconButton } from '@mui/material';
@@ -33,31 +31,57 @@ const MainAppBar = () => {
             justifyContent="space-between"
             alignItems="center"
           >
-            <IconButton color="secondary" onClick={handleHomeBtnOnclick}>
-              <HomeIcon fontSize="medium" />
-            </IconButton>
-            <Box textAlign="center" m={3}>
-              <Typography
-                bgcolor="primary.main"
-                fontFamily="IBM Plex Sans KR"
-                fontWeight={500}
-                variant="body2"
-                color="secondary.main"
+            <Grid container>
+              <Grid
+                item
+                xs={1}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
               >
-                Have you ever seen this cat?
-              </Typography>
-              <Typography
-                bgcolor="secondary.main"
-                fontFamily="IBM Plex Sans KR"
-                fontWeight={700}
-                variant="body1"
-                color="primary.main"
-                padding="2px"
+                <IconButton color="secondary" onClick={handleHomeBtnOnclick}>
+                  <HomeIcon fontSize="medium" />
+                </IconButton>
+              </Grid>
+              <Grid
+                item
+                xs={10}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
               >
-                😺 이 고양이를 보신 적 있습니까? 🤷‍♀️
-              </Typography>
-            </Box>
-            <HomeIcon sx={{ color: 'primary.main' }} />
+                <Box textAlign="center" m={3}>
+                  <Typography
+                    bgcolor="primary.main"
+                    fontFamily="IBM Plex Sans KR"
+                    fontWeight={500}
+                    variant="body2"
+                    color="secondary.main"
+                  >
+                    Have you ever seen this cat?
+                  </Typography>
+                  <Typography
+                    bgcolor="secondary.main"
+                    fontFamily="IBM Plex Sans KR"
+                    fontWeight={700}
+                    variant="body2"
+                    color="primary.main"
+                    padding="2px"
+                  >
+                    😺 이 고양이를 보신 적 있습니까? 🤷‍♀️
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid
+                item
+                xs={1}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <HomeIcon fontSize="small" sx={{ color: 'primary.main' }} />
+              </Grid>
+            </Grid>
           </Box>
         </Container>
       </AppBar>

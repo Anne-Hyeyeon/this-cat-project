@@ -5,7 +5,7 @@ const MainWrapperRoot = styled.div`
   border: 2px solid #ddd;
   border-radius: 15px;
   background-color: #fff;
-  padding: 15px; 15px; 
+  padding: 20px; 15px; 
 `;
 
 const MainWrapper = (props: React.HTMLAttributes<HTMLDivElement>) => {
