@@ -1,5 +1,13 @@
 import React from 'react';
 import Slider from 'react-slick';
+import exampleByeol from '../../assets/img/Mypets/byeol.jpeg';
+import exampleHusband from '../../assets/img/Mypets/husband.jpeg';
+import exampleLatte from '../../assets/img/Mypets/latte.jpeg';
+import exampleMilk from '../../assets/img/Mypets/milk.jpeg';
+import exampleMong from '../../assets/img/Mypets/mong.jpeg';
+import examplePhantom from '../../assets/img/Mypets/phantom.jpeg';
+import exmampleSiru from '../../assets/img/Mypets/siru.jpeg';
+import './PosterSlider.scss';
 
 const PosterSlider = () => {
   const settings = {
@@ -10,25 +18,28 @@ const PosterSlider = () => {
     slidesToScroll: 1,
   };
   return (
-    <div>
+    <div className="poster-slider">
       <Slider {...settings}>
-        <div>
-          <h3>1</h3>
+        <div className="image-container">
+          <img src={exampleByeol} alt="Byeol" />
         </div>
-        <div>
-          <h3>2</h3>
+        <div className="image-container">
+          <img src={exampleHusband} alt="Husband" />
         </div>
-        <div>
-          <h3>3</h3>
+        <div className="image-container">
+          <img src={exampleLatte} alt="Latte" />
         </div>
-        <div>
-          <h3>4</h3>
+        <div className="image-container">
+          <img src={exampleMilk} alt="Milk" />
         </div>
-        <div>
-          <h3>5</h3>
+        <div className="image-container">
+          <img src={exampleMong} alt="Mong" />
         </div>
-        <div>
-          <h3>6</h3>
+        <div className="image-container">
+          <img src={examplePhantom} alt="Phantom" />
+        </div>
+        <div className="image-container">
+          <img src={exmampleSiru} alt="Siru" />
         </div>
       </Slider>
     </div>
