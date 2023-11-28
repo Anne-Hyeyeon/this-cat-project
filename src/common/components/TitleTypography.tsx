@@ -4,13 +4,15 @@ import { useTheme } from '@mui/material/styles';
 
 interface Props {
   children: string;
+  bgColor?: string;
 }
 
-const TitleTypography = ({ children }: Props): JSX.Element => {
+const TitleTypography = ({ bgColor, children }: Props): JSX.Element => {
   const theme = useTheme();
   const { primary } = theme.palette;
   return (
     <Typography
+      bgcolor={bgColor}
       variant="h6"
       color="secondary-dark"
       fontWeight={700}
