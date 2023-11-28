@@ -6,13 +6,7 @@ import StepLabel from '@mui/material/StepLabel';
 import { State } from '../../store/store';
 import { Container } from '@mui/system';
 
-const steps = [
-  '사진 선택하기',
-  '문구 입력하기',
-  '디자인 고르기',
-  '디자인 세부 설정하기',
-  '완성',
-];
+const steps = ['사진 선택', '디자인 선택', '문구 입력', '컬러 설정', '완성'];
 
 const MainStepper = () => {
   const state = useSelector((state: State) => state);
