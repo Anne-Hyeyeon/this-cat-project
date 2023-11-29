@@ -26,6 +26,7 @@ interface Header {
 
 interface FirstLine {
   petName: string;
+  petDesc: string;
   accentColor: string;
   firstLineColor: string;
 }
@@ -86,17 +87,23 @@ const FirstLine = styled.div<FirstLine>`
   width: 100%;
   height: 33mm;
   margin-top: ${marginTop}px;
-  font-size: ${({ petName }) => {
-    if (petName.length <= 4) {
-      return '60px';
-    } else if (petName.length >= 5) {
+  font-size: ${({ petName, petDesc }) => {
+    const totalLength = petName.length + petDesc.length;
+
+    if (totalLength === 10) {
+      return '49px';
+    } else if (totalLength >= 6 && totalLength <= 9) {
       return '55px';
+    } else if (totalLength === 4 || totalLength === 5) {
+      return '65px';
+    } else if (totalLength >= 1 && totalLength <= 3) {
+      return '70px';
     }
-    return '65px';
+    return '55px'; // 기본값
   }};
   background-color: ${(props) => props.accentColor};
   color: ${(props) => props.firstLineColor};
-  -webkit-text-stroke: 1px #fff;
+  -webkit-text-stroke: 0.5px #fff;
 `;
 
 const SecondLine = styled.div<SecondLine>`
@@ -114,7 +121,7 @@ const SecondLine = styled.div<SecondLine>`
     } else if (petType.length === 4) {
       return '65px';
     }
-    return '90px';
+    return '65px';
   }};
   line-height: 70px;
 `;
@@ -144,6 +151,7 @@ const EmphasizedPoster: React.FC<Props> = (props) => {
         <FirstLine
           {...props.styles}
           petName={petName}
+          petDesc={petDesc}
           accentColor={accentColor}
           firstLineColor={firstLineColor}
         >

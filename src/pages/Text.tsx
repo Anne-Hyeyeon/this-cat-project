@@ -135,7 +135,7 @@ const Text = () => {
                     />
                     <FormHelperText sx={{ m: 0 }}>
                       동물, 또는 최애의 이름을 입력해주세요. <br />
-                      ex) 저희집 별이, 제 아내 <br /> 최대 5글자까지 입력
+                      ex) 저희집 별이, 제 아내 <br /> 최대 6글자까지 입력
                       가능합니다.
                     </FormHelperText>
                   </FormControl>
