@@ -30,7 +30,7 @@ const Start = () => {
         </Grid>
         <Grid item xs={12}>
           <MainWrapper>
-            <Grid container rowGap={3}>
+            <Grid container rowGap={1}>
               <Grid item xs={12} textAlign="center">
                 <TitleTypography>😻이렇게 만들어 보세요!</TitleTypography>
               </Grid>

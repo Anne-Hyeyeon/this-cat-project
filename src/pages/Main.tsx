@@ -50,11 +50,11 @@ const Main = () => {
         backgroundRepeat: 'repeat',
       }}
     >
-          <MainAppBar />
-          <Container maxWidth="sm" sx={{ paddingTop:'70px' }}>
-            {step !== 0 && <MainStepper />}
-            {renderComponentBasedOnStep(step, posterType)}
-          </Container>
+      <MainAppBar />
+      <Container maxWidth="sm" sx={{ paddingTop: '70px' }}>
+        {step !== 0 && <MainStepper />}
+        {renderComponentBasedOnStep(step, posterType)}
+      </Container>
     </Box>
   );
 };
