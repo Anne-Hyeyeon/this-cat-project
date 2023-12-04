@@ -49,14 +49,29 @@ const Text = () => {
 
   const handlePetTypeInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setPetType(e.target.value));
+    const inputValue = e.target.value;
+    if (inputValue.length > 4) {
+      alert('4글자까지만 입력 가능합니다. 🙏');
+      return;
+    }
   };
 
   const handlePetNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setPetName(e.target.value));
+    const inputValue = e.target.value;
+    if (inputValue.length > 6) {
+      alert('6글자까지만 입력 가능합니다. 🙏');
+      return;
+    }
   };
 
   const handlePetDescInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setPetDesc(e.target.value));
+    const inputValue = e.target.value;
+    if (inputValue.length > 4) {
+      alert('4글자까지만 입력 가능합니다. 🙏');
+      return;
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -83,9 +98,9 @@ const Text = () => {
                   😻 미리보기
                 </Typography>
                 {posterType === 'emphasized' ? (
-                  <EmphasizedPoster styles={{ width: 55 }} />
+                  <EmphasizedPoster styles={{ width: 110 }} />
                 ) : (
-                  <SimplePoster styles={{ width: 55 }} />
+                  <SimplePoster styles={{ width: 100 }} />
                 )}
               </Grid>
               <Grid item xs={12}>
@@ -152,7 +167,8 @@ const Text = () => {
                     <FormHelperText sx={{ m: 0 }}>
                       대상을 설명하는 말을 넣어 주세요. <br />
                       ex) 존귀, 졸귀, 존예. <br />
-                      최대 4글자까지 입력 가능합니다.
+                      최대 <span style={{ color: 'primary-main' }}>4글자</span>
+                      까지 입력 가능합니다.
                     </FormHelperText>
                   </FormControl>
                 </Grid>
