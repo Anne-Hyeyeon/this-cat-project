@@ -5,8 +5,6 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { Link } from 'react-router-dom';
 import EmphasizedPoster from '../../common/components/Poster/EmphasizedPoster';
 import {
-  setPetName,
-  setPetType,
   setStep,
   State,
   setHeaderColor,
@@ -16,18 +14,10 @@ import {
   setBgColor,
   initColor,
 } from '../../store/store';
-import { initialState } from '../../store/store';
-import { useFormControl } from '@mui/material/FormControl';
 
 import {
   Box,
   Button,
-  FormControl,
-  FormHelperText,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
   Typography,
   Grid,
   Avatar,
@@ -39,21 +29,27 @@ import { useTheme } from '@mui/material/styles';
 import MainWrapper from '../../common/components/MainWrapper';
 import SimplePoster from '../../common/components/Poster/SimplePoster';
 import MainButton from '../../common/components/MainButton';
-import {
-  ChromePicker,
-  CirclePicker,
-  SketchPicker,
-  SwatchesPicker,
-  TwitterPicker,
-} from 'react-color';
+import { SketchPicker } from 'react-color';
+import { getPosterWidth } from '../../common/function/getPosterWidth';
 
 interface Color {
   hex: string;
 }
 
 const EmphasizedDetail = () => {
-  const theme = useTheme();
-  const { secondary } = theme.palette;
+  const [posterWidth, setPosterWidth] = useState(getPosterWidth());
+
+  useEffect(() => {
+    const handleResize = () => {
+      setPosterWidth(getPosterWidth());
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const dispatch = useDispatch();
   const state = useSelector((state: State) => state);
@@ -139,18 +135,18 @@ const EmphasizedDetail = () => {
     <Box height="100vh">
       <Container maxWidth="sm">
         <MainWrapper>
-          <Grid container sx={{ bgcolor: 'secondary.light', p: 2 }}>
-            <Grid item xs={12}>
-              <Typography variant="h6" marginBottom={1}>
-                *미리보기*
-              </Typography>
-              <EmphasizedPoster styles={{ width: 100 }} />
+          <Grid item xs={12} sm={6}>
+            <Typography variant="body2" fontWeight={700} marginBottom={1}>
+              😻 미리보기
+            </Typography>
+          </Grid>
+          <Grid container rowGap={2} sx={{ bgcolor: 'secondary.light', p: 2 }}>
+            {' '}
+            <Grid item xs={12} sm={6} p={1}>
+              <EmphasizedPoster styles={{ width: posterWidth }} />
             </Grid>
-            <Grid display="flex" item xs={12}>
-              <Typography variant="h6" marginBottom={1}>
-                배경색
-              </Typography>
-              <Box>
+            <Grid item xs={12} sm={6}>
+              <Box display="flex" mb={1}>
                 <Avatar
                   onClick={handleBgClick}
                   sx={{
@@ -161,6 +157,9 @@ const EmphasizedDetail = () => {
                 >
                   {' '}
                 </Avatar>
+                <Typography variant="h6" mb={1} ml={1}>
+                  배경색
+                </Typography>
                 <Popover
                   id="second-line-popover"
                   open={Boolean(bgPickerAnchorEl)}
@@ -168,7 +167,7 @@ const EmphasizedDetail = () => {
                   onClose={handleBgClose}
                   anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'left',
+                    horizontal: 'center',
                   }}
                 >
                   <SketchPicker
@@ -177,12 +176,7 @@ const EmphasizedDetail = () => {
                   />
                 </Popover>
               </Box>
-            </Grid>
-            <Grid display="flex" item xs={12}>
-              <Typography variant="h6" marginBottom={1}>
-                강조색
-              </Typography>
-              <Box>
+              <Box display="flex" mb={1}>
                 <Avatar
                   onClick={handleAccentClick}
                   sx={{
@@ -193,6 +187,9 @@ const EmphasizedDetail = () => {
                 >
                   {' '}
                 </Avatar>
+                <Typography variant="h6" mb={1} ml={1}>
+                  강조색
+                </Typography>
                 <Popover
                   id="accent-popover"
                   open={Boolean(accentPickerAnchorEl)}
@@ -200,7 +197,7 @@ const EmphasizedDetail = () => {
                   onClose={handleAccentClose}
                   anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'left',
+                    horizontal: 'center',
                   }}
                 >
                   <SketchPicker
@@ -209,12 +206,7 @@ const EmphasizedDetail = () => {
                   />
                 </Popover>
               </Box>
-            </Grid>
-            <Grid display="flex" item xs={12}>
-              <Typography variant="h6" marginBottom={1}>
-                헤더
-              </Typography>
-              <Box>
+              <Box display="flex" mb={1}>
                 <Avatar
                   onClick={handleHeaderClick}
                   sx={{
@@ -225,6 +217,9 @@ const EmphasizedDetail = () => {
                 >
                   {' '}
                 </Avatar>
+                <Typography variant="h6" mb={1} ml={1}>
+                  헤더
+                </Typography>
                 <Popover
                   id="header-popover"
                   open={Boolean(headerPickerAnchorEl)}
@@ -232,7 +227,7 @@ const EmphasizedDetail = () => {
                   onClose={handleHeaderClose}
                   anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'left',
+                    horizontal: 'center',
                   }}
                 >
                   <SketchPicker
@@ -241,12 +236,7 @@ const EmphasizedDetail = () => {
                   />
                 </Popover>
               </Box>
-            </Grid>
-            <Grid display="flex" item xs={12}>
-              <Typography variant="h6" marginBottom={1}>
-                첫 번째 라인
-              </Typography>
-              <Box>
+              <Box display="flex" mb={1}>
                 <Avatar
                   onClick={handleFirstLineClick}
                   sx={{
@@ -257,6 +247,10 @@ const EmphasizedDetail = () => {
                 >
                   {' '}
                 </Avatar>
+                <Typography variant="h6" mb={1} ml={1}>
+                  첫 번째 라인
+                </Typography>
+
                 <Popover
                   id="first-line-popover"
                   open={Boolean(firstLinePickerAnchorEl)}
@@ -264,7 +258,7 @@ const EmphasizedDetail = () => {
                   onClose={handleFirstLineClose}
                   anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'left',
+                    horizontal: 'center',
                   }}
                 >
                   <SketchPicker
@@ -273,12 +267,7 @@ const EmphasizedDetail = () => {
                   />
                 </Popover>
               </Box>
-            </Grid>
-            <Grid display="flex" item xs={12}>
-              <Typography variant="h6" marginBottom={1}>
-                두 번째 라인
-              </Typography>
-              <Box>
+              <Box display="flex" mb={1}>
                 <Avatar
                   onClick={handleSecondLineClick}
                   sx={{
@@ -289,6 +278,9 @@ const EmphasizedDetail = () => {
                 >
                   {' '}
                 </Avatar>
+                <Typography variant="h6" mb={1} ml={1}>
+                  두 번째 라인
+                </Typography>
                 <Popover
                   id="second-line-popover"
                   open={Boolean(secondLinePickerAnchorEl)}
@@ -296,7 +288,7 @@ const EmphasizedDetail = () => {
                   onClose={handleSecondLineClose}
                   anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'left',
+                    horizontal: 'center',
                   }}
                 >
                   <SketchPicker
