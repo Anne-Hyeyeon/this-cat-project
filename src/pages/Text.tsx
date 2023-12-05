@@ -1,5 +1,5 @@
 import { Container } from '@mui/system';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import EmphasizedPoster from '../common/components/Poster/EmphasizedPoster';
@@ -23,19 +23,29 @@ import {
   Typography,
   Grid,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 
 import MainWrapper from '../common/components/MainWrapper';
 import SimplePoster from '../common/components/Poster/SimplePoster';
+import { getPosterWidth } from '../common/function/getPosterWidth';
 
 const Text = () => {
-  const theme = useTheme();
-  const { primary, secondary } = theme.palette;
-
   const dispatch = useDispatch();
   const state = useSelector((state: State) => state);
   const [showInput, setShowInput] = useState(false);
+  const [posterWidth, setPosterWidth] = useState(getPosterWidth());
   const { petName, petType, posterType, petDesc } = state;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setPosterWidth(getPosterWidth());
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handlePetTypeSelectChange = (e: SelectChangeEvent<string>) => {
     const selectedValue = e.target.value as string;
@@ -88,22 +98,24 @@ const Text = () => {
       <Container maxWidth="sm">
         <form onSubmit={handleSubmit}>
           <MainWrapper>
+            <Grid item xs={12} sm={6}>
+              <Typography variant="body2" fontWeight={700} marginBottom={1}>
+                😻 미리보기
+              </Typography>
+            </Grid>
             <Grid
               container
               rowGap={2}
               sx={{ bgcolor: 'secondary.light', p: 2 }}
             >
-              <Grid item xs={12}>
-                <Typography variant="body2" fontWeight={700} marginBottom={1}>
-                  😻 미리보기
-                </Typography>
+              <Grid item xs={12} sm={6} p={1}>
                 {posterType === 'emphasized' ? (
-                  <EmphasizedPoster styles={{ width: 110 }} />
+                  <EmphasizedPoster styles={{ width: posterWidth }} />
                 ) : (
-                  <SimplePoster styles={{ width: 100 }} />
+                  <SimplePoster styles={{ width: posterWidth }} />
                 )}
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <Grid item>
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <Select
@@ -181,8 +193,8 @@ const Text = () => {
                 fullWidth
                 variant="contained"
                 sx={{
-                  bgcolor: secondary.dark,
-                  color: secondary.light,
+                  bgcolor: 'secondary.dark',
+                  color: 'secondary.light',
                   height: '50px',
                 }}
                 type="submit"
