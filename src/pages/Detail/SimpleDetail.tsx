@@ -1,67 +1,48 @@
 import { Container } from '@mui/system';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
-import { Link } from 'react-router-dom';
-import EmphasizedPoster from '../../common/components/Poster/EmphasizedPoster';
 import {
-  setPetName,
-  setPetType,
   setStep,
   State,
   setHeaderColor,
-  setAccentColor,
   setBgColor,
   setFirstLineColor,
   setSecondLineColor,
   initColor,
 } from '../../store/store';
-import { initialState } from '../../store/store';
-import { useFormControl } from '@mui/material/FormControl';
 
-import {
-  Box,
-  Button,
-  FormControl,
-  FormHelperText,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
-  Typography,
-  Grid,
-  Avatar,
-  Popover,
-} from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { Box, Button, Typography, Grid, Avatar, Popover } from '@mui/material';
 
 import MainWrapper from '../../common/components/MainWrapper';
 import SimplePoster from '../../common/components/Poster/SimplePoster';
 import MainButton from '../../common/components/MainButton';
-import {
-  ChromePicker,
-  CirclePicker,
-  SketchPicker,
-  SwatchesPicker,
-  TwitterPicker,
-} from 'react-color';
+import { SketchPicker } from 'react-color';
+import { getPosterWidth } from '../../common/function/getPosterWidth';
 
 interface Color {
   hex: string;
 }
 
 const SimpleDetail = () => {
-  const theme = useTheme();
-  const { primary, secondary } = theme.palette;
-
   const dispatch = useDispatch();
   const state = useSelector((state: State) => state);
-  const { petName, petType, posterType, colors } = state;
-  const [displayColorPicker, setDisplayColorPicker] = useState(false);
-  const [showInput, setShowInput] = useState(false);
-  const [accentPickerAnchorEl, setAccentPickerAnchorEl] = useState<any | null>(
-    null,
-  );
+  const [posterWidth, setPosterWidth] = useState(getPosterWidth(60, 50));
+
+  useEffect(() => {
+    const handleResize = () => {
+      setPosterWidth(getPosterWidth(60, 50));
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const { colors } = state;
+
   const [bgPickerAnchorEl, setBgPickerAnchorEl] = useState<any | null>(null);
   const [headerPickerAnchorEl, setHeaderPickerAnchorEl] = useState<any | null>(
     null,
@@ -130,18 +111,17 @@ const SimpleDetail = () => {
     <Box height="100vh">
       <Container maxWidth="sm">
         <MainWrapper>
-          <Grid container sx={{ bgcolor: 'secondary.light', p: 2 }}>
-            <Grid item xs={12}>
-              <Typography variant="h6" marginBottom={1}>
-                *미리보기*
-              </Typography>
-              <SimplePoster styles={{ width: 100 }} />
+          <Grid container rowGap={2} p={2} sx={{ bgcolor: 'secondary.light' }}>
+            <Grid item xs={12} sm={6}>
+              <SimplePoster styles={{ width: posterWidth }} />
+              <Grid item xs={12} sm={6}>
+                <Typography variant="body2" fontWeight={700} mt={1}>
+                  😻 미리보기
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid display="flex" item xs={12}>
-              <Typography variant="h6" marginBottom={1}>
-                배경색
-              </Typography>
-              <Box>
+            <Grid item xs={12} sm={6}>
+              <Box display="flex" mb={1}>
                 <Avatar
                   onClick={handleBgClick}
                   sx={{
@@ -152,6 +132,9 @@ const SimpleDetail = () => {
                 >
                   {' '}
                 </Avatar>
+                <Typography variant="h6" mb={1} ml={1}>
+                  배경색
+                </Typography>
                 <Popover
                   id="second-line-popover"
                   open={Boolean(bgPickerAnchorEl)}
@@ -168,12 +151,7 @@ const SimpleDetail = () => {
                   />
                 </Popover>
               </Box>
-            </Grid>
-            <Grid display="flex" item xs={12}>
-              <Typography variant="h6" marginBottom={1}>
-                헤더
-              </Typography>
-              <Box>
+              <Box display="flex" mb={1}>
                 <Avatar
                   onClick={handleHeaderClick}
                   sx={{
@@ -184,6 +162,9 @@ const SimpleDetail = () => {
                 >
                   {' '}
                 </Avatar>
+                <Typography variant="h6" mb={1} ml={1}>
+                  헤더
+                </Typography>
                 <Popover
                   id="header-popover"
                   open={Boolean(headerPickerAnchorEl)}
@@ -200,12 +181,7 @@ const SimpleDetail = () => {
                   />
                 </Popover>
               </Box>
-            </Grid>
-            <Grid display="flex" item xs={12}>
-              <Typography variant="h6" marginBottom={1}>
-                첫 번째 라인
-              </Typography>
-              <Box>
+              <Box display="flex" mb={1}>
                 <Avatar
                   onClick={handleFirstLineClick}
                   sx={{
@@ -216,6 +192,9 @@ const SimpleDetail = () => {
                 >
                   {' '}
                 </Avatar>
+                <Typography variant="h6" mb={1} ml={1}>
+                  첫 번째 라인
+                </Typography>
                 <Popover
                   id="first-line-popover"
                   open={Boolean(firstLinePickerAnchorEl)}
@@ -232,12 +211,7 @@ const SimpleDetail = () => {
                   />
                 </Popover>
               </Box>
-            </Grid>
-            <Grid display="flex" item xs={12}>
-              <Typography variant="h6" marginBottom={1}>
-                두 번째 라인
-              </Typography>
-              <Box>
+              <Box display="flex" mb={1}>
                 <Avatar
                   onClick={handleSecondLineClick}
                   sx={{
@@ -248,6 +222,9 @@ const SimpleDetail = () => {
                 >
                   {' '}
                 </Avatar>
+                <Typography variant="h6" mb={1} ml={1}>
+                  두 번째 라인
+                </Typography>
                 <Popover
                   id="second-line-popover"
                   open={Boolean(secondLinePickerAnchorEl)}
@@ -264,14 +241,17 @@ const SimpleDetail = () => {
                   />
                 </Popover>
               </Box>
+              <Box>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    dispatch(initColor());
+                  }}
+                >
+                  색깔 초기화
+                </Button>
+              </Box>
             </Grid>
-            <Button
-              onClick={() => {
-                dispatch(initColor());
-              }}
-            >
-              원래대로
-            </Button>
           </Grid>
         </MainWrapper>
         <Grid container justifyContent="space-between" mt={4}>
