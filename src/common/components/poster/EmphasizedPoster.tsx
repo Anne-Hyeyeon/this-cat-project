@@ -15,7 +15,13 @@ interface Styles {
 }
 
 interface Props {
+  preview?: boolean;
   styles?: Styles;
+}
+
+interface Wrapper {
+  bgColor: string;
+  preview?: boolean;
 }
 
 interface Header {
@@ -36,7 +42,8 @@ interface SecondLine {
   secondLineColor: string;
 }
 
-const Wrapper = styled.div<{ bgColor: string }>`
+const Wrapper = styled.div<Wrapper>`
+  position: relative;
   width: ${initialWidth}mm;
   height: ${initialWidth * 1.414}mm;
   border: 1px solid black;
@@ -44,6 +51,24 @@ const Wrapper = styled.div<{ bgColor: string }>`
   font-family: 'Black Han Sans', sans-serif;
   padding: 20px;
   box-sizing: border-box;
+  opacity: ${(props) => (props.preview ? 0.5 : 1)};
+`;
+
+const PreviewText = styled.div<{ preview?: boolean }>`
+  height: 95%;
+  font-family: 'Black Han Sans', sans-serif;
+  width: 95%;
+  line-height: 1000px;
+  position: absolute;
+  color: white;
+  font-size: 100px;
+  text-align: center;
+  background-color: black;
+  padding: 30px;
+  opacity: 0.8;
+  z-index: 99; /* 다른 컨텐츠 위에 레이어를 배치하기 위한 z-index 설정 */
+  display: ${(props) =>
+    props.preview ? 'block' : 'none'}; /* 미리 보기 모드일 때만 표시 */
 `;
 
 const Header = styled.div<Header>`
@@ -132,9 +157,11 @@ const EmphasizedPoster: React.FC<Props> = (props) => {
   const { emphasizedPosterColors } = colors;
   const { bgColor, accentColor, headerColor, firstLineColor, secondLineColor } =
     emphasizedPosterColors;
+  const { preview } = props;
   return (
     <ScaleWrapper styles={props.styles}>
-      <Wrapper bgColor={bgColor}>
+      <Wrapper preview={preview} bgColor={bgColor}>
+        <PreviewText preview={preview}>미리 보기 😻</PreviewText>
         <Header
           {...props.styles}
           petType={petType}

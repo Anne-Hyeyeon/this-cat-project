@@ -37,11 +37,11 @@ interface Color {
 }
 
 const EmphasizedDetail = () => {
-  const [posterWidth, setPosterWidth] = useState(getPosterWidth());
+  const [posterWidth, setPosterWidth] = useState(getPosterWidth(60, 50));
 
   useEffect(() => {
     const handleResize = () => {
-      setPosterWidth(getPosterWidth());
+      setPosterWidth(getPosterWidth(60, 50));
     };
 
     window.addEventListener('resize', handleResize);
@@ -135,15 +135,12 @@ const EmphasizedDetail = () => {
     <Box height="100vh">
       <Container maxWidth="sm">
         <MainWrapper>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="body2" fontWeight={700} marginBottom={1}>
-              😻 미리보기
-            </Typography>
-          </Grid>
-          <Grid container rowGap={2} sx={{ bgcolor: 'secondary.light', p: 2 }}>
-            {' '}
-            <Grid item xs={12} sm={6} p={1}>
+          <Grid container rowGap={2} p={2} sx={{ bgcolor: 'secondary.light' }}>
+            <Grid item xs={12} sm={6}>
               <EmphasizedPoster styles={{ width: posterWidth }} />
+              <Typography variant="body2" fontWeight={700} mt={1}>
+                😻 미리보기
+              </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
               <Box display="flex" mb={1}>
@@ -297,14 +294,17 @@ const EmphasizedDetail = () => {
                   />
                 </Popover>
               </Box>
+              <Box>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    dispatch(initColor());
+                  }}
+                >
+                  색깔 초기화
+                </Button>
+              </Box>
             </Grid>
-            <Button
-              onClick={() => {
-                dispatch(initColor());
-              }}
-            >
-              원래대로
-            </Button>
           </Grid>
         </MainWrapper>
         <Grid container justifyContent="space-between" mt={4}>

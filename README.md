@@ -650,7 +650,7 @@ const test = () => {
 #### 오류
 
 ```ts
-const [posterWidth, setPosterWidth] = useState(getPosterWidth());
+const [posterWidth, setPosterWidth] = useState(getPosterWidth(60, 50));
 
 const getPosterWidth = () => {
   const screenWidth = window.innerWidth;
@@ -663,8 +663,6 @@ const getPosterWidth = () => {
     return 60;
   }
 };
-
-// 오류 발생 : getPosterWidth()를 찾을 수 없음.
 ```
 
 - getPosterWidth는 화살표 함수. 호이스팅이 안 되는 형식이다.
@@ -675,7 +673,7 @@ const getPosterWidth = () => {
 - getPosterWidth를 화살표 함수가 아닌, function으로 변경
 
 ```ts
-const [posterWidth, setPosterWidth] = useState(getPosterWidth());
+const [posterWidth, setPosterWidth] = useState(getPosterWidth(60, 50));
 
 function getPosterWidth() {
   const screenWidth = window.innerWidth;
@@ -696,7 +694,7 @@ function getPosterWidth() {
 
 1. **함수 정의 순서에 대한 혼란**: getPosterWidth 함수가 Text 컴포넌트의 상단에 실제로 정의되어 있지 않지만, 컴포넌트 내 어디서든 호출할 수 있다. 이는 코드의 가독성을 저해할 수 있으며, 특히 크고 복잡한 컴포넌트에서는 함수의 위치를 찾기 어렵게 만들 수 있다. (유지보수 측면에서 x)
 
-2. **코드의 구조와 명확성**: 일반적으로 컴포넌트의 로직은 **가능한 한** 선언된 순서대로 실행되는 것이 좋다. function으로 선언된 함수는 호이스팅으로 인해 이러한 순서가 깨질 수 있습니다.
+2. **코드의 구조와 명확성**: 일반적으로 컴포넌트의 로직은 **가능한 한** 선언된 순서대로 실행되는 것이 좋다. function으로 선언된 함수는 호이스팅으로 인해 이러한 순서가 깨질 수 있다.
 
 #### 방법 2.
 
