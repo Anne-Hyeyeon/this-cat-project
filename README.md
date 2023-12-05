@@ -1,6 +1,6 @@
 # This-Cat (이 고양이를 보신 적 있습니까) Project
 
-## 준비
+## 준비 - 개발 환경 세팅
 
 ### Creating Project & Typescript Setting
 
@@ -32,6 +32,8 @@ C:\Users\SSR\Desktop\hykim\study\this-cat>npx sass --watch css/style.scss css/st
 1. npm i firebase
 2. env에 key 저장, initialize firebase
 3. storage import
+
+## 각 페이지 별 작동 방식 구상
 
 ### Photo
 
@@ -250,20 +252,19 @@ When you store data in the Redux store, it is important to ensure that the data 
 
 하지만, 폰트 사이즈는 어떻게 맞출 것인가?
 
-* 개발진스처럼 사용자가 자유롭게 요소와 폰트를 변경하는...뭐 그런 거 없을까... *
+- 개발진스처럼 사용자가 자유롭게 요소와 폰트를 변경하는...뭐 그런 거 없을까... \*
 
-- https://devjeans.dev-hee.com/
+* https://devjeans.dev-hee.com/
 
+### 자식 요소가 부모 요소보다 커서 잘리는 오류 대처 방법
 
-### 자식 요소가 부모 요소보다 클 때
-
-### Resize Event Listener
+#### Resize Event Listener
 
 - before : 컴포넌트가 처음 마운트 될 때만 `setScreenSize` 호출함.
 - after : 사용자가 브라우저 크기를 조절하거나, 모바일 기기에서 화면을 회전할 경우에도 `--vh` 값 업데이트
 - how : resize 이벤트 리스너
 
-### 전체 스케일 조절
+#### 전체 스케일 조절
 
 - Poster.tsx에 전체 스케일을 width값만으로 동적으로 조정할 수 있게 만듦.
 
@@ -278,7 +279,9 @@ const ScaleWrapper = styled.div<Styles>`
 `;
 ```
 
-## 한 파일에서 여러 개의 컴포넌트 export하기
+## 개발 노트
+
+### 한 파일에서 여러 개의 컴포넌트 export하기
 
 1. 컴포넌트 정의
 
@@ -310,12 +313,12 @@ export { Poster, SimplePoster, PrettyPoster };
 import { Poster, SimplePoster, PrettyPoster } from './path';
 ```
 
-## 'Poster'컴포넌트에서 사용되는 initialWidth를 별도의 모듈 파일로 분리하여 사용하는 것은 좋은 접근일까?
+### 'Poster'컴포넌트에서 사용되는 initialWidth를 별도의 모듈 파일로 분리하여 사용하는 것은 좋은 접근일까?
 
 - Poster.tsx, ScaleWrapper.tsx에서 공통으로 사용되는 initialWidth
 - 해당 값을 관리하는 파일을 별도로 만들어야 하는지.
 
-### pros
+#### pros
 
 1. `재사용성``: 해당 상수가 여러 컴포넌트나 함수에서 사용되어야 하는 경우, 한 곳에서 정의하고 여러 곳에서 임포트하여 사용하면 중복 코드를 줄일 수 있다.
 
@@ -323,7 +326,7 @@ import { Poster, SimplePoster, PrettyPoster } from './path';
 
 3. `가독성`: 각 컴포넌트나 함수 파일이 주요 로직에만 집중할 수 있게 되고, 상수와 같은 설정 값들이 별도의 파일에 있으므로 코드의 가독성이 향상됨.
 
-### cons
+#### cons
 
 - 오버엔지니어링: 만약 initialWidth와 같은 상수가 특정 컴포넌트에서만 사용되고, 재사용될 가능성이 없다면 별도의 파일로 분리하는 것은 오버엔지니어링이 될 수 있음.
 
@@ -333,9 +336,9 @@ import { Poster, SimplePoster, PrettyPoster } from './path';
 
 - 재사용성 업!
 
-## Hook은 무조건 컴포넌트 안에!
+### Hook은 무조건 컴포넌트 안에!
 
-### 오류 내용
+#### 오류 내용
 
 ```
 react.development.js:209 Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
@@ -345,13 +348,13 @@ react.development.js:209 Warning: Invalid hook call. Hooks can only be called in
 2. You might be breaking the Rules of Hooks
 3. You might have more than one copy of React in the same app
 
-### 원인
+#### 원인
 
 Poster 컴포넌트에서 컴포넌트 내부가 아닌 바깥에 useSelector를 사용했음. hook은 컴포넌트 내부에서! !
 
-## 삽질 기록: react-color 가 hex값도 제공했네~!!
+### 삽질 기록: react-color 가 hex값도 제공했네~!!
 
-### 생각의 흐름
+#### 생각의 흐름
 
 1. color-picker를 이용해서 Poster의 배경색, 강조색을 사용자가 직접 정할 수 있게 만들어보자!
 2. react-color 라이브러리 설치
@@ -543,9 +546,9 @@ source: "hsv"
 
 나는 진실을 알게 되고 말았지... 7. 모든 걸 hex로 되돌리는 작업 실시!
 
-### 교훈 : 삽질하기 전에 꼼꼼히 사전조사하기...
+#### 교훈 : 삽질하기 전에 꼼꼼히 사전조사하기...
 
-## Detail 컴포넌트 -> 분리냐, 통합이냐
+### Detail 컴포넌트 -> 분리냐, 통합이냐
 
 1. Detail 컴포넌트에서는 SimplePoster, EmphasizedPoster의 Detail 설정을 담당하고 있다.
 2. poster별로 컨트롤해야 할 색상의 수는 각 4개(accent color, header color, first line color, second line color), 3개(accent color 제외한 나머지 색상). 해당 컴포넌트에다가 7개의 색상을 컨트롤하는 로직을 짜야 함.
@@ -557,13 +560,13 @@ source: "hsv"
 - 유지보수
 - 코드 가독성 : 조건문과 리듀서 때문에 코드가 꼬일 가능성이 큼
 
-### 나의 결론
+#### 나의 결론
 
 - 관리해야 하는 페이지는 EmphasizedDetail, SimpleDetail 총 두 개다. 굳이 한 페이지로 통합할 필요가 없다고 판단함.
 - 두 개로 나누어서 분리하는 게 복잡도를 낮추고 코드 가독성을 높일 수 있다는 결론을 내림.
 - 포스터의 종류가 더 늘어날 가능성이 적고, 늘어난다고 해도 5개 미만이 될 것으로 예상함. 재사용성보다는 복잡도, 유지보수, 코드 가독성의 이점이 있기 때문에 컴포넌트 분리.
 
-## 상단 네비바와 하단의 메인 컨텐츠가 겹치지 않게 하는 방법
+### 상단 네비바와 하단의 메인 컨텐츠가 겹치지 않게 하는 방법
 
 1. 메인 컨텐츠에 네비바 높이만큼 패딩을 준다.
 
@@ -573,8 +576,9 @@ source: "hsv"
 
 - 여기서 나는 1번의 방법이 가장 간단하고 보기 좋다고 생각한다. 아주 간단하고 오류 없이 잘 작동하기 때문이다. 메인 컨텐츠에 네이바 높이만큼의 패딩이 적용되었다는 사실을 코드를 통해 명시하면 될 듯하다. 유지보수 시 다른 개발자가 해당 패딩값의 의미를 알게 하는 장치가 필요...?
 
-## 폴더명의 대문자, 소문자 때문에 생긴 오류
-### 작업을 하다가 문득 내가 만든 폴더들이 모두 소문자로 시작한다는 사실을 알게 되었다 😱😱😱 이럴 수가
+### 폴더명의 대문자, 소문자 때문에 생긴 오류
+
+#### 작업을 하다가 문득 내가 만든 폴더들이 모두 소문자로 시작한다는 사실을 알게 되었다 😱😱😱 이럴 수가
 
 - 내가 한 행동 : 열심히 폴더명의 앞글자를 대문자로 바꿈. 그런데...
 - import 오류는 물론이고, 커밋을 할 때 같은 파일임에도 불구하고 두 개의 변경사항이 뜨는 것을 발견했다.
@@ -586,17 +590,162 @@ source: "hsv"
 fatal: will not add file alias 'src/common/components/Poster/EmphasizedPoster.tsx' ('src/common/components/poster/EmphasizedPoster.tsx' already exists in index)
 ```
 
-### 원인 분석
-- 이 오류 메시지는 git에서 발생하며, 주로 대소문자 구분이 다른 두 파일이나 디렉토리를 동일한 git 인덱스에 추가하려고 할 때 나타남. 
+#### 원인 분석
+
+- 이 오류 메시지는 git에서 발생하며, 주로 대소문자 구분이 다른 두 파일이나 디렉토리를 동일한 git 인덱스에 추가하려고 할 때 나타남.
 - 이는 특히 파일 시스템이 대소문자를 구분하지 않는 환경 (예: Windows, 일부 macOS 파일 시스템)에서 자주 발생함.
 
-### 해결 방법 
+#### 해결 방법
+
 1. 기존 파일 제거 후 커밋
 2. git 설정 변경:
-git의 core.ignoreCase 설정을 false로 변경하여 git에게 대소문자를 구분하도록 지시함. (미래 비슷한 오류 방지)
-`git config core.ignoreCase false`
+   git의 core.ignoreCase 설정을 false로 변경하여 git에게 대소문자를 구분하도록 지시함. (미래 비슷한 오류 방지)
+   `git config core.ignoreCase false`
 
 - 프로젝트를 삭제하고 저장소에서 한번 더 클론한 후, git 설정을 변경해 주었다.
 
-### 느낀 점
+#### 느낀 점
+
 - 프로젝트 진행 때는 작은 선택일지라도 신중해야 한다. 조그마한 변동사항일지라도 어떤 부작용이 생길지 모른다.
+
+### 자바스크립트에서 화면 크기를 확인한 후 적절한 값을 return 시키기
+
+```ts
+const test = () => {
+  const width = window.innerWidth;
+
+  if (width >= 1024) {
+    // PC 사이즈
+    return 100;
+  } else if (width >= 768 && width < 1024) {
+    // 태블릿 사이즈
+    return 50;
+  } else {
+    // 모바일 사이즈
+    return 30;
+  }
+};
+```
+
+- window.innterWidth 를 이용하면 화면의 크기를 확인할 수 있다.
+- 이에 따라 반응형으로 요소 크기를 조절하는 게 가능해진다.
+
+#### 고려해야 할 점
+
+- 브라우저 크기가 변경될 때마다 함수를 호출하고, 컴포넌트의 상태를 업데이트 하기 위해서는 **리사이즈 이벤트 리스너 설정** 등 추가 로직이 필요하다.
+
+### 호이스팅을 시킬 것인가, 그러지 말아야 하는가 (함수의 반환 값을 useState의 초기값으로 쓰고 싶을 때)
+
+#### 호이스팅이란?
+
+- 자바스크립트의 작동 방식 중 하나다. 함수 선언, 변수 선언을 스코프의 최상단으로 끌어올리는 것. 그러나 **화살표 함수**에서는 적용되지 않는다.
+
+#### 상황
+
+- useState 훅으로 posterWidth라는 값을 관리하기로 했다.
+- posterWidth가 스크린의 크기에 따라 변하도록 만드는 함수가 존재한다.
+- posterWidth의 초기값을 이 함수의 return 값으로 정하고자 한다.
+- 그리하여, 이 페이지에 접속했을 때 스크린 사이즈에 맞는 posterSize가 선택되게끔 하고 싶다.
+
+#### 오류
+
+```ts
+const [posterWidth, setPosterWidth] = useState(getPosterWidth());
+
+const getPosterWidth = () => {
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth >= 600) {
+    // sm 이상
+    return 50;
+  } else {
+    // xs
+    return 60;
+  }
+};
+
+// 오류 발생 : getPosterWidth()를 찾을 수 없음.
+```
+
+- getPosterWidth는 화살표 함수. 호이스팅이 안 되는 형식이다.
+- 화살표 함수는 자바스크립트 실행 시 함수가 차례대로 실행된다는 걸 보장한다.
+
+#### 방법 1.
+
+- getPosterWidth를 화살표 함수가 아닌, function으로 변경
+
+```ts
+const [posterWidth, setPosterWidth] = useState(getPosterWidth());
+
+function getPosterWidth() {
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth >= 600) {
+    // sm 이상
+    return 50;
+  } else {
+    // xs
+    return 60;
+  }
+}
+```
+
+- 이 경우 function으로 선언된 getPosterWidth() 함수는 호이스팅이 일어나 순서와 상관 없이 전역에서 사용이 가능해진다.
+
+##### 예상되는 문제
+
+1. **함수 정의 순서에 대한 혼란**: getPosterWidth 함수가 Text 컴포넌트의 상단에 실제로 정의되어 있지 않지만, 컴포넌트 내 어디서든 호출할 수 있다. 이는 코드의 가독성을 저해할 수 있으며, 특히 크고 복잡한 컴포넌트에서는 함수의 위치를 찾기 어렵게 만들 수 있다. (유지보수 측면에서 x)
+
+2. **코드의 구조와 명확성**: 일반적으로 컴포넌트의 로직은 **가능한 한** 선언된 순서대로 실행되는 것이 좋다. function으로 선언된 함수는 호이스팅으로 인해 이러한 순서가 깨질 수 있습니다.
+
+#### 방법 2.
+
+- const [posterWidth, setPosterWidth] = useState(getPosterWidth()); 를 getPosterWidth 함수보다 아래에 선언
+
+```ts
+const getPosterWidth = () => {
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth >= 600) {
+    // sm 이상
+    return 50;
+  } else {
+    // xs
+    return 60;
+  }
+};
+const [posterWidth, setPosterWidth] = useState(getPosterWidth());
+```
+
+##### 예상되는 문제
+
+- Hook 관련 관행 어기게 됨.
+- React Hook은 조건문, 반복문, 중첩된 함수 내부에서 호출될 수 없다. 최상위 레벨에서만 호출되어야 한다.
+- 따라서 useState 등의 hook은 함수의 상단에 위치시키는 것이 일반적인 관행이다.
+  (함수가 최상위 레벨에 있다는 사실을 명시적으로 나타냄.)
+- 리액트 컴포넌트에서는 상태 관리 훅(hooks)을 컴포넌트의 최상단에 배치하여, 컴포넌트의 상태와 관련된 로직이 쉽게 식별될 수 있도록 한다.
+- 위 방법을 따를 경우, 이 관행을 어기게 됨.
+- 이러한 문제를 방지하기 위해, 가능하면 컴포넌트의 상단에 상태 관리 훅을 위치시키고, 필요한 함수는 훅 위에 또는 별도의 헬퍼 파일로 분리하는 것이 좋음. 이렇게 하면 컴포넌트의 구조가 더 명확해지고, 유지 보수가 용이해짐.
+
+#### 비교
+
+- 어떤 방법을 선택할 지는 개발 환경, 상황에 따라 달라진다.
+
+1. 방법 1 (Function 사용)
+
+- 이 방법은 getPosterWidth 함수를 일반 function으로 정의하여 호이스팅을 활용하는 방식이다. 이 경우, 함수는 컴포넌트 어디에서나 접근할 수 있으므로 useState의 초기값으로 바로 사용할 수 있다.
+- 그러나 이는 함수의 선언 위치와 상관없이 함수를 호출할 수 있다는 점에서 **코드의 가독성과 구조적 명확성**을 해칠 수 있다.
+- 크고 복잡한 컴포넌트에서는 함수의 위치를 추적하기 어려워질 수 있다.
+
+2. 방법 2 (함수 선언 후 useState 사용)
+
+- 이 방법은 useState를 함수 선언 바로 아래에 배치하는 것이다.
+- 이는 리액트의 훅 사용 규칙을 따르며, 함수의 호출 순서와 관련된 혼란을 최소화할 수 있다.
+- 그러나 이 방식은 훅의 선언 위치가 컴포넌트의 최상단이 아니라는 점에서 일반적인 리액트 패턴을 벗어난다.
+
+#### 결론
+
+- 방법 1을 선택하기로 했다.
+- 호이스팅은 자바스크립트의 특징 중 하나이며, 사용한다고 해서 반드시 나쁜 게 아니다.
+- 또한, 이 방식은 리액트 컴포넌트의 일반적인 구조를 따르므로 다른 개발자들이 코드를 이해하고 유지보수하는 데에도 도움이 된다고 판단함. (이건 개인 프로젝트지만)
+- 가장 중요한 것은 코드의 명확성, 유지보수의 용이성, 그리고 팀 내의 코딩 관행을 고려하는 것이다.
