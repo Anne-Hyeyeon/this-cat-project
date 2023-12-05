@@ -5,6 +5,7 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import { State } from '../../store/store';
 import { Container } from '@mui/system';
+import './MainStepper.scss';
 
 const steps = ['사진 선택', '디자인 선택', '문구 입력', '컬러 설정', '완성'];
 
