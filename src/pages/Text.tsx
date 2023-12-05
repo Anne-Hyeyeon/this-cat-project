@@ -32,12 +32,12 @@ const Text = () => {
   const dispatch = useDispatch();
   const state = useSelector((state: State) => state);
   const [showInput, setShowInput] = useState(false);
-  const [posterWidth, setPosterWidth] = useState(getPosterWidth());
+  const [posterWidth, setPosterWidth] = useState(getPosterWidth(60, 50));
   const { petName, petType, posterType, petDesc } = state;
 
   useEffect(() => {
     const handleResize = () => {
-      setPosterWidth(getPosterWidth());
+      setPosterWidth(getPosterWidth(60, 50));
     };
 
     window.addEventListener('resize', handleResize);
@@ -98,11 +98,6 @@ const Text = () => {
       <Container maxWidth="sm">
         <form onSubmit={handleSubmit}>
           <MainWrapper>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="body2" fontWeight={700} marginBottom={1}>
-                😻 미리보기
-              </Typography>
-            </Grid>
             <Grid
               container
               rowGap={2}
@@ -114,6 +109,14 @@ const Text = () => {
                 ) : (
                   <SimplePoster styles={{ width: posterWidth }} />
                 )}
+                <Typography
+                  variant="body2"
+                  fontWeight={700}
+                  mb={1}
+                  mt={1}
+                >
+                  😻 미리보기
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Grid item>
