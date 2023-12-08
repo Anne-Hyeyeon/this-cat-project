@@ -114,11 +114,6 @@ const SimpleDetail = () => {
           <Grid container rowGap={2} p={2} sx={{ bgcolor: 'secondary.light' }}>
             <Grid item xs={12} sm={6}>
               <SimplePoster styles={{ width: posterWidth }} />
-              <Grid item xs={12} sm={6}>
-                <Typography variant="body2" fontWeight={700} mt={1}>
-                  😻 미리보기
-                </Typography>
-              </Grid>
             </Grid>
             <Grid item xs={12} sm={6}>
               <Box display="flex" mb={1}>
