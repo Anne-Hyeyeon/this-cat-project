@@ -109,14 +109,6 @@ const Text = () => {
                 ) : (
                   <SimplePoster styles={{ width: posterWidth }} />
                 )}
-                <Typography
-                  variant="body2"
-                  fontWeight={700}
-                  mb={1}
-                  mt={1}
-                >
-                  😻 미리보기
-                </Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Grid item>
