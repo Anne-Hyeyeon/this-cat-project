@@ -1,13 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { State } from '../../../store/store';
+import { State, setShowFullPage } from '../../../store/store';
 import {
   objectCaseSelector,
   subjectCaseSelector,
 } from '../../function/endingSelector';
 import ScaleWrapper from './common/ScaleWrapper';
 import { initialWidth, marginTop } from './common/initialStyles';
+import { Box, Button, Typography } from '@mui/material';
 
 interface Styles {
   width?: number;
@@ -51,24 +52,30 @@ const Wrapper = styled.div<Wrapper>`
   font-family: 'Black Han Sans', sans-serif;
   padding: 20px;
   box-sizing: border-box;
-  opacity: ${(props) => (props.preview ? 0.5 : 1)};
 `;
 
-const PreviewText = styled.div<{ preview?: boolean }>`
-  height: 95%;
-  font-family: 'Black Han Sans', sans-serif;
+const PreviewWrapper = styled.div<{ preview?: boolean }>`
   width: 95%;
-  line-height: 1000px;
+  height: 95%;
   position: absolute;
-  color: white;
-  font-size: 100px;
-  text-align: center;
-  background-color: black;
-  padding: 30px;
-  opacity: 0.8;
-  z-index: 99; /* 다른 컨텐츠 위에 레이어를 배치하기 위한 z-index 설정 */
   display: ${(props) =>
-    props.preview ? 'block' : 'none'}; /* 미리 보기 모드일 때만 표시 */
+    props.preview ? 'flex' : 'none'}; /* 미리 보기 모드일 때만 표시 */
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+`;
+
+const PreviewArea = styled.div`
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.9;
+  background-color: white;
+  text-color: black;
+  z-index: 2;
 `;
 
 const Header = styled.div<Header>`
@@ -152,16 +159,68 @@ const SecondLine = styled.div<SecondLine>`
 `;
 
 const EmphasizedPoster: React.FC<Props> = (props) => {
+  const dispatch = useDispatch();
   const state = useSelector((state: State) => state);
   const { photoUrl, petType, petName, petDesc, colors } = state;
   const { emphasizedPosterColors } = colors;
   const { bgColor, accentColor, headerColor, firstLineColor, secondLineColor } =
     emphasizedPosterColors;
-  const { preview } = props;
+  const { preview, styles } = props;
+
+  const handlePreviewClick = () => {
+    window.open('https://link.coupang.com/a/OqysD', '_blank');
+    sessionStorage.setItem('showFullPage', 'true');
+    dispatch(setShowFullPage(true));
+  };
+
   return (
-    <ScaleWrapper styles={props.styles}>
+    <ScaleWrapper styles={styles}>
       <Wrapper preview={preview} bgColor={bgColor}>
-        <PreviewText preview={preview}>미리 보기 😻</PreviewText>
+        <Box onClick={handlePreviewClick}>
+          <PreviewWrapper preview={preview}>
+            <PreviewArea>
+              <Typography variant="h3" color="#CC3D44" fontWeight="700" mb={2}>
+                쿠팡 방문하고 최종 결과물 보기
+              </Typography>
+              <Button
+                variant="contained"
+                color="info"
+                onClick={handlePreviewClick}
+                fullWidth
+                sx={{ height: '20%', fontSize: 40 }}
+              >
+                쿠팡 방문하기
+              </Button>
+              <Typography
+                variant="h4"
+                color="secondary.dark"
+                fontWeight="700"
+                mt={2}
+              >
+                🙇‍♀️ 개발자에게 커피를 사 주셔서 감사합니다!
+              </Typography>
+              <Typography
+                variant="h5"
+                color="secondary.dark"
+                fontWeight="700"
+                mt={2}
+              >
+                ☕ 여러분이 사 주신 커피를 먹고 힘내서
+              </Typography>
+              <Typography
+                variant="h5"
+                color="secondary.dark"
+                fontWeight="700"
+                mt={2}
+              >
+                더 재밌는 프로그램을 많이 만들겠습니다!🏃‍♀️으랏차차!
+              </Typography>
+              <Typography variant="h5" color="secondary.dark" mt={3}>
+                방문을 원치 않으실 경우, '뒤로 가기'를 눌러주세요.
+              </Typography>
+            </PreviewArea>
+          </PreviewWrapper>
+        </Box>
         <Header
           {...props.styles}
           petType={petType}
