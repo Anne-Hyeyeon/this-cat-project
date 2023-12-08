@@ -25,6 +25,7 @@ export interface State {
     emphasizedPosterColors: emphasizedPosterColors;
     simplePosterColors: PosterColors;
   };
+  showFullPage: boolean;
 }
 export const initialState: State = {
   step: 0,
@@ -49,6 +50,7 @@ export const initialState: State = {
       secondLineColor: '#1a1a1a',
     },
   },
+  showFullPage: false,
 };
 
 const postSlice = createSlice({
@@ -103,6 +105,9 @@ const postSlice = createSlice({
     setAccentColor: (state, action) => {
       state.colors.emphasizedPosterColors.accentColor = action.payload;
     },
+    setShowFullPage: (state, action) => {
+      state.showFullPage = action.payload;
+    },
     init: (state) => {
       state.step = initialState.step;
       state.photoUrl = initialState.photoUrl;
@@ -112,6 +117,7 @@ const postSlice = createSlice({
       state.petDesc = initialState.petDesc;
       state.posterType = initialState.posterType;
       state.colors = initialState.colors;
+      state.showFullPage = initialState.showFullPage;
     },
     initColor: (state) => {
       state.colors = initialState.colors;
@@ -132,6 +138,7 @@ export const {
   setFirstLineColor,
   setSecondLineColor,
   setHeaderColor,
+  setShowFullPage,
   init,
   initColor,
 } = postSlice.actions;

@@ -2,28 +2,30 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteObject } from 'firebase/storage';
 import EmphasizedPoster from '../common/components/Poster/EmphasizedPoster';
-import { State, init } from '../store/store';
+import { State, init, setShowFullPage } from '../store/store';
 import SimplePoster from '../common/components/Poster/SimplePoster';
 import MainWrapper from '../common/components/MainWrapper';
 import { getPosterWidth } from '../common/function/getPosterWidth';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { toJpeg } from 'html-to-image';
+import TitleTypography from '../common/components/TitleTypography';
 
 const Result = () => {
   const dispatch = useDispatch();
   const state = useSelector((state: State) => state);
   const ref = useRef<HTMLBRElement>(null);
 
-  const { fileRef, posterType } = state;
+  const { fileRef, posterType, showFullPage } = state;
 
   const onButtonClick = useCallback(() => {
     if (ref.current === null) {
       return;
     }
     const actualHeight = ref.current.offsetHeight;
+    const actualWidth = ref.current.offsetWidth;
 
     toJpeg(ref.current, {
-      width: 795,
+      width: actualWidth,
       height: actualHeight,
     })
       .then((dataUrl) => {
@@ -37,20 +39,20 @@ const Result = () => {
       });
   }, [ref]);
 
-  const onShowFullPageClick = useCallback(() => {
-    window.open('https://link.coupang.com/a/OqysD', '_blank');
-    sessionStorage.setItem('showFullPage', 'true');
-    setShowFullPage(true);
-  }, []);
-
-  const storedValue = sessionStorage.getItem('showFullPage');
-  const initialShowFullPage = storedValue === 'true';
-  const [showFullPage, setShowFullPage] = useState(initialShowFullPage);
-  const [posterWidth, setPosterWidth] = useState(getPosterWidth(60, 100));
+  const [posterWidth, setPosterWidth] = useState(getPosterWidth(80, 120));
 
   const displayPreviewPoster = () => {
     if (posterType === 'emphasized')
       return <EmphasizedPoster preview styles={{ width: posterWidth }} />;
+
+    if (posterType === 'simple')
+      return <SimplePoster preview styles={{ width: posterWidth }} />;
+  };
+
+  const displayOriginalPoster = () => {
+    if (posterType === 'emphasized')
+      return <EmphasizedPoster styles={{ width: posterWidth }} />;
+
     if (posterType === 'simple')
       return <SimplePoster styles={{ width: posterWidth }} />;
   };
@@ -85,7 +87,7 @@ const Result = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setPosterWidth(getPosterWidth(100, 100));
+      setPosterWidth(getPosterWidth(80, 120));
     };
 
     window.addEventListener('resize', handleResize);
@@ -96,40 +98,43 @@ const Result = () => {
   }, []);
 
   return (
-    <>
-      {!showFullPage ? (
-        <>
-          <Box ref={ref}>{displayPreviewPoster()}</Box>
-          <>
-            <button onClick={onButtonClick}>Click me</button>
-            <button
-              onClick={() => {
-                dispatch(init());
-              }}
-            >
-              다시 하기
-            </button>
-          </>
-        </>
-      ) : (
-        <Box height="100vh">
-          <MainWrapper>
-            <Box>
-              <Box
-                style={{
-                  position: 'relative',
-                }}
-              >
-                <Box>{displayPreviewPoster()}</Box>
+    <Box height="100vh">
+      <MainWrapper>
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          rowGap={2}
+        >
+          <TitleTypography> 🐱 결과 보기 🐱 </TitleTypography>
+          {showFullPage ? (
+            <>
+              <Box ref={ref} className="poster-area">
+                {displayOriginalPoster()}
               </Box>
-              <Button onClick={onShowFullPageClick}>
-                쿠팡 보고 포스터 결과물 보기
-              </Button>
-            </Box>
-          </MainWrapper>
+              <>
+                <Button variant="contained" fullWidth onClick={onButtonClick}>
+                  이미지 다운로드
+                </Button>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  onClick={() => {
+                    dispatch(init());
+                  }}
+                  sx={{ backgroundColor: 'secondary.dark' }}
+                >
+                  다시 하기
+                </Button>
+              </>
+            </>
+          ) : (
+            <>{displayPreviewPoster()}</>
+          )}
         </Box>
-      )}
-    </>
+      </MainWrapper>
+    </Box>
   );
 };
 
