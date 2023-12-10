@@ -332,7 +332,7 @@ import { Poster, SimplePoster, PrettyPoster } from './path';
 
 - 디렉토리 구조: 상수를 별도 파일로 관리할 때, 프로젝트의 디렉토리 구조를 잘 관리하지 않으면 여러 상수 파일들이 프로젝트 전체에 흩어져 코드 베이스가 혼란스러울 수 있다.
 
-## 페이지 설명을 나타내는 TitleTypography와 본문 내용을 설명하는 BodyTypoGraphy 공통 컴포넌트로 분리
+### 페이지 설명을 나타내는 TitleTypography와 본문 내용을 설명하는 BodyTypoGraphy 공통 컴포넌트로 분리
 
 - 재사용성 업!
 
