@@ -33,11 +33,23 @@ C:\Users\SSR\Desktop\hykim\study\this-cat>npx sass --watch css/style.scss css/st
 2. env에 key 저장, initialize firebase
 3. storage import
 
+### 카카오톡 공유하기
+
+#### 초기 세팅
+
+1. JavaScript SDK 파일을 웹 페이지에 포함시킴. (index.html에 script로 삽입)
+2. Kakao.init('키값')으로 초기화 후 확인
+
+#### 카카오톡 공유 기능
+
+- JavaScript SDK의 `Kakao.Share` 모듈 사용
+
 ## 각 페이지 별 작동 방식 구상
 
 ### Photo
 
-- 파일 업로드시 랜덤 파일명으로
+- 파일 업로드
+- 파일 업로드시 랜덤 파일명으로 자동 설정
 
 ```js
 const fileRef = ref(
@@ -51,12 +63,25 @@ const fileRef = ref(
 
 ### Text
 
+- 원하는 문구 입력하기
+- 미리보기
 - selectBox와 input 생성 후 store의 state값과 연결.
 - 자동 조사 생성기 (주어/목적어의 받침에 따라 이/가, 을/를 자동으로 선택)
 
+### Design
+
+- 강조형, 심플형 포스터 중 하나 선택
+
+### Detail
+
+- 미리보기
+- 포스터 내 글자, 배경 색깔 변경
+
 ### Result
 
+- '쿠팡 방문하고 결과 보기'를 통해 수익화
 - Html to Image 컴포넌트 이용해 Poster 컴포넌트를 이미지로 다운로드.
+- 카카오톡 공유하기
 
 ## Liberaies
 
@@ -150,12 +175,6 @@ allow read, write;
 - CORS문제로 웹폰트가 걸린 HTML을 png로 다운로드 할 수 없음.
 
 - crossorigin="anonymous" 를 link 태그에다가 추가해줌.
-
-### useTheme() 사용할 수 없음
-
-- 자동 임포트로 styled-component 에 있는 useTheme을 가져왔었다. 하지만 내가 사용하는 useTheme은 Mui 컴포넌트로 경로를 Mui로 해주어야 정상 작동하는 것이었다.
-
-- import 경로를 mui로 변경하니 정상 작동함.
 
 ### import mingming from '../assets/img/mingming.png' 임포트 안 됨
 
@@ -278,6 +297,16 @@ const ScaleWrapper = styled.div<Styles>`
     width ? `${width * 1.414}mm` : `${initialWidth * 1.414}mm`};
 `;
 ```
+
+### index.html에서 환경 변수 사용하기(env)
+
+- 일반적으로 순수 HTML 에서는 `process.env`를 사용할 수 없다.
+- <%= %> 등의 방법을 사용하려고 했으나 내 프로젝트에는 먹히지 않는다. (원인 파악 필요)
+
+### window.Kakao 인식 불가
+
+- SDK이 정상적으로 추가되면, window.Kakao 접근이 가능하다.
+- 그러나 내 프로젝트에서는 접근이 불가능하다. (원인 파악 필요)
 
 ## 개발 노트
 
