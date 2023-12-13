@@ -86,7 +86,7 @@ const Text = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!petType || !petName) {
+    if (!petType || !petName || !petDesc) {
       alert('모든 필드를 채워주세요!');
       return;
     }
