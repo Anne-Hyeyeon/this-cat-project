@@ -1,4 +1,3 @@
-import React from 'react';
 import Slider from 'react-slick';
 import exampleByeol from '../../assets/img/Mypets/byeol.jpeg';
 import exampleHusband from '../../assets/img/Mypets/husband.jpeg';

@@ -176,7 +176,7 @@ const EmphasizedPoster: React.FC<Props> = (props) => {
   return (
     <ScaleWrapper styles={styles}>
       <Wrapper preview={preview} bgColor={bgColor}>
-        <Box onClick={handlePreviewClick}>
+        <Box>
           <PreviewWrapper preview={preview}>
             <PreviewArea>
               <Typography variant="h3" color="#CC3D44" fontWeight="700" mb={2}>

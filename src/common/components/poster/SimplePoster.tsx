@@ -154,7 +154,7 @@ const SimplePoster = (props: Props) => {
   return (
     <ScaleWrapper styles={styles}>
       <Wrapper bgColor={bgColor}>
-        <Box onClick={handlePreviewClick}>
+        <Box>
           <PreviewWrapper preview={preview}>
             <PreviewArea>
               <Typography variant="h3" color="#CC3D44" fontWeight="700" mb={2}>
