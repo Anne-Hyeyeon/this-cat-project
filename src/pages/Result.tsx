@@ -2,13 +2,16 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteObject } from 'firebase/storage';
 import EmphasizedPoster from '../common/components/Poster/EmphasizedPoster';
-import { State, init, setShowFullPage } from '../store/store';
+import { State, init } from '../store/store';
 import SimplePoster from '../common/components/Poster/SimplePoster';
 import MainWrapper from '../common/components/MainWrapper';
 import { getPosterWidth } from '../common/function/getPosterWidth';
-import { Box, Button, Typography } from '@mui/material';
+import { Avatar, Box, Button } from '@mui/material';
 import { toJpeg } from 'html-to-image';
 import TitleTypography from '../common/components/TitleTypography';
+import ShareOnKakao from '../common/function/ShareOnKakao';
+import KaKaoShareIcon from '../assets/img/ShareButtonImages/kakaotalk.png';
+import BodyTypography from '../common/components/BodyTypoGraphy';
 
 const Result = () => {
   const dispatch = useDispatch();
@@ -114,8 +117,17 @@ const Result = () => {
                 {displayOriginalPoster()}
               </Box>
               <>
-                <Button variant="contained" fullWidth onClick={onButtonClick}>
-                  이미지 다운로드
+                <Button
+                  variant="contained"
+                  fullWidth
+                  onClick={onButtonClick}
+                  sx={{
+                    fontSize: 25,
+                    height: 50,
+                    backgroundColor: 'secondary.dark',
+                  }}
+                >
+                  🐈 이미지 다운로드 🐈
                 </Button>
                 <Button
                   variant="contained"
@@ -123,11 +135,30 @@ const Result = () => {
                   onClick={() => {
                     dispatch(init());
                   }}
-                  sx={{ backgroundColor: 'secondary.dark' }}
+                  sx={{
+                    fontSize: 25,
+                    height: 50,
+                    backgroundColor: 'secondary.dark',
+                  }}
                 >
                   다시 하기
                 </Button>
               </>
+              <BodyTypography>친구랑 같이 하기 (공유하기) 🔽</BodyTypography>
+              <Box
+                display="flex"
+                justifyContent="flex-start"
+                alignItems="center"
+              >
+                <Button onClick={ShareOnKakao}>
+                  <Avatar src={KaKaoShareIcon} />
+                </Button>
+                <Button>
+                  <Avatar alt="URL" sx={{ bgcolor: '#427D9D' }}>
+                    URL
+                  </Avatar>
+                </Button>
+              </Box>
             </>
           ) : (
             <>{displayPreviewPoster()}</>
