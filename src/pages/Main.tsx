@@ -16,26 +16,34 @@ const Main = () => {
   const step = useSelector((state: State) => state.step);
   const posterType = useSelector((state: State) => state.posterType);
 
+  enum MainStep {
+    Start,
+    Photo,
+    Design,
+    Text,
+    Detail,
+    Result
+  }
   const renderComponentBasedOnStep = (
-    step: number,
+    step: MainStep,
     posterType: 'emphasized' | 'simple',
   ) => {
     switch (step) {
-      case 0:
+      case MainStep.Start:
         return <Start />;
-      case 1:
+      case MainStep.Photo:
         return <Photo />;
-      case 2:
+      case MainStep.Design:
         return <Design />;
-      case 3:
+      case MainStep.Text:
         return <Text />;
-      case 4:
+      case MainStep.Detail:
         return posterType === 'emphasized' ? (
           <EmphasizedDetail />
         ) : (
           <SimpleDetail />
         );
-      case 5:
+      case MainStep.Result:
         return <Result />;
       default:
         return null;
