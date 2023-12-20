@@ -11,6 +11,7 @@ import Result from './Result';
 import EmphasizedDetail from './Detail/EmphasizedDetail';
 import SimpleDetail from './Detail/SimpleDetail';
 import background from '../assets/img/background.jpg';
+import MainFooter from '../common/components/MainFooter';
 
 const Main = () => {
   const step = useSelector((state: State) => state.step);
@@ -22,8 +23,9 @@ const Main = () => {
     Design,
     Text,
     Detail,
-    Result
+    Result,
   }
+
   const renderComponentBasedOnStep = (
     step: MainStep,
     posterType: 'emphasized' | 'simple',
@@ -60,10 +62,14 @@ const Main = () => {
       }}
     >
       <MainAppBar />
-      <Container maxWidth="sm" sx={{ paddingTop: '70px' }}>
+      <Container
+        maxWidth="sm"
+        sx={{ paddingTop: '80px', paddingBottom: '30px' }}
+      >
         {step !== 0 && <MainStepper />}
         {renderComponentBasedOnStep(step, posterType)}
       </Container>
+      <MainFooter />
     </Box>
   );
 };
