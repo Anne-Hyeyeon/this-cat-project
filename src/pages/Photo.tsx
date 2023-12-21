@@ -19,8 +19,6 @@ const Photo = () => {
   const [url, setUrl] = useState('');
   const [progress, setProgress] = useState(0);
   const dispatch = useDispatch();
-  const theme = useTheme();
-  const { primary, secondary } = theme.palette;
 
   const handleFileChange = (e: any) => {
     setFile(e.target.files[0]);
