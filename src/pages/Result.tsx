@@ -101,50 +101,58 @@ const Result = () => {
   }, []);
 
   return (
-    <Box height="100vh">
+    <Box>
       <MainWrapper>
         <Box
           display="flex"
           flexDirection="column"
           justifyContent="center"
           alignItems="center"
-          rowGap={2}
+          rowGap={3}
         >
           <TitleTypography> 🐱 결과 보기 🐱 </TitleTypography>
           {showFullPage ? (
             <>
-              <Box ref={ref} className="poster-area">
+              <Box
+                ref={ref}
+                className="poster-area"
+                onClick={onButtonClick}
+                sx={{ cursor: 'pointer' }}
+              >
                 {displayOriginalPoster()}
               </Box>
-              <>
+              <Box width="100%">
                 <Button
+                  onClick={onButtonClick}
                   variant="contained"
                   fullWidth
-                  onClick={onButtonClick}
                   sx={{
                     fontSize: 25,
                     height: 50,
                     backgroundColor: 'secondary.dark',
+                    marginBottom: 1,
                   }}
                 >
                   🐈 이미지 다운로드 🐈
                 </Button>
                 <Button
-                  variant="contained"
-                  fullWidth
                   onClick={() => {
                     dispatch(init());
                   }}
+                  variant="contained"
+                  fullWidth
                   sx={{
                     fontSize: 25,
                     height: 50,
-                    backgroundColor: 'secondary.dark',
+                    backgroundColor: '#989898',
                   }}
                 >
                   다시 하기
                 </Button>
-              </>
-              <BodyTypography>친구랑 같이 하기 (공유하기) 🔽</BodyTypography>
+              </Box>
+              <TitleTypography>
+                친구랑 같이 하기 (This Cat 페이지 공유하기) 🔽
+              </TitleTypography>
               <Box
                 display="flex"
                 justifyContent="flex-start"
