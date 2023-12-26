@@ -13,9 +13,6 @@ const MainFooter = () => {
       bgcolor="secondary.light"
     >
       <Typography variant="body2" color="secondary.dark">
-        dlswptkfkd@gmail.com
-      </Typography>
-      <Typography variant="body2" color="secondary.dark">
         This cat © {currentYear} | Created by {CREATER_NAME}. All rights
         reserved.
       </Typography>
