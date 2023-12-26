@@ -54,6 +54,7 @@ const Main = () => {
 
   return (
     <Box
+      height="100vh"
       overflow="auto"
       sx={{
         backgroundImage: `url(${background})`,

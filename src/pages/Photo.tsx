@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { storage } from '../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { setFileRef, setPhotoUrl, setStep } from '../store/store';
@@ -8,10 +8,8 @@ import MainWrapper from '../common/components/MainWrapper';
 import ImagePreview from '../common/components/ImagePreview';
 import PetsIcon from '@mui/icons-material/Pets';
 import MainButton from '../common/components/MainButton';
-('../common/components/MainButton');
 
 import './Photo.scss';
-import { useTheme } from '@mui/material/styles';
 import TitleTypography from '../common/components/TitleTypography';
 
 const Photo = () => {
@@ -64,7 +62,7 @@ const Photo = () => {
   };
 
   return (
-    <Box height="100vh">
+    <Box>
       <MainWrapper>
         <Grid container rowGap={1} textAlign="center">
           <Grid item xs={12}>

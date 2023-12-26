@@ -108,7 +108,7 @@ const SimpleDetail = () => {
   };
 
   return (
-    <Box height="100vh">
+    <Box minHeight="70vh">
       <Container maxWidth="sm">
         <MainWrapper>
           <Grid container rowGap={2} p={2} sx={{ bgcolor: 'secondary.light' }}>

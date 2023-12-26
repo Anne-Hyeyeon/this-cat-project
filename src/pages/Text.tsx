@@ -94,7 +94,7 @@ const Text = () => {
   };
 
   return (
-    <Box height="100vh">
+    <Box minHeight="70vh">
       <Container maxWidth="sm">
         <form onSubmit={handleSubmit}>
           <MainWrapper>

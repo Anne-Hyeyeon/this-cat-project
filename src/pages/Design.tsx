@@ -23,7 +23,7 @@ const Design = () => {
   };
 
   return (
-    <Box height="100vh">
+    <Box>
       <MainWrapper>
         <Container maxWidth="sm">
           <Grid container rowGap={3}>
