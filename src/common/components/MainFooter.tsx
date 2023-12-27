@@ -5,7 +5,7 @@ const MainFooter = () => {
   const CREATER_NAME = 'Anne';
   return (
     <Box
-      height={100}
+      height="15vh"
       display="flex"
       flexDirection="column"
       justifyContent="center"

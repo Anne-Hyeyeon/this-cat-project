@@ -51,10 +51,6 @@ const Photo = () => {
     file ? handleUpload() : alert('파일을 등록해 주세요.');
   };
 
-  const handleNextBtnOnclick = () => {
-    url ? dispatch(setStep(2)) : alert('이미지를 등록해 주세요.');
-  };
-
   const handleResetBtnOnclick = () => {
     setFile(null);
     setUrl('');
@@ -62,7 +58,7 @@ const Photo = () => {
   };
 
   return (
-    <Box>
+    <Box minHeight="70vh">
       <MainWrapper>
         <Grid container rowGap={1} textAlign="center">
           <Grid item xs={12}>
