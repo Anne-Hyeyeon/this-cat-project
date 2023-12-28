@@ -7,6 +7,7 @@ import exampleMong from '../../assets/img/Mypets/mong.jpeg';
 import examplePhantom from '../../assets/img/Mypets/phantom.jpeg';
 import exmampleSiru from '../../assets/img/Mypets/siru.jpeg';
 import './PosterSlider.scss';
+import { Box } from '@mui/material';
 
 const PosterSlider = () => {
   const settings = {
@@ -17,31 +18,31 @@ const PosterSlider = () => {
     slidesToScroll: 1,
   };
   return (
-    <div className="poster-slider">
+    <Box className="poster-slider">
       <Slider {...settings}>
-        <div className="image-container">
+        <Box className="image-container">
           <img src={exampleByeol} alt="Byeol" />
-        </div>
-        <div className="image-container">
+        </Box>
+        <Box className="image-container">
           <img src={exampleHusband} alt="Husband" />
-        </div>
-        <div className="image-container">
+        </Box>
+        <Box className="image-container">
           <img src={exampleLatte} alt="Latte" />
-        </div>
-        <div className="image-container">
+        </Box>
+        <Box className="image-container">
           <img src={exampleMilk} alt="Milk" />
-        </div>
-        <div className="image-container">
+        </Box>
+        <Box className="image-container">
           <img src={exampleMong} alt="Mong" />
-        </div>
-        <div className="image-container">
+        </Box>
+        <Box className="image-container">
           <img src={examplePhantom} alt="Phantom" />
-        </div>
-        <div className="image-container">
+        </Box>
+        <Box className="image-container">
           <img src={exmampleSiru} alt="Siru" />
-        </div>
+        </Box>
       </Slider>
-    </div>
+    </Box>
   );
 };
 

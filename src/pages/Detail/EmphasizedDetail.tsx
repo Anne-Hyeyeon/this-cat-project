@@ -1,8 +1,6 @@
-import { Container } from '@mui/system';
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
-import { Link } from 'react-router-dom';
 import EmphasizedPoster from '../../common/components/Poster/EmphasizedPoster';
 import {
   setStep,
@@ -16,18 +14,16 @@ import {
 } from '../../store/store';
 
 import {
+  Container,
   Box,
   Button,
   Typography,
   Grid,
   Avatar,
-  Badge,
   Popover,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 
 import MainWrapper from '../../common/components/MainWrapper';
-import SimplePoster from '../../common/components/Poster/SimplePoster';
 import MainButton from '../../common/components/MainButton';
 import { SketchPicker } from 'react-color';
 import { getPosterWidth } from '../../common/function/getPosterWidth';

@@ -1,5 +1,4 @@
-import { Container } from '@mui/system';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import {
@@ -12,7 +11,15 @@ import {
   initColor,
 } from '../../store/store';
 
-import { Box, Button, Typography, Grid, Avatar, Popover } from '@mui/material';
+import {
+  Container,
+  Box,
+  Button,
+  Typography,
+  Grid,
+  Avatar,
+  Popover,
+} from '@mui/material';
 
 import MainWrapper from '../../common/components/MainWrapper';
 import SimplePoster from '../../common/components/Poster/SimplePoster';
@@ -87,7 +94,6 @@ const SimpleDetail = () => {
   };
 
   const handleBgColorChange = (color: Color) => {
-    console.log(color);
     dispatch(setBgColor({ type: 'simplePosterColors', color: color.hex }));
   };
 
