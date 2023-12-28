@@ -48,11 +48,19 @@ const Design = () => {
                   selectedPoster === 'emphasized' ? '2px solid #ddd' : 'none',
                 backgroundColor:
                   selectedPoster === 'emphasized' ? 'secondary.light' : 'none',
+                animation: '1 ease-out',
+                '&:hover': {
+                  backgroundColor: 'secondary.light',
+                  transition: 'background-color 0.3s ease-in-out',
+                },
               }}
             >
               <EmphasizedPoster styles={{ width: 50 }} />
               <Typography variant="h5" fontFamily="jua" fontWeight={500}>
                 💖 강조형 💖
+              </Typography>
+              <Typography variant="body2" textAlign="center">
+                😸 오리지널 '이 고양이를 보셨나요?' 포스터를 만들고 싶다면!
               </Typography>
             </Grid>
             <Grid
@@ -70,11 +78,20 @@ const Design = () => {
                 border: selectedPoster === 'simple' ? '2px solid #ddd' : 'none',
                 backgroundColor:
                   selectedPoster === 'simple' ? 'secondary.light' : 'none',
+                animation: '1 ease-out',
+                '&:hover': {
+                  backgroundColor: 'secondary.light',
+                  transition: 'background-color 0.3s ease-in-out',
+                },
               }}
             >
               <SimplePoster styles={{ width: 50 }} />
               <Typography variant="h5" fontFamily="jua" fontWeight={500}>
                 💖 심플형 💖
+              </Typography>
+              <Typography variant="body2" textAlign="center">
+                😸 테두리 없는 사진과 문구만으로 이루어진 심플한 포스터를
+                원한다면!
               </Typography>
             </Grid>
             <Grid item xs={12} textAlign="center"></Grid>
