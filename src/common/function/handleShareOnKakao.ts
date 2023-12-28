@@ -8,8 +8,8 @@ const handleShareOnKakao = () => {
       imageUrl:
         'https://raw.githubusercontent.com/Anne-Hyeyeon/mystorage/main/this-cat/square_latte.png',
       link: {
-        mobileWebUrl: 'https://developers.kakao.com',
-        webUrl: 'https://developers.kakao.com',
+        mobileWebUrl: 'https://this-cat-project.vercel.app/',
+        webUrl: 'https://this-cat-project.vercel.app/',
       },
     },
 
@@ -17,8 +17,8 @@ const handleShareOnKakao = () => {
       {
         title: '나만의 고양이 포스터 만들러 가기',
         link: {
-          mobileWebUrl: 'https://developers.kakao.com',
-          webUrl: 'https://developers.kakao.com',
+          mobileWebUrl: 'https://this-cat-project.vercel.app/',
+          webUrl: 'https://this-cat-project.vercel.app/',
         },
       },
     ],
