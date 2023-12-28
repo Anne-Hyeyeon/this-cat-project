@@ -1,4 +1,4 @@
-const ShareOnKakao = () => {
+const handleShareOnKakao = () => {
   const { Kakao } = window;
   Kakao.Share.sendDefault({
     objectType: 'feed',
@@ -24,4 +24,4 @@ const ShareOnKakao = () => {
     ],
   });
 };
-export default ShareOnKakao;
+export default handleShareOnKakao;
