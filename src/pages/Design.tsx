@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Box, Container, Grid, Typography } from '@mui/material';
+
+import { setPosterType } from '../store/store';
 import EmphasizedPoster from '../common/components/Poster/EmphasizedPoster';
 import SimplePoster from '../common/components/Poster/SimplePoster';
 import MainButton from '../common/components/MainButton';
 import MainWrapper from '../common/components/MainWrapper';
-import { useTheme } from '@mui/material/styles';
 import TitleTypography from '../common/components/TitleTypography';
-import BodyTypography from '../common/components/BodyTypoGraphy';
-import { useDispatch } from 'react-redux';
-import { setPosterType } from '../store/store';
-('../common/components/MainButton');
 
 const Design = () => {
   const dispatch = useDispatch();
-  const theme = useTheme();
-
   const [selectedPoster, setSelectedPoster] = useState('');
 
   const handlePosterSelect = (type: string) => {
@@ -33,6 +29,7 @@ const Design = () => {
               </Grid>
             </Grid>
             <Grid
+              container
               item
               rowGap={1}
               xs={12}
