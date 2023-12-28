@@ -1,18 +1,21 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteObject } from 'firebase/storage';
-import EmphasizedPoster from '../common/components/Poster/EmphasizedPoster';
+import { toJpeg } from 'html-to-image';
+import { Avatar, Box, Button } from '@mui/material';
+
 import { State, init } from '../store/store';
+import { getPosterWidth } from '../common/function/getPosterWidth';
+import handleShareOnKakao from '../common/function/handleShareOnKakao';
+
+import EmphasizedPoster from '../common/components/Poster/EmphasizedPoster';
 import SimplePoster from '../common/components/Poster/SimplePoster';
 import MainWrapper from '../common/components/MainWrapper';
-import { getPosterWidth } from '../common/function/getPosterWidth';
-import { Avatar, Box, Button } from '@mui/material';
-import { toJpeg } from 'html-to-image';
 import TitleTypography from '../common/components/TitleTypography';
-import ShareOnKakao from '../common/function/handleShareOnKakao';
-import KaKaoShareIcon from '../assets/img/ShareButtonImages/kakaotalk.png';
 import LoadingOverlay from '../common/components/LoadingOverlay';
-import handleShareOnKakao from '../common/function/handleShareOnKakao';
+
+import KaKaoShareIcon from '../assets/img/ShareButtonImages/kakaotalk.png';
+import { deleteObject, ref as fireBaseRef } from 'firebase/storage';
+import { storage } from '../firebase';
 
 const Result = () => {
   const dispatch = useDispatch();
@@ -21,8 +24,10 @@ const Result = () => {
   const [posterWidth, setPosterWidth] = useState(getPosterWidth(80, 120));
   const [isGenerating, setIsGenerating] = useState(false);
 
-  const { fileRef, posterType, showFullPage } = state;
+  const { fileRefPath, posterType, showFullPage } = state;
+  const fileRef = fireBaseRef(storage, fileRefPath);
 
+  // 페이지 언로드 시, 로컬 스토리지에서 'showFullPage' 항목 제거
   useEffect(() => {
     const handleUnload = () => {
       localStorage.removeItem('showFullPage');
@@ -35,22 +40,24 @@ const Result = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      if (fileRef) {
-        deleteObject(fileRef).catch((error) => {
-          console.error(error);
-        });
+  // '다시 하기' 클릭 시 파일 삭제
+  const handleBeforeUnload = async () => {
+    if (fileRef) {
+      try {
+        await deleteObject(fileRef);
+      } catch (error) {
+        console.error('File deletion error:', error);
       }
-    };
+    }
+  };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
+  useEffect(() => {
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      handleBeforeUnload();
     };
-  }, [fileRef]);
+  }, []);
 
+  // 브라우저 창 크기 조정 시, 포스터의 너비 업데이트
   useEffect(() => {
     const handleResize = () => {
       setPosterWidth(getPosterWidth(80, 120));

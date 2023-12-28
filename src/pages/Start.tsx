@@ -1,4 +1,5 @@
 import { Grid, Container, Typography } from '@mui/material';
+
 import BodyTypography from '../common/components/BodyTypoGraphy';
 import MainButton from '../common/components/MainButton';
 import MainWrapper from '../common/components/MainWrapper';

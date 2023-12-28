@@ -20,7 +20,7 @@ export interface State {
   petName: string;
   petDesc: string;
   posterType: 'emphasized' | 'simple';
-  fileRef: any;
+  fileRefPath: string;
   colors: {
     emphasizedPosterColors: emphasizedPosterColors;
     simplePosterColors: PosterColors;
@@ -34,7 +34,7 @@ export const initialState: State = {
   petName: '저희집 별이',
   petDesc: '졸귀',
   posterType: 'emphasized',
-  fileRef: '',
+  fileRefPath: '',
   colors: {
     emphasizedPosterColors: {
       bgColor: 'white',
@@ -72,8 +72,8 @@ const postSlice = createSlice({
     setPetDesc: (state, action) => {
       state.petDesc = action.payload;
     },
-    setFileRef: (state, action) => {
-      state.fileRef = action.payload;
+    setFileRefPath: (state, action) => {
+      state.fileRefPath = action.payload;
     },
     setPosterType: (state, action) => {
       state.posterType = action.payload;
@@ -113,7 +113,7 @@ const postSlice = createSlice({
       state.photoUrl = initialState.photoUrl;
       state.petType = initialState.petType;
       state.petName = initialState.petName;
-      state.fileRef = initialState.fileRef;
+      state.fileRefPath = initialState.fileRefPath;
       state.petDesc = initialState.petDesc;
       state.posterType = initialState.posterType;
       state.colors = initialState.colors;
@@ -131,7 +131,7 @@ export const {
   setPetType,
   setPetName,
   setPetDesc,
-  setFileRef,
+  setFileRefPath,
   setPosterType,
   setAccentColor,
   setBgColor,

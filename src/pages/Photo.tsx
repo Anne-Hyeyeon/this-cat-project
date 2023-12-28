@@ -1,25 +1,51 @@
-import { useState } from 'react';
-import { storage } from '../firebase';
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { setFileRef, setPhotoUrl, setStep } from '../store/store';
-import { useDispatch } from 'react-redux/es/exports';
+import { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { Box, Button, Grid, Typography } from '@mui/material';
+import PetsIcon from '@mui/icons-material/Pets';
+
+import { storage } from '../firebase';
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from 'firebase/storage';
+import { State, setFileRefPath, setPhotoUrl, setStep } from '../store/store';
+
 import MainWrapper from '../common/components/MainWrapper';
 import ImagePreview from '../common/components/ImagePreview';
-import PetsIcon from '@mui/icons-material/Pets';
 import MainButton from '../common/components/MainButton';
 
 import './Photo.scss';
 import TitleTypography from '../common/components/TitleTypography';
 
 const Photo = () => {
+  const { fileRefPath } = useSelector((state: State) => state);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [file, setFile] = useState(null);
   const [url, setUrl] = useState('');
   const [progress, setProgress] = useState(0);
   const dispatch = useDispatch();
+  const fileRef = ref(storage, fileRefPath);
+
+  const handleDeleteObject = async () => {
+    if (fileRef) {
+      try {
+        await deleteObject(fileRef);
+      } catch (error) {
+        console.error('File deletion error:', error);
+      }
+    }
+  };
 
   const handleFileChange = (e: any) => {
     const selectedFile = e.target.files[0];
+
+    const resetFileInput = () => {
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    };
 
     if (!selectedFile) {
       return;
@@ -28,6 +54,7 @@ const Photo = () => {
     const MAX_FILE_SIZE = 4 * 1024 * 1024; // 4MB
     if (selectedFile.size > MAX_FILE_SIZE) {
       alert('파일 크기는 4MB 이하여야 합니다.');
+      resetFileInput();
       return;
     }
 
@@ -35,6 +62,7 @@ const Photo = () => {
     const fileExtension = selectedFile.name.split('.').pop().toLowerCase();
     if (!ALLOWED_EXTENSIONS.includes(fileExtension)) {
       alert('jpg, jpeg, png, gif 파일만 업로드할 수 있습니다.');
+      resetFileInput();
       return;
     }
 
@@ -60,7 +88,7 @@ const Photo = () => {
         getDownloadURL(ref(storage, `photos/${randomFileName}`)).then((url) => {
           setUrl(url);
           dispatch(setPhotoUrl(url));
-          dispatch(setFileRef(fileRef));
+          dispatch(setFileRefPath(fileRef.fullPath));
         });
       },
     );
@@ -93,7 +121,10 @@ const Photo = () => {
                 <Button
                   variant="contained"
                   fullWidth
-                  onClick={handleResetBtnOnclick}
+                  onClick={() => {
+                    handleResetBtnOnclick();
+                    handleDeleteObject();
+                  }}
                   sx={{ bgcolor: '#ddd', color: 'rgba(0,0,0,0.8)' }}
                 >
                   이미지 다시 선택하기
@@ -102,7 +133,11 @@ const Photo = () => {
             ) : (
               <>
                 <Box display="flex" justifyContent="space-between">
-                  <input type="file" onChange={handleFileChange} />
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    onChange={handleFileChange}
+                  />
                   <button
                     className="upload-btn"
                     onClick={handleUploadBtnOnclick}
