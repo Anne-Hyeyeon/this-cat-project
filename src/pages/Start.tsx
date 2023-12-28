@@ -14,7 +14,7 @@ const Start = () => {
           <MainWrapper>
             <Grid container rowGap={2}>
               <Grid item xs={12}>
-                <TitleTypography>이 고양이를 보신 적 있습니까?</TitleTypography>
+                <TitleTypography>이 고양이를 보신 적 있나요?</TitleTypography>
                 <Typography variant="h1">😽</Typography>
               </Grid>
               <Grid item xs={12}>

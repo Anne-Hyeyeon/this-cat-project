@@ -1,4 +1,4 @@
-# This-Cat (이 고양이를 보신 적 있습니까) Project
+# This-Cat (이 고양이를 보신 적 있나요) Project
 
 ## 준비 - 개발 환경 세팅
 

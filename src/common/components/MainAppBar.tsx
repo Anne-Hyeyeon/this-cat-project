@@ -68,7 +68,7 @@ const MainAppBar = () => {
                     color="primary.main"
                     padding="2px"
                   >
-                    😺 이 고양이를 보신 적 있습니까? 🤷‍♀️
+                    😺 이 고양이를 보신 적 있나요? 🤷‍♀️
                   </Typography>
                 </Box>
               </Grid>
