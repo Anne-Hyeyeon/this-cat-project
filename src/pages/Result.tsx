@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toJpeg } from 'html-to-image';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import { Avatar, Box, Button } from '@mui/material';
 
 import { State, init } from '../store/store';
@@ -26,6 +27,8 @@ const Result = () => {
 
   const { fileRefPath, posterType, showFullPage } = state;
   const fileRef = fireBaseRef(storage, fileRefPath);
+
+  const URL_TO_COPY = 'https://this-cat-project.vercel.app/';
 
   // 페이지 언로드 시, 로컬 스토리지에서 'showFullPage' 항목 제거
   useEffect(() => {
@@ -115,7 +118,7 @@ const Result = () => {
   };
 
   const handleUrlClick = () => {
-    alert('URL이 복사되었습니다!');
+    alert('URL이 복사되었습니다 😽');
   };
 
   return (
@@ -181,9 +184,11 @@ const Result = () => {
                   <Avatar src={KaKaoShareIcon} />
                 </Button>
                 <Button onClick={handleUrlClick}>
-                  <Avatar alt="URL" sx={{ bgcolor: '#427D9D' }}>
-                    URL
-                  </Avatar>
+                  <CopyToClipboard text={URL_TO_COPY}>
+                    <Avatar alt="URL" sx={{ bgcolor: '#427D9D' }}>
+                      URL
+                    </Avatar>
+                  </CopyToClipboard>
                 </Button>
               </Box>
             </>
