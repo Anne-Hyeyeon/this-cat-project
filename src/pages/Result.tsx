@@ -28,7 +28,7 @@ const Result = () => {
   const { fileRefPath, posterType, showFullPage } = state;
   const fileRef = fireBaseRef(storage, fileRefPath);
 
-  const URL_TO_COPY = 'https://this-cat-project.vercel.app/';
+  const URL_TO_COPY = 'https://this-cat.vercel.app/';
 
   // 페이지 언로드 시, 로컬 스토리지에서 'showFullPage' 항목 제거
   useEffect(() => {
