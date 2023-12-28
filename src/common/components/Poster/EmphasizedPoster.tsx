@@ -58,8 +58,7 @@ const PreviewWrapper = styled.div<{ preview?: boolean }>`
   width: 95%;
   height: 95%;
   position: absolute;
-  display: ${(props) =>
-    props.preview ? 'flex' : 'none'}; /* 미리 보기 모드일 때만 표시 */
+  display: ${(props) => (props.preview ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
   z-index: 1;
@@ -124,13 +123,13 @@ const FirstLine = styled.div<FirstLine>`
     if (totalLength === 10) {
       return '49px';
     } else if (totalLength >= 6 && totalLength <= 9) {
-      return '55px';
+      return '52px';
     } else if (totalLength === 4 || totalLength === 5) {
       return '65px';
     } else if (totalLength >= 1 && totalLength <= 3) {
       return '70px';
     }
-    return '55px'; // 기본값
+    return '55px';
   }};
   background-color: ${(props) => props.accentColor};
   color: ${(props) => props.firstLineColor};

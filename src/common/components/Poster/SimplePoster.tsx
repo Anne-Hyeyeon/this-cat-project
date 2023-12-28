@@ -27,6 +27,7 @@ interface Header {
 
 interface FirstLine {
   petName: string;
+  petDesc: string;
   firstLineColor: string;
 }
 
@@ -106,13 +107,18 @@ const FirstLine = styled.div<FirstLine>`
   align-items: center;
   width: 100%;
   margin-top: ${marginTop}px;
-  font-size: ${({ petName }) => {
-    if (petName.length <= 4) {
-      return '65px';
-    } else if (petName.length >= 5) {
+  font-size: ${({ petName, petDesc }) => {
+    const totalLength = petName.length + petDesc.length;
+    if (totalLength === 10) {
+      return '49px';
+    } else if (totalLength >= 6 && totalLength <= 9) {
       return '55px';
+    } else if (totalLength === 4 || totalLength === 5) {
+      return '67px';
+    } else if (totalLength >= 1 && totalLength <= 3) {
+      return '70px';
     }
-    return '65px';
+    return '55px';
   }};
   color: ${(props) => props.firstLineColor};
 `;
@@ -210,6 +216,7 @@ const SimplePoster = (props: Props) => {
         <FirstLine
           {...props.styles}
           petName={petName}
+          petDesc={petDesc}
           firstLineColor={firstLineColor}
         >
           왜냐면 {petName}
