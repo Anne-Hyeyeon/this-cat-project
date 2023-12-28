@@ -25,7 +25,7 @@ import {
 
 import MainWrapper from '../../common/components/MainWrapper';
 import MainButton from '../../common/components/MainButton';
-import { SketchPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import { getPosterWidth } from '../../common/function/getPosterWidth';
 
 interface Color {
@@ -160,7 +160,7 @@ const EmphasizedDetail = () => {
                     horizontal: 'center',
                   }}
                 >
-                  <SketchPicker
+                  <ChromePicker
                     color={colors.emphasizedPosterColors.bgColor}
                     onChange={handleBgColorChange}
                   />
@@ -190,7 +190,7 @@ const EmphasizedDetail = () => {
                     horizontal: 'center',
                   }}
                 >
-                  <SketchPicker
+                  <ChromePicker
                     color={colors.emphasizedPosterColors.accentColor}
                     onChange={handleAccentColorChange}
                   />
@@ -220,7 +220,7 @@ const EmphasizedDetail = () => {
                     horizontal: 'center',
                   }}
                 >
-                  <SketchPicker
+                  <ChromePicker
                     color={colors.emphasizedPosterColors.headerColor}
                     onChange={handleHeaderColorChange}
                   />
@@ -251,7 +251,7 @@ const EmphasizedDetail = () => {
                     horizontal: 'center',
                   }}
                 >
-                  <SketchPicker
+                  <ChromePicker
                     color={colors.emphasizedPosterColors.firstLineColor}
                     onChange={handleFirstLineColorChange}
                   />
@@ -281,7 +281,7 @@ const EmphasizedDetail = () => {
                     horizontal: 'center',
                   }}
                 >
-                  <SketchPicker
+                  <ChromePicker
                     color={colors.emphasizedPosterColors.secondLineColor}
                     onChange={handleSecondLineColorChange}
                   />

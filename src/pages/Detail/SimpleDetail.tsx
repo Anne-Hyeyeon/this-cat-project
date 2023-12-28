@@ -24,7 +24,7 @@ import {
 import MainWrapper from '../../common/components/MainWrapper';
 import SimplePoster from '../../common/components/Poster/SimplePoster';
 import MainButton from '../../common/components/MainButton';
-import { SketchPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import { getPosterWidth } from '../../common/function/getPosterWidth';
 
 interface Color {
@@ -146,7 +146,7 @@ const SimpleDetail = () => {
                     horizontal: 'left',
                   }}
                 >
-                  <SketchPicker
+                  <ChromePicker
                     color={colors.simplePosterColors.bgColor}
                     onChange={handleBgColorChange}
                   />
@@ -176,7 +176,7 @@ const SimpleDetail = () => {
                     horizontal: 'left',
                   }}
                 >
-                  <SketchPicker
+                  <ChromePicker
                     color={colors.simplePosterColors.headerColor}
                     onChange={handleHeaderColorChange}
                   />
@@ -206,7 +206,7 @@ const SimpleDetail = () => {
                     horizontal: 'left',
                   }}
                 >
-                  <SketchPicker
+                  <ChromePicker
                     color={colors.simplePosterColors.firstLineColor}
                     onChange={handleFirstLineColorChange}
                   />
@@ -236,7 +236,7 @@ const SimpleDetail = () => {
                     horizontal: 'left',
                   }}
                 >
-                  <SketchPicker
+                  <ChromePicker
                     color={colors.simplePosterColors.secondLineColor}
                     onChange={handleSecondLineColorChange}
                   />
