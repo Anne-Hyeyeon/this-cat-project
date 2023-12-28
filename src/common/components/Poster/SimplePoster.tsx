@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { State, setShowFullPage } from '../../../store/store';
@@ -7,7 +6,7 @@ import {
   subjectCaseSelector,
 } from '../../function/endingSelector';
 import { Box, Button, Typography } from '@mui/material';
-import { initialWidth, marginTop } from '../initialStyles';
+import { INITIAL_POSTER_WIDTH, INITIAL_MARGIN_TOP } from '../initialStyles';
 import ScaleWrapper from '../ScaleWrapper';
 
 interface Styles {
@@ -38,8 +37,8 @@ interface SecondLine {
 
 const Wrapper = styled.div<{ bgColor: string }>`
   position: relative;
-  width: ${initialWidth}mm;
-  height: ${initialWidth * 1.414}mm;
+  width: ${INITIAL_POSTER_WIDTH}mm;
+  height: ${INITIAL_POSTER_WIDTH * 1.414}mm;
   border: 1px solid black;
   background-color: ${(props) => props.bgColor};
   padding: 50px 0px;
@@ -97,7 +96,7 @@ const Photo = styled.div<{ photoUrl?: string }>`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  margin-top: ${marginTop}px;
+  margin-top: ${INITIAL_MARGIN_TOP}px;
 `;
 
 const FirstLine = styled.div<FirstLine>`
@@ -106,7 +105,7 @@ const FirstLine = styled.div<FirstLine>`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: ${marginTop}px;
+  margin-top: ${INITIAL_MARGIN_TOP}px;
   font-size: ${({ petName, petDesc }) => {
     const totalLength = petName.length + petDesc.length;
     if (totalLength === 10) {
@@ -129,7 +128,7 @@ const SecondLine = styled.div<SecondLine>`
   justify-content: center;
   align-items: center;
   width: 100;
-  margin-top: ${marginTop}px;
+  margin-top: ${INITIAL_MARGIN_TOP}px;
   color: ${(props) => props.secondLineColor};
   font-size: ${({ petType }) => {
     if (petType.length <= 3) {
