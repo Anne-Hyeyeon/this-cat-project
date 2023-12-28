@@ -19,6 +19,25 @@ const Photo = () => {
   const dispatch = useDispatch();
 
   const handleFileChange = (e: any) => {
+    const selectedFile = e.target.files[0];
+
+    if (!selectedFile) {
+      return;
+    }
+
+    const MAX_FILE_SIZE = 4 * 1024 * 1024; // 4MB
+    if (selectedFile.size > MAX_FILE_SIZE) {
+      alert('파일 크기는 4MB 이하여야 합니다.');
+      return;
+    }
+
+    const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif'];
+    const fileExtension = selectedFile.name.split('.').pop().toLowerCase();
+    if (!ALLOWED_EXTENSIONS.includes(fileExtension)) {
+      alert('jpg, jpeg, png, gif 파일만 업로드할 수 있습니다.');
+      return;
+    }
+
     setFile(e.target.files[0]);
     setUrl('');
   };
@@ -64,19 +83,7 @@ const Photo = () => {
           <Grid item xs={12}>
             <TitleTypography>사진 선택하기</TitleTypography>
           </Grid>
-          <Grid item xs={12}>
-            <Box
-              component="span"
-              display="flex"
-              justifyContent="flex-start"
-              alignItems="center"
-            >
-              <PetsIcon />
-              <Typography mt={1} ml={1} variant="body2">
-                2MB 이하의 사진 업로드를 권장합니다.
-              </Typography>
-            </Box>
-          </Grid>
+          <Grid item xs={12}></Grid>
           <Grid item xs={12} textAlign="center">
             <ImagePreview imageUrl={url} />
           </Grid>
@@ -103,6 +110,18 @@ const Photo = () => {
                     Upload
                   </button>
                 </Box>
+                <Box
+                  component="span"
+                  display="flex"
+                  justifyContent="flex-start"
+                  alignItems="center"
+                >
+                  <PetsIcon />
+                  <Typography mt={1} ml={1} variant="body2">
+                    2MB 이하의 사진 업로드를 권장합니다. (첨부 가능 최대 용량 :
+                    4MB)
+                  </Typography>
+                </Box>
                 <Box mt={1}>
                   {progress > 0 && (
                     <progress
@@ -116,7 +135,7 @@ const Photo = () => {
             )}
           </Grid>
           <Grid item xs={12}>
-            {!!url && <MainButton text="다음으로" />}
+            {!!url && <MainButton useIcon text="다음으로" />}
           </Grid>
         </Grid>
       </MainWrapper>
