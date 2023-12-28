@@ -132,18 +132,31 @@ const Photo = () => {
               </>
             ) : (
               <>
-                <Box display="flex" justifyContent="space-between">
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="center"
+                  alignItems="flex-start"
+                  rowGap={1}
+                >
                   <input
                     ref={fileInputRef}
                     type="file"
                     onChange={handleFileChange}
                   />
-                  <button
+
+                  <Button
+                    fullWidth
+                    variant="contained"
                     className="upload-btn"
                     onClick={handleUploadBtnOnclick}
+                    sx={{
+                      height: 40,
+                      backgroundColor: 'secondary.dark',
+                    }}
                   >
-                    Upload
-                  </button>
+                    업로드하기
+                  </Button>
                 </Box>
                 <Box
                   component="span"
@@ -152,9 +165,9 @@ const Photo = () => {
                   alignItems="center"
                 >
                   <PetsIcon />
-                  <Typography mt={1} ml={1} variant="body2">
-                    2MB 이하의 사진 업로드를 권장합니다. (첨부 가능 최대 용량 :
-                    4MB)
+                  <Typography mt={1} ml={1} variant="body2" textAlign="left">
+                    2MB 이하의 사진 업로드를 권장합니다. <br />
+                    (첨부 가능 최대 용량 : 4MB)
                   </Typography>
                 </Box>
                 <Box mt={1}>
