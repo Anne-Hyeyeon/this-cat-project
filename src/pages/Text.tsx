@@ -110,6 +110,16 @@ const Text = () => {
                   <SimplePoster styles={{ width: posterWidth }} />
                 )}
               </Grid>
+              <Grid
+                display="flex"
+                justifyContent="flex-start"
+                alignItems="center"
+              >
+                <Typography variant="body2" fontWeight={500}>
+                  😸 조사(은, 는/이, 가 등)는 끝 글자의 받침 유무에 따라
+                  자동으로 변경됩니다. ❣️
+                </Typography>
+              </Grid>
               <Grid item xs={12} sm={6}>
                 <Grid item>
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
