@@ -828,3 +828,13 @@ git reset --soft 커밋 해시
 - 스케줄링을 이용해 주기적으로 firebase의 storage를 청소해 준다.
 - Firebase Cloud Function 사용할 수 있으나, 유료 서비스임.
 - vercel 을 이용해볼 예정.
+
+### 완성된 포스터가 아이폰에서 다운받아지지 않음.
+#### 에러
+```
+console.js:213 Error inlining remote css file DOMException: Failed to read the 'cssRules' property from 'CSSStyleSheet': Cannot access rules
+
+Error loading remote stylesheet DOMException: Failed to read the 'cssRules' property from 'CSSStyleSheet': Cannot access rules\
+```
+
+#### 해결책 
