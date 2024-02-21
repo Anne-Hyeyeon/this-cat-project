@@ -1,3 +1,6 @@
+# 😺 완성작 : https://this-cat.vercel.app/  
+
+
 # This-Cat (이 고양이를 보신 적 있나요) Project
 
 ## 준비 - 개발 환경 세팅
@@ -828,3 +831,20 @@ git reset --soft 커밋 해시
 - 스케줄링을 이용해 주기적으로 firebase의 storage를 청소해 준다.
 - Firebase Cloud Function 사용할 수 있으나, 유료 서비스임.
 - vercel 을 이용해볼 예정.
+
+### 완성된 포스터가 아이폰에서 다운받아지지 않음.
+#### 에러
+```
+console.js:213 Error inlining remote css file DOMException: Failed to read the 'cssRules' property from 'CSSStyleSheet': Cannot access rules
+
+Error loading remote stylesheet DOMException: Failed to read the 'cssRules' property from 'CSSStyleSheet': Cannot access rules\
+```
+
+#### 해결책 
+
+- 웹 페이지와 폰트 파일이 서로 다른 도메인에서 호스팅되고 있다면, CORS 에러가 발생할 수 있다.
+- 웹 페이지와 폰트 파일이 같은 서버에서 호스팅되고 있고, 상대 경로를 사용하여 폰트를 참조하고 있다면, CORS 에러는 발생하지 않을 것이다.
+- CORS 에러 방지를 위해서는 :
+1. 동일한 도메인에서 호스팅: 폰트 파일이 웹 페이지와 동일한 도메인 또는 서브도메인에서 호스팅되고 있을 때. (불가능)
+2. 상대 경로 사용: @font-face에서 폰트 파일의 경로를 상대 경로로 지정했을 때. 예를 들어, src: url('/fonts/myfont.woff2') 와 같은 방식으로 지정합니다. (당장 시도 가능)
+3. 웹 서버 설정: 웹 서버가 동일 출처 정책을 준수하고, 필요한 경우 적절한 CORS 헤더를 추가하는 방식으로 구성되어 있을 때. (분석해봐야 함)
