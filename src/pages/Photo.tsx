@@ -166,8 +166,8 @@ const Photo = () => {
                 >
                   <PetsIcon />
                   <Typography mt={1} ml={1} variant="body2" textAlign="left">
-                    2MB 이하의 사진 업로드를 권장합니다. <br />
-                    (첨부 가능 최대 용량 : 4MB)
+                    4MB 이하의 사진 업로드를 권장합니다. <br />
+                    (첨부 가능 최대 용량 : 8MB)
                   </Typography>
                 </Box>
                 <Box mt={1}>
