@@ -15,7 +15,7 @@ import TitleTypography from '../common/components/TitleTypography';
 import LoadingOverlay from '../common/components/LoadingOverlay';
 
 import KaKaoShareIcon from '../assets/img/ShareButtonImages/kakaotalk.png';
-import { deleteObject, ref as fireBaseRef } from 'firebase/storage';
+import { ref as fireBaseRef } from 'firebase/storage';
 import { storage } from '../firebase';
 
 const Result = () => {
@@ -116,64 +116,68 @@ const Result = () => {
           rowGap={3}
         >
           <TitleTypography> 🐱 결과 보기 🐱 </TitleTypography>
-          {/* {showFullPage ? ( */}
-          <>
-            <Box
-              ref={ref}
-              className="poster-area"
-              onClick={onButtonClick}
-              sx={{ cursor: 'pointer' }}
-            >
-              {displayOriginalPoster()}
-            </Box>
-            <Box width="100%">
-              <Button
+          {showFullPage ? (
+            <>
+              <Box
+                ref={ref}
+                className="poster-area"
                 onClick={onButtonClick}
-                variant="contained"
-                fullWidth
-                sx={{
-                  fontSize: 25,
-                  height: 50,
-                  backgroundColor: 'secondary.dark',
-                  marginBottom: 1,
-                }}
+                sx={{ cursor: 'pointer' }}
               >
-                🐈 이미지 다운로드 🐈
-              </Button>
-              <Button
-                onClick={() => {
-                  dispatch(init());
-                }}
-                variant="contained"
-                fullWidth
-                sx={{
-                  fontSize: 25,
-                  height: 50,
-                  backgroundColor: '#989898',
-                }}
+                {displayOriginalPoster()}
+              </Box>
+              <Box width="100%">
+                <Button
+                  onClick={onButtonClick}
+                  variant="contained"
+                  fullWidth
+                  sx={{
+                    fontSize: 25,
+                    height: 50,
+                    backgroundColor: 'secondary.dark',
+                    marginBottom: 1,
+                  }}
+                >
+                  🐈 이미지 다운로드 🐈
+                </Button>
+                <Button
+                  onClick={() => {
+                    dispatch(init());
+                  }}
+                  variant="contained"
+                  fullWidth
+                  sx={{
+                    fontSize: 25,
+                    height: 50,
+                    backgroundColor: '#989898',
+                  }}
+                >
+                  다시 하기
+                </Button>
+              </Box>
+              <TitleTypography>
+                친구랑 같이 하기 (This Cat 페이지 공유하기) 🔽
+              </TitleTypography>
+              <Box
+                display="flex"
+                justifyContent="flex-start"
+                alignItems="center"
               >
-                다시 하기
-              </Button>
-            </Box>
-            <TitleTypography>
-              친구랑 같이 하기 (This Cat 페이지 공유하기) 🔽
-            </TitleTypography>
-            <Box display="flex" justifyContent="flex-start" alignItems="center">
-              <Button onClick={handleShareOnKakao}>
-                <Avatar src={KaKaoShareIcon} />
-              </Button>
-              <Button onClick={handleUrlClick}>
-                <CopyToClipboard text={URL_TO_COPY}>
-                  <Avatar alt="URL" sx={{ bgcolor: '#427D9D' }}>
-                    URL
-                  </Avatar>
-                </CopyToClipboard>
-              </Button>
-            </Box>
-          </>
-          {/* : (
+                <Button onClick={handleShareOnKakao}>
+                  <Avatar src={KaKaoShareIcon} />
+                </Button>
+                <Button onClick={handleUrlClick}>
+                  <CopyToClipboard text={URL_TO_COPY}>
+                    <Avatar alt="URL" sx={{ bgcolor: '#427D9D' }}>
+                      URL
+                    </Avatar>
+                  </CopyToClipboard>
+                </Button>
+              </Box>
+            </>
+          ) : (
             <>{displayPreviewPoster()}</>
-          )} */}
+          )}
         </Box>
       </MainWrapper>
     </Box>
