@@ -43,23 +43,6 @@ const Result = () => {
     };
   }, []);
 
-  // '다시 하기' 클릭 시 파일 삭제
-  const handleBeforeUnload = async () => {
-    if (fileRef) {
-      try {
-        await deleteObject(fileRef);
-      } catch (error) {
-        console.error('File deletion error:', error);
-      }
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      handleBeforeUnload();
-    };
-  }, []);
-
   // 브라우저 창 크기 조정 시, 포스터의 너비 업데이트
   useEffect(() => {
     const handleResize = () => {
