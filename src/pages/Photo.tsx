@@ -51,9 +51,9 @@ const Photo = () => {
       return;
     }
 
-    const MAX_FILE_SIZE = 4 * 1024 * 1024; // 4MB
+    const MAX_FILE_SIZE = 8 * 1024 * 1024; // 4MB
     if (selectedFile.size > MAX_FILE_SIZE) {
-      alert('파일 크기는 4MB 이하여야 합니다.');
+      alert('파일 크기는 8MB 이하여야 합니다.');
       resetFileInput();
       return;
     }
