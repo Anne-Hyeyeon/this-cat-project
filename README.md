@@ -26,9 +26,6 @@ C:\Users\SSR\Desktop\hykim\study\this-cat>npx sass --watch css/style.scss css/st
 - https://velog.io/@_seeul/React-리액트로-프로젝트를-진행할때-어떻게-폴더-구조를-잡는것이-좋을까
 - src 하위 폴더에 assets, components, pages 폴더 생성
 
-### 리액트 라우터 설치
-
-- Main, Photo, Text, Result를 라우터로
 
 ### Firebase 연동
 
